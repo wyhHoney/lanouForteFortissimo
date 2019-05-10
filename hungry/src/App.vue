@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <!--<router-view></router-view>-->
+    <router-view></router-view>
     <!--<MyHomePage></MyHomePage>-->
     <!--<wyh_-balance></wyh_-balance>-->
 

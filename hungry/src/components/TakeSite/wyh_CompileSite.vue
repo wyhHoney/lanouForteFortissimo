@@ -47,7 +47,7 @@
           },
           //添加地址事件
           AddSite(){
-
+              this.$router.push({path:'addlocation'})
           },
           //点击编辑按钮
           Compile(){
