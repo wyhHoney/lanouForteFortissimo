@@ -11,7 +11,7 @@
             <ul>
               <li v-for="item1 in foodPro" class="menu_left_li">
                 <span>{{item1.name}}</span>
-                <span class="category_num">{{hot_kind(item1.foods)}}</span>
+                <span :class="{category_num:hot_kind(item1.foods)>0?true:false}">{{hot_kind(item1.foods)}}</span>
               </li>
             </ul>
           </section>
@@ -98,11 +98,11 @@
             <ul>
               <li class="cart_food_li" v-for="item in  buy_specs_arr">
                 <div class="art_list_num">
-                  <p class="art_list_num1">{{item.kindname}}</p>
-                  <p class="art_list_num2">{{item.name}}</p>
+                  <p class="art_list_num1">{{item.pro.name}}</p>
+                  <p class="art_list_num2">{{item.pro.specs_name}}</p>
                 </div>
                 <div class="cart_list_price">
-                  <span>$</span><span>{{item.price}}</span>
+                  <span>$</span><span>{{item.pro.price}}</span>
                 </div>
                 <section class="cart_list_control">
                   <img src="../../assets/减小.png" alt="" class="jianxiao" @click="jianshao1(item)">
@@ -139,7 +139,7 @@
         <div class="specs_price">
           <span class="span1">￥</span><span class="span2">{{show_spec_money}}</span>
         </div>
-        <div class="specs_cart" @click="in_cart">
+        <div class="specs_cart" @click="in_cart()">
           加入购物车
         </div>
       </footer>
@@ -164,6 +164,7 @@
         kind_price_obj: {},//用来放置商品类名字，购买数量，股买的各类的价格集合
         kind_price: [],//存放上面的对象
         kind_count: 0,//每类食品的数量
+        kind_id:Number,
         if_show_cart_list: false,//蒙版的显示隐藏
         if_show_cart_list1: false,
         buy_specs_name: '',//将要购买的物品名称
@@ -172,6 +173,9 @@
         buy_specs_price: Number,//特殊商品的单价
         allPrice: 0,//总价格
         allNum: 0,//总数
+        kindSpec:Object,
+
+
       }
     },
     beforeDestroy() {
@@ -188,7 +192,18 @@
       //调用显示购物车的css样式函数
       this.shopcartcss();
     },
+    computed:{
+      fenlancss(i){
+        for(let j in this.buy_specs_arr){
+          if(this.buy_specs_arr[j].pro.name==i){
+            return true
+          }
+        }
+      }
+    }
+    ,
     methods: {
+
       //进入每一个具体的店铺
       inPerShop(pro){
         this.$store.state.shop_head_title=pro.name;
@@ -199,10 +214,10 @@
       },
       //分栏的购买数量
       hot_kind(m) {
-        let sum = 0;
+        let sum = null;
         for (let i in m) {
           for (let j in this.buy_specs_arr) {
-            if (m[i].name === this.buy_specs_arr[j].kindname) {
+            if (m[i].name === this.buy_specs_arr[j].pro.name) {
               sum += this.buy_specs_arr[j].count;
             }
           }
@@ -238,10 +253,9 @@
         this.allNum = NumSum;
       },
       allNumAndPrice2() {
-
         let PricSum = 0;
         for (let i in this.buy_specs_arr) {
-          PricSum += this.buy_specs_arr[i].count * this.buy_specs_arr[i].price;
+          PricSum += this.buy_specs_arr[i].count * this.buy_specs_arr[i].pro.price;
         }
         this.allPrice = PricSum;
       }
@@ -254,13 +268,11 @@
       //点击减少
       jianshao1() {
         for (let i in this.buy_specs_arr) {
-          if (this.buy_specs_arr[i].kindname === this.buy_specs_kind) {
-            if (this.buy_specs_arr[i].name === this.buy_specs_name) {
-              if (this.buy_specs_arr[i].count > 1) {
-                this.buy_specs_arr[i].count--;
-              } else {
-                this.buy_specs_arr = [];
-              }
+          if (this.buy_specs_arr[i].pro.specs_name === this.buy_specs_name) {
+            if (this.buy_specs_arr[i].count > 1) {
+              this.buy_specs_arr[i].count--;
+            } else {
+              this.buy_specs_arr = [];
             }
           }
         }
@@ -269,11 +281,9 @@
       //点击购物清单界面增加
       zengjia1() {
         for (let i in this.buy_specs_arr) {
-          if (this.buy_specs_arr[i].kindname === this.buy_specs_kind) {
-            if (this.buy_specs_arr[i].name === this.buy_specs_name) {
-              if (this.buy_specs_arr[i].count >= 0) {
-                this.buy_specs_arr[i].count++;
-              }
+          if (this.buy_specs_arr[i].pro.specs_name === this.buy_specs_name) {
+            if (this.buy_specs_arr[i].count > 0) {
+              this.buy_specs_arr[i].count ++
             }
           }
         }
@@ -297,7 +307,7 @@
           alert('只能减少当个商品')
         } else {
           for (let i in this.buy_specs_arr) {
-            if (this.buy_specs_arr[i].kindname === this.buy_specs_kind) {
+            if (this.buy_specs_arr[i].pro.name === this.buy_specs_kind) {
               if (this.buy_specs_arr[i].count >= 1) {
                 this.buy_specs_arr[i].count--;
               } else {
@@ -309,54 +319,67 @@
       },
       //每一食品的个数
       find_kind_count(m) {
-        let sum = 0;
+        let sum =null;
         for (let i in this.buy_specs_arr) {
-          if (this.buy_specs_arr[i].kindname === m) {
+          if (this.buy_specs_arr[i].pro.name === m) {
             sum += this.buy_specs_arr[i].count;
-            return sum
           }
         }
+        return sum
       },
       in_cart() {
+        // console.log(this.buy_specs_kind,'商品',this.buy_specs_name);
+        //定义对象存储商品信息
+        // let obj = {name:'', count: 0, kindname: this.buy_cart_name, price:0};
+        //  如果为空选取了默认值
+
+        // if(this.buy_specs_kind===''){
+        //判断是否为空
+        if(this.buy_specs_arr.length===0){
+          let obj={pro:this.kindSpec,count:1,};
+          this.buy_specs_arr.push(obj)
+        }else{
+          let obj={pro:this.kindSpec,count:1,};
+          let isHas = this.buy_specs_arr.some((v) => {
+            return v.pro._id === this.kindSpec._id;
+          });
+          if (!isHas) {
+            this.buy_specs_arr.push(obj)
+          } else {
+            const arr = this.buy_specs_arr.filter((v) => {
+              return v.pro._id === this.kindSpec._id
+            })
+            arr[0].count++
+          }
+        }
+        console.log(this.buy_specs_arr)
         this.if_show_gray = false;
         this.if_show_cart = false;
-        // 存放所有商品的价格
-        this.price_array.push(this.show_spec_money)
-        // console.log(this.kind_price)
-        for (let i in this.kind_price) {
-          if (this.kind_price[i].name === this.buy_cart_name) {
-            this.kind_price[i].count++;
-            this.kind_count = this.kind_price[i].count;
-            //存放每一种商品的价格
-            this.kind_price[i].arr.push(this.show_spec_money)
-          }
-        }
-        for (let i in this.buy_specs_arr) {
-          if (this.buy_specs_arr[i].kindname === this.buy_specs_kind) {
-            if (this.buy_specs_arr[i].name === this.buy_specs_name) {
-              this.buy_specs_arr[i].count++;
-              // this.buy_specs_price = this.buy_specs_arr[i].price;
-              // console.log(this.buy_specs_arr[i].count, this.buy_specs_arr[i].kindname, this.buy_specs_arr[i].name, this.buy_specs_arr[i].price);
-              this.buy_specs_arr = [...new Set(this.buy_specs_arr)]
-              return
-            }
-          }
-        }
+        //
+        // for (let i in this.buy_specs_arr) {
+        //   if (this.buy_specs_arr[i].kindname === this.buy_specs_kind) {
+        //     if (this.buy_specs_arr[i].name === this.buy_specs_name) {
+        //       this.buy_specs_arr[i].count++;
+        //       this.buy_specs_arr = [...new Set(this.buy_specs_arr)]
+        //       return
+        //     }
+        //   }
+        // }
 
       }
       ,
       show_money(i, id, specs_name) {
+        // console.log(i, i._id, specs_name);
+        //食物种类名字
         this.buy_specs_kind = i.name;
+        //ID
+        this.kindSpec=i;
+        // console.log(this.kindSpec._id)
         // console.log(i.name)
         //特殊食物的价格
         this.show_spec_money = i.price;
         //特殊食物的名字
         this.buy_specs_name = specs_name;
-        //定义对象存储特殊食物和数量
-        let specs_obj = {name: specs_name, count: 0, kindname: i.name, price: i.price};
-        //将对象存放在数组里，在点击购买的时候操作数组
-        this.buy_specs_arr.push(specs_obj);
-        // console.log(this.buy_specs_arr);
         for (let i in this.$refs.uuu) {
           this.$refs.uuu[i].style.borderColor = ''
         }
@@ -374,6 +397,7 @@
       },
       zp_buy_shop(i, name) {
         this.show_spec_money = i[0].price;
+        //数组存放特殊食物。如果没点击，默认选取第一个name
         this.spec_food_array = i;
         this.buy_cart_name = name;
         this.if_show_cart = !this.if_show_cart;
@@ -404,12 +428,7 @@
       Vue.axios.get('https://elm.cangdu.org/shopping/getcategory/' + this.$store.state.shopId + '').then((res) => {
         this.foodPro = res.data.category_list;
       });
-
-
-    },
-    // computed(){
-    //   this.allNumAndPrice()
-    // }
+    }
   }
 </script>
 

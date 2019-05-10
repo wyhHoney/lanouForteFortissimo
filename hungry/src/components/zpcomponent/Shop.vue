@@ -2,11 +2,11 @@
   <div>
     <!--头部-->
     <header class="head_top">
-     <router-link :to="{path:'toinshop'}">
-       <img src="../../assets/fanhui.png" alt="" class="back">
-     </router-link>
+      <router-link :to="{path:'toinshop'}">
+        <img src="../../assets/fanhui.png" alt="" class="back">
+      </router-link>
       <section class="title_head">
-       {{$store.state.shop_head_title}}
+        {{$store.state.shop_head_title}}
       </section>
     </header>
     <!--中间图像-->
@@ -66,11 +66,11 @@
           <ul>
             <li class="cart_food_li" v-for="item in  buy_specs_arr">
               <div class="art_list_num">
-                <p class="art_list_num1">{{item.kindname}}</p>
-                <p class="art_list_num2">{{item.name}}</p>
+                <p class="art_list_num1">{{item.pro.name}}</p>
+                <p class="art_list_num2">{{item.pro.specs_name}}</p>
               </div>
               <div class="cart_list_price">
-                <span>$</span><span>{{item.price}}</span>
+                <span>$</span><span>{{item.pro.price}}</span>
               </div>
               <section class="cart_list_control">
                 <img src="../../assets/减小.png" alt="" class="jianxiao" @click="jianshao1(item)">
@@ -135,7 +135,7 @@
       allNumAndPrice2() {
         let PricSum = 0;
         for (let i in this.buy_specs_arr) {
-          PricSum += this.buy_specs_arr[i].count * this.buy_specs_arr[i].price;
+          PricSum += this.buy_specs_arr[i].count * this.buy_specs_arr[i].pro.price;
         }
         this.allPrice = PricSum;
       }
@@ -164,16 +164,14 @@
         this.buy_specs_arr = [];
       },
       //点击减少
+      //点击减少
       jianshao1() {
-        // console.log('减少')
         for (let i in this.buy_specs_arr) {
-          if (this.buy_specs_arr[i].kindname === this.buy_specs_kind) {
-            if (this.buy_specs_arr[i].name === this.buy_specs_name) {
-              if (this.buy_specs_arr[i].count > 1) {
-                this.buy_specs_arr[i].count--;
-              } else {
-                this.buy_specs_arr = [];
-              }
+          if (this.buy_specs_arr[i].pro.specs_name === this.buy_specs_name) {
+            if (this.buy_specs_arr[i].count > 1) {
+              this.buy_specs_arr[i].count--;
+            } else {
+              this.buy_specs_arr = [];
             }
           }
         }
@@ -182,11 +180,9 @@
       //点击购物清单界面增加
       zengjia1() {
         for (let i in this.buy_specs_arr) {
-          if (this.buy_specs_arr[i].kindname === this.buy_specs_kind) {
-            if (this.buy_specs_arr[i].name === this.buy_specs_name) {
-              if (this.buy_specs_arr[i].count >= 0) {
-                this.buy_specs_arr[i].count++;
-              }
+          if (this.buy_specs_arr[i].pro.specs_name === this.buy_specs_name) {
+            if (this.buy_specs_arr[i].count > 0) {
+              this.buy_specs_arr[i].count ++
             }
           }
         }
