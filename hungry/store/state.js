@@ -34,5 +34,6 @@ let state={
 
   //曾光声明的vuex变量
   zg_name:'',//用户名传值
+  nameArrAdjustIn:[],//定义数组判断是否登陆过
 };
 export default state

@@ -1,10 +1,17 @@
 <template>
   <div class="container zp_container">
     <header class="zp_head_top">
-      <a href="###"><img src="../../assets/fangdajing.png" alt=""></a>
+      <router-link :to="{path:'/seek'}">
+        <a href="###"><img src="../../assets/fangdajing.png" alt=""></a>
+      </router-link>
+    <router-link :to="{path:'/glogin'}" v-if=" ifshowdenglu">
       <a href="###" class="zp_head_top_right">
         <span>登陆|注册</span>
       </a>
+    </router-link>
+      <router-link :to="{path:'/glogin'}" v-if="ifshouheadimg">
+        <img src="../../assets/personhead1.png" alt="" class="zp_head_top_right1">
+      </router-link>
       <a href="###" class="zp_head_top_middle">
         <!--定位地址-->
         <span>{{$store.state.afterSearchName}}</span>
@@ -121,6 +128,15 @@
     methods: {
       intoShop(i) {
         this.$store.state.shopId=i
+      },
+      adjustifshowimg(){
+        if(this.$store.state.nameArrAdjustIn.length===0){
+          this.ifshowdenglu=true;
+            this.ifshouheadimg=false
+        }else{
+          this.ifshowdenglu=false;
+          this.ifshouheadimg=true
+        }
       }
     },
       beforeMount(){
@@ -146,10 +162,14 @@
         halfGoodsCateory2: [],
         shopPro: [],
         ifShowLoading:true,//显示动画
+        ifshowdenglu:true,
+        ifshouheadimg:false,//判断是否登陆过显示那个头像
       }
     },
 
     mounted() {
+      //判断是否有登陆
+      this.adjustifshowimg();
       new Swiper('.swiper-container', {
         pagination: {
           el: '.swiper-pagination',
@@ -174,7 +194,9 @@
     width: 1.5rem;
 
   }
-
+  .zp_head_top_right1{
+    margin-left: 14rem;
+  }
   .zp-shop-detail-ul {
     display: flex;
     transform: scale(0.8);

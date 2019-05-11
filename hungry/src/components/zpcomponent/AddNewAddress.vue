@@ -70,6 +70,9 @@
 </script>
 
 <style scoped>
+  .section_right input{
+    outline: none;
+  }
   .choose_address{
     font-size: .7rem;
     color: #999;

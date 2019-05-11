@@ -8,6 +8,9 @@
     <!--<MyHomePage></MyHomePage>-->
     <!--<wyh_-balance></wyh_-balance>-->
 
+<!--<Idiscount></Idiscount>-->
+
+
   </div>
 </template>
 

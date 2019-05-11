@@ -2,7 +2,7 @@
   <div class="MyHomePage1">
     <!--头部-->
     <div class="MyHomePage_header">
-      <div class="Return" @click="Return"></div>
+      <div class="Return" @click="$router.back(-1)"></div>
       <div class="Mynav"><p>我的</p></div>
     </div>
 
@@ -132,9 +132,7 @@
     },
     methods:{
       //返回按钮的点击事件
-      Return(){
 
-      },
       //用户信息的点击事件
       PersonalData_Header(){
         // let zhi=this.NoLogiIn;

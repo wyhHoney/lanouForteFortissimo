@@ -3,7 +3,7 @@
 
 <div class="Zg_head">
   <!--返回上一外卖的路由-->
-  <router-link :to="{path:''}"><img src="../../assets/fanhui.png" height="200" width="200" class="zg_fanhui4"/></router-link>
+  <router-link :to="{path:''}"><img src="../../assets/fanhui.png" height="200" width="200" class="zg_fanhui4" @click="$router.back(-1)"/></router-link>
   <span class="search">搜索</span>
 </div>
     <div class="zg_search box ">

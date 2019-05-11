@@ -64,18 +64,18 @@ export default new Router({
     {path: '/changesin',component:ChangesIn},//重置密码页面
 
     //张鹏配置的路由
-    {path: '', component: zpposition},
-    {path: '/city', component: SpecificAddress},
-    {path: '/toCity', component: zpposition},
-    {path: '/zp_toMyHome', component: ZpTakeOut},
+    {path: '', component: zpposition},//路由重定向，进入定位界面
+    {path: '/city', component: SpecificAddress},//进入具体定位
+    {path: '/toCity', component: zpposition},//定位界面
+    {path: '/zp_toMyHome', component: ZpTakeOut},//获取商品，有轮播图
     {path: '/zpMine', component: MyHomePage},
-    {path: '/intoShop', component: InShop},
-    {path: '/toshop', component: Shop},
+    {path: '/intoShop', component: InShop},//购物车界面
+    {path: '/toshop', component: Shop},//加入购物车
     {path: '/toinshop', component: InShop},
-    {path:'/tosureorder',component:SureOrder},
-    {path:'/toinvoice',component:InVoice},
-    {path:'/tochooseaddress',component:ChoodeAddress},
-    {path:'/toaddnewaddress',component:AddNewAddress},
+    {path:'/tosureorder',component:SureOrder},//确认购买
+    {path:'/toinvoice',component:InVoice},//发票
+    {path:'/tochooseaddress',component:ChoodeAddress},//选择外卖地址
+    {path:'/toaddnewaddress',component:AddNewAddress},//添加定位地址
     //曾光配置的路由
 
     {path: '/register', component: register}, //跳转到重置密码的路由
