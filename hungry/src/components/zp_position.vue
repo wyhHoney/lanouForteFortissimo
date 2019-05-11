@@ -4,7 +4,7 @@
       <header id="zp_head-top" class="container text-center">
         <span class="pull-left">ele.me</span>
         <span class="pull-right">
-          <router-link :to="{path:''}">登陆|注册</router-link>
+          <router-link :to="{path:'/glogin'}">登陆|注册</router-link>
         </span>
       </header>
       <nav id="zp_city-nav">

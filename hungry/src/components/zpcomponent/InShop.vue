@@ -1,5 +1,7 @@
 <template>
   <div>
+    <PublicHeader :pagetitle="PageTitle" :hops="routejump" class="headzujian"></PublicHeader>
+    <Loading v-if="if_show_load"></Loading>
     <section class="shop_container">
       <section class="change_show_type">
         <div><span class="activity_show">商品</span></div>
@@ -83,7 +85,9 @@
             </div>
           </section>
           <section class="gotopay" ref="gotopay">
-            <a href="###" class="gotopay_btn" ref="gotopay_btn">去结算</a>
+            <router-link :to="{path: '/tosureorder'}" ref="tosureorder">
+              <a href="###" class="gotopay_btn" ref="gotopay_btn">去结算</a>
+            </router-link>
           </section>
         </section>
         <section class="cart_food_list" v-if="if_show_cart_list1">
@@ -149,11 +153,16 @@
 
 <script>
   import Vue from 'vue'
-
+  import Loading from "./Loading";
+  import PublicHeader from '../MyPage/CommonComponents/wyh_header'
   export default {
     name: "InShop",
+    components: {Loading,PublicHeader},
     data() {
       return {
+        PageTitle: '选择商品',
+        routejump: 'zp_toMyHome',
+        if_show_load: true,//是否显示动画
         foodPro: [],
         if_show_cart: false,
         if_show_gray: false,
@@ -164,7 +173,7 @@
         kind_price_obj: {},//用来放置商品类名字，购买数量，股买的各类的价格集合
         kind_price: [],//存放上面的对象
         kind_count: 0,//每类食品的数量
-        kind_id:Number,
+        kind_id: Number,
         if_show_cart_list: false,//蒙版的显示隐藏
         if_show_cart_list1: false,
         buy_specs_name: '',//将要购买的物品名称
@@ -173,7 +182,7 @@
         buy_specs_price: Number,//特殊商品的单价
         allPrice: 0,//总价格
         allNum: 0,//总数
-        kindSpec:Object,
+        kindSpec: Object,
 
 
       }
@@ -181,9 +190,9 @@
     beforeDestroy() {
       this.$store.state.allPrice = this.allPrice;
       this.$store.state.allNum = this.allNum;
-      this.$store.state.buy_specs_arr=this.buy_specs_arr
-      this.$store.state.buy_specs_kind=this.buy_specs_kind
-      this.$store.state.buy_specs_name=this.buy_specs_name
+      this.$store.state.buy_specs_arr = this.buy_specs_arr
+      this.$store.state.buy_specs_kind = this.buy_specs_kind
+      this.$store.state.buy_specs_name = this.buy_specs_name
     },
     beforeUpdate() {
       //调用总价格和总数函数
@@ -192,10 +201,15 @@
       //调用显示购物车的css样式函数
       this.shopcartcss();
     },
-    computed:{
-      fenlancss(i){
-        for(let j in this.buy_specs_arr){
-          if(this.buy_specs_arr[j].pro.name==i){
+    mounted() {
+      setTimeout(() => {
+        this.if_show_load = false;
+      }, 2000)
+    },
+    computed: {
+      fenlancss(i) {
+        for (let j in this.buy_specs_arr) {
+          if (this.buy_specs_arr[j].pro.name == i) {
             return true
           }
         }
@@ -203,14 +217,13 @@
     }
     ,
     methods: {
-
       //进入每一个具体的店铺
-      inPerShop(pro){
-        this.$store.state.shop_head_title=pro.name;
-        this.$store.state.shop_head_description=pro.description;
-        this.$store.state.rating_count=pro.rating_count;
-        this.$store.state.satisfy_rate=pro.satisfy_rate;
-        this.$store.state.image_path=pro.image_path
+      inPerShop(pro) {
+        this.$store.state.shop_head_title = pro.name;
+        this.$store.state.shop_head_description = pro.description;
+        this.$store.state.rating_count = pro.rating_count;
+        this.$store.state.satisfy_rate = pro.satisfy_rate;
+        this.$store.state.image_path = pro.image_path
       },
       //分栏的购买数量
       hot_kind(m) {
@@ -283,7 +296,7 @@
         for (let i in this.buy_specs_arr) {
           if (this.buy_specs_arr[i].pro.specs_name === this.buy_specs_name) {
             if (this.buy_specs_arr[i].count > 0) {
-              this.buy_specs_arr[i].count ++
+              this.buy_specs_arr[i].count++
             }
           }
         }
@@ -319,7 +332,7 @@
       },
       //每一食品的个数
       find_kind_count(m) {
-        let sum =null;
+        let sum = null;
         for (let i in this.buy_specs_arr) {
           if (this.buy_specs_arr[i].pro.name === m) {
             sum += this.buy_specs_arr[i].count;
@@ -328,18 +341,11 @@
         return sum
       },
       in_cart() {
-        // console.log(this.buy_specs_kind,'商品',this.buy_specs_name);
-        //定义对象存储商品信息
-        // let obj = {name:'', count: 0, kindname: this.buy_cart_name, price:0};
-        //  如果为空选取了默认值
-
-        // if(this.buy_specs_kind===''){
-        //判断是否为空
-        if(this.buy_specs_arr.length===0){
-          let obj={pro:this.kindSpec,count:1,};
+        if (this.buy_specs_arr.length === 0) {
+          let obj = {pro: this.kindSpec, count: 1,};
           this.buy_specs_arr.push(obj)
-        }else{
-          let obj={pro:this.kindSpec,count:1,};
+        } else {
+          let obj = {pro: this.kindSpec, count: 1,};
           let isHas = this.buy_specs_arr.some((v) => {
             return v.pro._id === this.kindSpec._id;
           });
@@ -355,27 +361,13 @@
         console.log(this.buy_specs_arr)
         this.if_show_gray = false;
         this.if_show_cart = false;
-        //
-        // for (let i in this.buy_specs_arr) {
-        //   if (this.buy_specs_arr[i].kindname === this.buy_specs_kind) {
-        //     if (this.buy_specs_arr[i].name === this.buy_specs_name) {
-        //       this.buy_specs_arr[i].count++;
-        //       this.buy_specs_arr = [...new Set(this.buy_specs_arr)]
-        //       return
-        //     }
-        //   }
-        // }
-
       }
       ,
       show_money(i, id, specs_name) {
-        // console.log(i, i._id, specs_name);
         //食物种类名字
         this.buy_specs_kind = i.name;
         //ID
-        this.kindSpec=i;
-        // console.log(this.kindSpec._id)
-        // console.log(i.name)
+        this.kindSpec = i;
         //特殊食物的价格
         this.show_spec_money = i.price;
         //特殊食物的名字
@@ -384,7 +376,6 @@
           this.$refs.uuu[i].style.borderColor = ''
         }
         this.$refs.uuu[id].style.borderColor = 'blue';
-        // console.log(i,id,specs_name)
       },
       zp_delete_cart() {
         this.if_show_gray = false;
@@ -403,10 +394,7 @@
         this.if_show_cart = !this.if_show_cart;
         this.if_show_gray = true;
         let obj = {name: name, count: 0, arr: []};
-        // let obj1={name:}
         this.kind_price.push(obj);
-        // console.log(this.kind_price)
-        // console.log(i, name,specs_name)
       },
       ifNull(i) {
         if (i == null) {
@@ -421,18 +409,26 @@
         } else {
           return '选规格'
         }
-      }
+      },
     },
 
     created() {
       Vue.axios.get('https://elm.cangdu.org/shopping/getcategory/' + this.$store.state.shopId + '').then((res) => {
         this.foodPro = res.data.category_list;
       });
+      this.buy_specs_arr = this.$store.state.buy_specs_arr;
+
     }
+
   }
 </script>
 
 <style scoped>
+  .headzujian{
+     position: fixed;
+     top: 0;
+    z-index: 100;
+   }
   .op {
     font-size: .65rem;
     color: #666;
@@ -959,6 +955,7 @@
   }
 
   .change_show_type {
+    margin-top: 2rem;
     display: flex;
     background-color: #fff;
     padding: .3rem 0 .6rem;

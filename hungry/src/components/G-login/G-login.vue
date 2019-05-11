@@ -4,7 +4,7 @@
     <div class="z-top">
       <p class="sizi ">密码登录</p>
       <!--返回上一级-->
-      <router-link :to="{path: ''}"><img src="../../assets/fanhui.png" height="200" width="200" class="zg_fanhui1"/></router-link>
+      <router-link :to="{path: '/toCity'}"><img src="../../assets/fanhui.png" height="200" width="200" class="zg_fanhui1"/></router-link>
     </div>
     <div class="Z-input">
       <div class="z-accounts"> <input type="text" placeholder="帐号"v-model="A" />
@@ -59,20 +59,21 @@
           check(this.show_num)
         },
         register(){
-          if(this.A ==''){
+          if(this.A ===''){
             alert("帐号没输")
           }
-        if(this.B ==''){
+        if(this.B ===''){
           alert('密码没输')
         }
-        if(this.C ==''){
+        if(this.C ===''){
           alert("请输入验证码")
         }
-        if(this.A,this.B,this.C==''){
+        if(this.A,this.B,this.C===''){
           alert("你是个傻逼?啥都不输入还登?")
         }
-if(this.A!='',this.B!='',this.C!=''){
+if(this.A!==''&&this.B!==''&&this.C!==''){
 //按钮登录,下边是个路由,登录成功的路由
+  this.$router.push({path:'myhomepage'})
 }
         }
       }

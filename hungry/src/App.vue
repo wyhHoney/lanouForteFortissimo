@@ -1,9 +1,12 @@
 <template>
   <div id="app">
-    <router-view></router-view>
+    <transition name="slide-fade" >
+      <router-view></router-view>
+   <!--<Invoice></Invoice>-->
+    </transition>
     <!--<MyHomePage></MyHomePage>-->
     <!--<wyh_-balance></wyh_-balance>-->
-
+    <!--<Loading></Loading>-->
   </div>
 </template>
 
@@ -27,9 +30,13 @@
   import Zg_basic from "./components/zg_AccountInformation/zg_basic";
   import Explain from "./components/zg_AccountInformation/Explain";
   import Payment from "./components/zg_AccountInformation/Payment";
+  import Loading from "./components/zpcomponent/Loading";
+  import Invoice from "./components/zpcomponent/Invoice";
   export default {
     name: 'App',
     components: {
+      Invoice,
+      Loading,
       MyHomePage,
 
       //张鹏引入的组件
@@ -53,4 +60,16 @@
 <style>
   @import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
   @import "OverallSituationCSS/animate.min.css";
+
+  .slide-fade-enter-active {
+    transition: all 2s ease;
+  }
+  .slide-fade-leave-active {
+    transition: all .5s ;
+  }
+  .slide-fade-enter, .slide-fade-leave-to
+  {
+    opacity: 0;
+  }
+
 </style>

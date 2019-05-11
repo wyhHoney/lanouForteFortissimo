@@ -21,19 +21,20 @@
               </figure>
             </a>
           </div>
-          <div class="swiper-slide zp_food_types">
-            <a href="###" v-for="item in halfGoodsCateory2">
-              <figure>
-                <img :src="'//fuss10.elemecdn.com/'+item.image_url" alt="">
-                <figcaption>{{item.title}}</figcaption>
-              </figure>
-            </a>
-          </div>
+          <!--<div class="swiper-slide zp_food_types">-->
+            <!--<a href="###" v-for="item in halfGoodsCateory2">-->
+              <!--<figure>-->
+                <!--<img :src="'//fuss10.elemecdn.com/'+item.image_url" alt="">-->
+                <!--<figcaption>{{item.title}}</figcaption>-->
+              <!--</figure>-->
+            <!--</a>-->
+          <!--</div>-->
 
         </div>
         <div class="swiper-pagination"></div>
       </div>
     </nav>
+    <Loading v-if="ifShowLoading"></Loading>
     <div class="zp_shopList">
       <header class="zp_shopListHeader">
         <!--<img src="../../assets/shangcheng.png" alt="">-->
@@ -112,17 +113,30 @@
 <script>
   import Vue from 'vue'
   import Swiper from 'swiper'
+  import Loading from "./Loading";
 
   export default {
     name: "ZpTakeOut",
+    components: {Loading},
     methods: {
       intoShop(i) {
         this.$store.state.shopId=i
       }
     },
+      beforeMount(){
+
+    }
+    ,
     created() {
       Vue.axios.get('https://elm.cangdu.org/shopping/restaurants?latitude=' + this.$store.state.afterSearchLatitude + '&longitude=' + this.$store.state.afterSearchLongitude + '').then((res) => {
         this.shopPro = res.data;
+
+      });
+      Vue.axios.get('https://elm.cangdu.org/v2/index_entry').then((res) => {
+        this.goodsCategory = res.data
+        this.halfGoodsCateory1 = this.goodsCategory.slice(0, this.goodsCategory.length / 2);
+        this.halfGoodsCateory2 = this.goodsCategory.slice(this.goodsCategory.length / 2, this.goodsCategory.length)
+        this.ifShowLoading=false;
       })
     },
     data() {
@@ -130,23 +144,18 @@
         goodsCategory: [],
         halfGoodsCateory1: [],
         halfGoodsCateory2: [],
-        shopPro: []
+        shopPro: [],
+        ifShowLoading:true,//显示动画
       }
     },
+
     mounted() {
       new Swiper('.swiper-container', {
-        loop: true,
-        // 如果需要分页器
-        preventClicks: false,
         pagination: {
           el: '.swiper-pagination',
         },
       });
-      Vue.axios.get('https://elm.cangdu.org/v2/index_entry').then((res) => {
-        this.goodsCategory = res.data
-        this.halfGoodsCateory1 = this.goodsCategory.slice(0, this.goodsCategory.length / 2);
-        this.halfGoodsCateory2 = this.goodsCategory.slice(this.goodsCategory.length / 2, this.goodsCategory.length)
-      })
+
     }
   }
 </script>
@@ -378,14 +387,14 @@
     display: flex;
     flex-wrap: wrap;
     height: 100%;
-    position: relative;
+    /*position: relative;*/
   }
 
   .zp_food_types a {
     width: 25%;
     padding: .3rem 0;
-    display: flex;
-    justify-content: center;
+    /*display: flex;*/
+    /*justify-content: center;*/
   }
 
   .zp_food_types figure img {

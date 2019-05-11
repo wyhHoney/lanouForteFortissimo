@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-
 Vue.use(Router);
 
 //张鹏配置的路由
@@ -9,6 +8,10 @@ import zpposition from '../components/zp_position'
 import ZpTakeOut from '../components/zpcomponent/ZpTakeOut'
 import InShop from '../components/zpcomponent/InShop'
 import Shop from '../components/zpcomponent/Shop'
+import SureOrder from '../components/zpcomponent/SureOrder'
+import InVoice from '../components/zpcomponent/Invoice'
+import ChoodeAddress from '../components/zpcomponent/ChooseAdress'
+import AddNewAddress from '../components/zpcomponent/AddNewAddress'
 
 //曾光配置的路由
 import register from '../components/G-login/zg_register'//重置密码页面的路由
@@ -64,8 +67,10 @@ export default new Router({
     {path: '/intoShop', component: InShop},
     {path: '/toshop', component: Shop},
     {path: '/toinshop', component: InShop},
-
-
+    {path:'/tosureorder',component:SureOrder},
+    {path:'/toinvoice',component:InVoice},
+    {path:'/tochooseaddress',component:ChoodeAddress},
+    {path:'/toaddnewaddress',component:AddNewAddress},
     //曾光配置的路由
 
     {path: '/register', component: register}, //跳转到重置密码的路由
