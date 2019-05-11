@@ -22,6 +22,7 @@ import Payment from '../components/zg_AccountInformation/Payment'//在线支付�
 import exchangeMembers from '../components/zg_AccountInformation/ExchangeMembers'//兑换记录路由
 import PurchaseHistory from '../components/zg_AccountInformation/PurchaseHistory'
 import seek from '../components/Zg_seek/Zg_seek'//收索页面
+import TheMoneyThat from '../components/zg_AccountInformation/TheMoneyThat'//红包说明
 
 //王义豪配置的路由
 import Balance from '../components/MyPage/SubPage/wyh_Balance'
@@ -38,6 +39,7 @@ import AccountInformation from '../components/MyPage/SubPage/wyh_AccountInformat
 import AmendUserName from '../components/MyPage/SubPage/wyh_AmendUserName'
 import TakeSite from '../components/TakeSite/wyh_CompileSite'
 import AddLocation from '../components/TakeSite/wyh_AddLocation'
+
 
 
 export default new Router({
@@ -81,7 +83,7 @@ export default new Router({
     {path: '/exchangeMembers', component: exchangeMembers},//帐号注册
     {path: '/PurchaseHistory', component: PurchaseHistory},//购买记录
     {path: '/seek', component: seek},//搜索食物页面
-
+    {path:'/TheMoneyThat',component:TheMoneyThat}
 
   ]
 })

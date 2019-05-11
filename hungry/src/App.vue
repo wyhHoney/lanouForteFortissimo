@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+
     <transition name="slide-fade" >
       <router-view></router-view>
    <!--<Invoice></Invoice>-->
@@ -7,6 +8,12 @@
     <!--<MyHomePage></MyHomePage>-->
     <!--<wyh_-balance></wyh_-balance>-->
     <!--<Loading></Loading>-->
+
+    <!--<router-view></router-view>-->
+    <!--<MyHomePage></MyHomePage>-->
+    <!--<wyh_-balance></wyh_-balance>-->
+<Idiscount></Idiscount>
+
   </div>
 </template>
 
@@ -30,6 +37,7 @@
   import Zg_basic from "./components/zg_AccountInformation/zg_basic";
   import Explain from "./components/zg_AccountInformation/Explain";
   import Payment from "./components/zg_AccountInformation/Payment";
+<<<<<<< Updated upstream
   import Loading from "./components/zpcomponent/Loading";
   import Invoice from "./components/zpcomponent/Invoice";
   export default {
@@ -37,6 +45,13 @@
     components: {
       Invoice,
       Loading,
+=======
+  import Idiscount from "./components/zg_AccountInformation/IDiscount";
+  export default {
+    name: 'App',
+    components: {
+      Idiscount,
+>>>>>>> Stashed changes
       MyHomePage,
 
       //张鹏引入的组件
@@ -53,6 +68,7 @@
       Zg_seek,
       ResetPasswords,
       GLogin,
+
     }
   }
 </script>

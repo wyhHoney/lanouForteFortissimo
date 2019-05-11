@@ -1,7 +1,7 @@
 <template>
     <div>
       <div class="Zg_head">
-        <router-link :to="{path:''}"> <img src="../../assets/fanhui.png" height="200" width="200" class="zg_fanhui4"/></router-link>
+        <router-link :to="{path:'MyHomePage'}"> <img src="../../assets/fanhui.png" height="200" width="200" class="zg_fanhui4"/></router-link>
         <div class="search">
         <span>会员中心</span>
         </div>

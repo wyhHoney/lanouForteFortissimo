@@ -24,13 +24,17 @@
       <img src="../../assets/duihao.jpg" style="position: absolute;top: 13.5rem;right: 1.5rem;width: 1.4rem" v-if="zhifubao" @click="zg_show"/>
       <img src="../../assets/duihao1.jpg" style="position: absolute;top: 13.5rem;right: 1.5rem;width: 1.4rem" v-if="zhifubao_1"/>
     </div>
-    <button class="btn btn-info confirm" @click="Aa">确认付款</button>
+    <button class="btn btn-info confirm" @click="Aa">确认支付</button>
     <div class="fadeOutDownBig EnterTheAnimation" v-if="disappeared">
       <img src="../../assets/gantanhao.png" alt="" style="width: 4rem;height: 4rem;">
       <p>暂不开放支付功能</p>
       <button class="btn btn-info button_queren"  style="background-color:  #4cd964" @click="zg_disappeared " >确认</button>
     </div>
-
+    <div class="fadeOutDownBig EnterTheAnimation" v-if="disappeared_logon">
+      <img src="../../assets/gantanhao.png" alt="" style="width: 4rem;height: 4rem;">
+      <p>当前环境无法支付,请打开官方APP <br/>进行付款 </p>
+      <button class="btn btn-info button_queren"  style="background-color:  #4cd964" @click="zg_disappeared__logon " >确认</button>
+    </div>
     </div>
 </template>
 
@@ -46,7 +50,8 @@
           weixin_1:false,
           zhifubao:false,
           zhifubao_1:true,
-          disappeared:true
+          disappeared:true,
+          disappeared_logon:false,
         }
       },
       mounted(){
@@ -79,11 +84,15 @@
             this. zhifubao_1=false
         },
         Aa(){
-            //订单页面的跳转
-            this.$router.push({path:'myhomepage'})
+          this.disappeared_logon=true
         },
         zg_disappeared(){
           this.disappeared=false
+        },
+        zg_disappeared__logon(){
+            //跳转到订单页面
+            this.$router.push({})
+          this.disappeared_logon=false
         }
       },
     }

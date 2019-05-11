@@ -4,13 +4,31 @@
     <div class="search">
       <span>购买记录</span>
     </div>
-
+    <div style="position: absolute;top: 12rem;left: 6.3rem">
+      <img src="../../zg_img/xiaoren.png" height="107" width="89"/></div>
   </div>
 </template>
 
 <script>
     export default {
-        name: "PurchaseHistory"
+        name: "PurchaseHistory",
+        mounted(){
+          let  zg_connector ='https://elm.cangdu.org/bos/v2/users/1/orders?limit=20&offset=10&restaurant_id=this.zg_user_id'
+          this.$http.get(zg_connector).then(res=>{
+            this.OrderForm=res.data
+            console.log(res.data)
+          },res=>{
+            console.log('error')
+          })
+        },
+      data(){
+          return{
+            OrderForm:[],
+            zg_user_id:'3222',
+            methods:{
+            }
+          }
+      }
     }
 
 </script>

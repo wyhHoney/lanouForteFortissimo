@@ -29,5 +29,7 @@ let state={
 
   //王义豪声明的vuex变量
   UserName11:'',
+  //用户名传值
+  zg_name:''
 };
 export default state

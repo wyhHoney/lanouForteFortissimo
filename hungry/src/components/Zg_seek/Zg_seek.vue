@@ -20,19 +20,6 @@
       <li v-if="B"@click="z_empty" class="z_empty">清空所有历史</li>
     </ul>
     <div v-for="(a) in searchArr" v-show="zg_array">{{a.name}}</div>
-    <div class="zg_bottom_img">
-      <img src="../../assets/bottom1.png" height="200" width="200"class="zg_bottom_img_1"/>
-      <img src="../../assets/bottom2.png" height="200" width="200" class="zg_bottom_img_2"/>
-      <img src="../../assets/bottom3.png" height="200" width="200"class="zg_bottom_img_3"/>
-      <img src="../../assets/bottom4.png" height="200" width="200"class="zg_bottom_img_4"/>
-    </div>
-    <div class="zg_bottom ">
-      <!--路由跳转的单击事件-->
-      <span class="zg_span_1" @click="zg_span_1">外卖</span>
-      <span class="zg_span_1" @click="zg_span_2">搜索</span>
-      <span class="zg_span_1" @click="zg_span_3">订单</span>
-      <span class="zg_span_1" @click="zg_span_4">我的</span>
-    </div>
     <div class="zg_thegur"></div>
     <!--下拉线-->
   </div>
@@ -202,13 +189,6 @@
     list-style: none;
     font-weight: 800;
   }
-  .fanhui{
-    position: relative;
-    top: 0;
-    right: 6rem;
-    width: 1.4rem;
-    height: 1rem;
-  }
   .search{
     position: relative;
     right: 1rem;
@@ -231,42 +211,11 @@
     margin: 0 2rem;
     font-size: .7rem;
   }
-  .zg_bottom_img_2{
-    position:fixed;
-    left: 5.9rem;
-    bottom: .8rem;
-    width: 1rem;
-    height: 1rem;
-  }
-  .zg_bottom_img_3{
-    position:fixed;
-    right: 5.5rem;
-    bottom: .85rem;
-    width: 1rem;
-    height: .9rem;
-  }
-  .zg_bottom_img_1{
-    position:fixed;
-   left: 2.3rem;
-    bottom: .85rem;
-    width: 1rem;
-    height: .9rem;
-  }
-  .zg_bottom_img_4{
-    position:fixed;
-    right: 1.8rem;
-    bottom: .85rem;
-    width: 1rem;
-    height: .9rem;
-  }
   .zg_thegur{
     border-top:1px solid grey;
     position: fixed;
     bottom: 0;
     background-color: red;
-  }
-  .zg_span_1{
-    color: grey;
   }
   .zg_fanhui4{
     width: .7rem;
