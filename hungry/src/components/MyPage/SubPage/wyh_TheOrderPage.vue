@@ -43,11 +43,11 @@
         methods:{
           //底部按钮按钮的点击事件
           TakeOutFood(){
-
+            this.$router.push({path:'zp_toMyHome'});
           },
           //底部搜索按钮的点击事件
           SearchButton(){
-
+            this.$router.push({path:'seek'})
           },
           //底部订单按钮的点击事件
           OrderButton(){

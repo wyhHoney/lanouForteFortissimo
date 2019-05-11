@@ -95,23 +95,21 @@
       </div>
     </div>
     <div class="BottomPart">
-      <div>
-        <div class="bottom_logo bottom_logo_span1"></div>
+      <div @click="TakeOutFood">
+        <div class="bottom_logo bottom_logo_span1" ></div>
         <p>外卖</p>
       </div>
-      <div>
+      <div @click="SearchButton">
         <div class="bottom_logo bottom_logo_span2"></div>
         <p>搜索</p>
       </div>
-      <div>
+      <div @click="OrderButton">
         <div class="bottom_logo bottom_logo_span3"></div>
         <p>订单</p>
       </div>
-      <div>
-        <RouterLink :to="{path:'/zpMine'}">
-          <div class="bottom_logo bottom_logo_span4"></div>
-          <p>我的</p>
-        </RouterLink>
+      <div @click="MyInformation">
+        <div class="bottom_logo bottom_logo_span4"></div>
+        <p>我的</p>
       </div>
     </div>
   </div>
@@ -137,12 +135,29 @@
           this.ifshowdenglu=false;
           this.ifshouheadimg=true
         }
-      }
+      },
+
+      //底部按钮按钮的点击事件
+      TakeOutFood(){
+        this.$router.push({path:'zp_toMyHome'})
+      },
+      //底部搜索按钮的点击事件
+      SearchButton(){
+        this.$router.push({path:'seek'});
+      },
+      //底部订单按钮的点击事件
+      OrderButton(){
+        this.$router.push({path:'theorderoage'});
+      },
+      //底部我的按钮的点击事件
+      MyInformation(){
+        this.$router.push({path:'myhomepage'})
+      },
     },
       beforeMount(){
 
-    }
-    ,
+      },
+
     created() {
       Vue.axios.get('https://elm.cangdu.org/shopping/restaurants?latitude=' + this.$store.state.afterSearchLatitude + '&longitude=' + this.$store.state.afterSearchLongitude + '').then((res) => {
         this.shopPro = res.data;
@@ -470,7 +485,7 @@
   }
 
   .bottom_logo_span1 {
-    background: url("../../assets/bottom1.png") no-repeat center center;
+    background: url("../../assets/bottom11.png") no-repeat center center;
     background-size: 110% 110%;
   }
 

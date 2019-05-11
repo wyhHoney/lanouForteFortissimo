@@ -151,7 +151,8 @@
       },
       //我的优惠点击事件
       Discount(){
-        this.$router.push({path:'discount'});
+        // this.$router.push({path:'discount'});//王义豪写的空白页面
+        this.$router.push({path:'explain'});
       },
       //我的积分点击事件
       integral(){

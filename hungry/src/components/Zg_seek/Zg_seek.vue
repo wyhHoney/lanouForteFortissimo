@@ -1,27 +1,46 @@
 <template>
   <div>
-
-<div class="Zg_head">
-  <!--返回上一外卖的路由-->
-  <router-link :to="{path:''}"><img src="../../assets/fanhui.png" height="200" width="200" class="zg_fanhui4" @click="$router.back(-1)"/></router-link>
-  <span class="search">搜索</span>
-</div>
+    <div class="Zg_head">
+      <!--返回上一外卖的路由-->
+      <router-link :to="{path:''}"><img src="../../assets/fanhui.png" height="200" width="200" class="zg_fanhui4" @click="$router.back(-1)"/></router-link>
+      <span class="search">搜索</span>
+    </div>
     <div class="zg_search box ">
-      <input type="text"  placeholder="请输入商家或美食名称"                   v-model="history"><img src="../../assets/shift out .jpg"@click="picture"v-show="A" class="_img"/>
+      <input type="text" placeholder="请输入商家或美食名称" v-model="history"><img src="../../assets/shift out .jpg" @click="picture" v-show="A" class="_img"/>
       <!--<span class="btn btn-info "style="height: 1.8rem;width: 20%;font-size: 0.7rem;margin: 0;" @click="submitAReport()">提交</span>-->
-      <input type="submit" value="提交" class="btn present"style="height: 1.8rem;width: 20%;font-size: 0.7rem;margin: 0;" @click="submitAReport()">
+      <input type="submit" value="提交" class="btn present" style="height: 1.8rem;width: 20%;font-size: 0.7rem;margin: 0;" @click="submitAReport()">
     </div>
     <div class="zg_text_2" v-if="text_2">暂无商家/商品,请重试</div>
     <div class="zg_text" v-if="zg_text">
       <p class="zg_text_1" v-if="zg_text_1">搜索记录</p>
-      </div>
+    </div>
     <ul>
       <li v-for="(i,a) in arr " class="z-price" @click="z_price(a)">{{i}}</li>
-      <li v-if="B"@click="z_empty" class="z_empty">清空所有历史</li>
+      <li v-if="B" @click="z_empty" class="z_empty">清空所有历史</li>
     </ul>
     <div v-for="(a) in searchArr" v-show="zg_array">{{a.name}}</div>
     <div class="zg_thegur"></div>
     <!--下拉线-->
+
+    <!--底部按钮-->
+    <div class="BottomPart">
+      <div @click="TakeOutFood">
+        <div class="bottom_logo bottom_logo_span1" ></div>
+        <p>外卖</p>
+      </div>
+      <div @click="SearchButton">
+        <div class="bottom_logo bottom_logo_span2"></div>
+        <p>搜索</p>
+      </div>
+      <div @click="OrderButton">
+        <div class="bottom_logo bottom_logo_span3"></div>
+        <p>订单</p>
+      </div>
+      <div @click="MyInformation">
+        <div class="bottom_logo bottom_logo_span4"></div>
+        <p>我的</p>
+      </div>
+    </div>
   </div>
 </template>
 <script>
@@ -95,19 +114,23 @@
           this.zg_text_1=false;
           this.arr.splice(this.arr[0]);
         },
-        zg_span_1(){
-        //外卖路由跳转
-        },
-        zg_span_2(){
-        //搜索路由,当前页面
 
+        //底部按钮按钮的点击事件
+        TakeOutFood(){
+          this.$router.push({path:'zp_toMyHome'})
         },
-        zg_span_3(){
-        //订单路由跳转
+        //底部搜索按钮的点击事件
+        SearchButton(){
+          this.$router.push({path:'seek'});
         },
-        zg_span_4(){
-        //我的路由跳转
-        }
+        //底部订单按钮的点击事件
+        OrderButton(){
+          this.$router.push({path:'theorderoage'});
+        },
+        //底部我的按钮的点击事件
+        MyInformation(){
+          this.$router.push({path:'myhomepage'})
+        },
       }
     }
 </script>
@@ -225,4 +248,52 @@
     top: .4rem;
     font-weight: 800;
   }
+
+/*底部导航样式*/
+.BottomPart{
+  width: 100%;
+  background-color: white;
+  font-size: 0;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  box-shadow: 0 0 2px rgba(0,0,0,0.2);
+}
+.BottomPart>div{
+  box-sizing: border-box;
+  padding-top: .3rem;
+  width: 25%;
+  display: inline-block;
+  text-align: center;
+  font-size: .45rem;
+  color: #666666;
+  margin-bottom: 0;
+}
+.BottomPart>div>p{
+  margin-bottom: .2rem;
+}
+.bottom_logo{
+  width: .8rem;
+  height: .8rem;
+  margin: 0 auto;
+  box-sizing: border-box;
+  padding-top: .3rem;
+
+}
+.bottom_logo_span1{
+  background: url("../../assets/bottom1.png") no-repeat center center;
+  background-size: 110% 110%;
+}
+.bottom_logo_span2{
+  background: url("../../assets/bottom22.png") no-repeat center center;
+  background-size: 110% 110%;
+}
+.bottom_logo_span3{
+  background: url("../../assets/bottom3.png") no-repeat center center;
+  background-size: 110% 80%;
+}
+.bottom_logo_span4{
+  background: url("../../assets/bottom4.png") no-repeat center center;
+  background-size: 100% 100%;
+}
 </style>

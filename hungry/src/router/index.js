@@ -5,7 +5,7 @@ Vue.use(Router);
 //张鹏配置的路由
 import SpecificAddress from '../components/SpecificAddress'
 import zpposition from '../components/zp_position'
-import ZpTakeOut from '../components/zpcomponent/ZpTakeOut'
+import ZpTakeOut from '../components/zpcomponent/ZpTakeOut'//外卖页面
 import InShop from '../components/zpcomponent/InShop'
 import Shop from '../components/zpcomponent/Shop'
 import SureOrder from '../components/zpcomponent/SureOrder'
@@ -47,8 +47,8 @@ export default new Router({
   routes: [
     //  王义豪配置的路由
     {path: '/myhomepage', component: MyHomePage}, //我的页面
-    {path: '/balance', component: Balance},
-    {path: '/discount', component: Discount},
+    {path: '/balance', component: Balance},//余额页面
+    {path: '/discount', component: Discount},//我的优惠页面
     {path: '/integral', component: Integral},//我的积分页面
     {path: '/balanceProblem', component: BalanceProblem},//说明组件
     {path: '/serviceCenter', component: ServiceCenter},//服务中心
