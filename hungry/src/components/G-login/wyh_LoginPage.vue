@@ -253,7 +253,6 @@
   .verification>div{
     position: relative;
     left: .2rem;
-    top: 0rem;
     display: inline-block;
   }
   .verification>div>p{

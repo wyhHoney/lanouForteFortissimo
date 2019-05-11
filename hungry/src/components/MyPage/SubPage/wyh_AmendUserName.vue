@@ -58,7 +58,7 @@
           }else if(this.UserName.length>=24){
 
           }else {
-              this.$store.state.UserName11=this.UserName;
+            this.$store.state.UserName11=this.UserName;
               console.log(this.$store.state.UserName11);
           }
           this.$router.push({path:'accountinformation'})

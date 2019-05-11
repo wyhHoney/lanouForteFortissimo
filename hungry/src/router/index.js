@@ -39,7 +39,8 @@ import AccountInformation from '../components/MyPage/SubPage/wyh_AccountInformat
 import AmendUserName from '../components/MyPage/SubPage/wyh_AmendUserName'
 import TakeSite from '../components/TakeSite/wyh_CompileSite'
 import AddLocation from '../components/TakeSite/wyh_AddLocation'
-
+import AearchSith from '../components/TakeSite/wyh_AearchSite'
+import ChangesIn from '../components/MyPage/SubPage/wyh_ChangesIn'
 
 
 export default new Router({
@@ -48,8 +49,8 @@ export default new Router({
     {path: '/myhomepage', component: MyHomePage}, //我的页面
     {path: '/balance', component: Balance},
     {path: '/discount', component: Discount},
-    {path: '/integral', component: Integral},
-    {path: '/balanceProblem', component: BalanceProblem},
+    {path: '/integral', component: Integral},//我的积分页面
+    {path: '/balanceProblem', component: BalanceProblem},//说明组件
     {path: '/serviceCenter', component: ServiceCenter},//服务中心
     {path: '/downloadapp', component: DownloadAPP},//下载饿了么
     {path: '/publicprompt', component: PublicPrompt},//提示框路由
@@ -58,7 +59,9 @@ export default new Router({
     {path: '/accountinformation', component: AccountInformation},//账户信息页面
     {path: '/amendusername', component: AmendUserName},//修改用户名页面
     {path: '/takesite', component: TakeSite},//编辑地址页面
-    {path:'/AddLocation',component:AddLocation},//新增地址页面
+    {path: '/AddLocation', component: AddLocation},//新增地址页面
+    {path: '/aearchsith', component: AearchSith},//搜索地址页面
+    {path: '/changesin',component:ChangesIn},//重置密码页面
 
     //张鹏配置的路由
     {path: '', component: zpposition},

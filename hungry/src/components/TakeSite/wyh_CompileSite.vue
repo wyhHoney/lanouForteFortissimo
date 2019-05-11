@@ -1,4 +1,5 @@
 <template>
+  <!--编辑地址页面-->
     <div class="TakeSite">
       <!--头部-->
       <header>
@@ -10,12 +11,12 @@
       <!--内容-->
       <div class="TakeSite_nr">
         <ul class="DetailedAddress_ul">
-          <li class="DetailedAddress">
-            <div>
-              <p>郑州</p><br/>
-              <p>123456</p>
+          <li class="DetailedAddress" v-for="(pie,index) in UserSite">
+            <div >
+              <p>{{pie.address}}</p><br/>
+              <p>{{pie.phone}}</p>
             </div>
-            <span  v-if="ShowIf" @click="DeleteSite"><span class="Delete" >删除</span></span>
+            <span  v-if="ShowIf" @click="DeleteSite(pie)"><span class="Delete" >删除</span></span>
             <span class="empty"></span>
           </li>
         </ul>
@@ -31,13 +32,15 @@
 </template>
 
 <script>
+    import Vue from 'vue'
     export default {
         name: "wyh_CompileSite",
         data(){
           return {
             pagetitle:'编辑地址',
             ShowIf:false,
-            ShowText:'编辑'
+            ShowText:'编辑',
+            UserSite:[],//用户的地址信息
           }
         },
         methods:{
@@ -60,9 +63,26 @@
               }
           },
           //删除地址事件
-          DeleteSite(){
-
+          DeleteSite(data1){
+              let user_id=0;
+              Vue.axios.get('https://elm.cangdu.org/v1/user').then((res)=>{
+                user_id=res.data.user_id;
+                Vue.axios.get('https://elm.cangdu.org/v1/users/'+res.data.user_id+'/addresses').then((res)=>{
+                  Vue.axios.delete('https://elm.cangdu.org/v1/users/'+ user_id +'/addresses/'+data1.id).then((res)=>{
+                    console.log(res.data)
+                  })
+                })
+              })
           }
+        },
+        created(){
+          //获取收获地址
+          Vue.axios.get('https://elm.cangdu.org/v1/user').then((res)=>{
+            Vue.axios.get('https://elm.cangdu.org/v1/users/'+res.data.user_id+'/addresses').then((res)=>{
+              // console.log(res.data);
+              this.UserSite=res.data;
+            })
+          })
         },
     }
 </script>

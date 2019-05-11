@@ -145,9 +145,6 @@
         }else {
           this.$router.push({path:'accountinformation'});
         }
-
-
-
       },
 
       //我的余额点击事件

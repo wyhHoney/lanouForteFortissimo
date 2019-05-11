@@ -1,4 +1,5 @@
 <template>
+  <div>
     <!--账户信息-->
     <div class="AccountInformation">
       <!--头部-->
@@ -36,7 +37,7 @@
           </div>
         </div>
         <p>账号绑定</p>
-        <div class="parcel">
+        <div class="parcel" @click="PhonePrompt">
           <img src="../../../assets/shouji11.png" alt="" class="img_shouji">
           <span class="parcel_left" >手机</span>
           <div class="parcel_right">
@@ -44,8 +45,9 @@
           </div>
           <p class="empty"></p>
         </div>
+
         <p>安全设置</p>
-        <div class="parcel">
+        <div class="parcel" @click="ChangesIn">
           <span class="parcel_left" >用户名</span>
           <div class="parcel_right">
             <p class="xiugai">修改 <img src="../../../assets/jiantou.png" alt="" class="img_jiantou"></p>
@@ -53,17 +55,24 @@
           <p class="empty"></p>
         </div>
 
-        <div class="secede">退出登陆</div>
+        <div class="secede" @click="QuitLogIn">退出登陆</div>
       </div>
       <!--弹出提示框-->
       <PublicPrompt v-if="showcom" :showcom="showcom" @update="getMsg($event)" :prompt="promptContent"></PublicPrompt>
+
     </div>
+    <div class="masking" v-if="ShowLog">
+      <!--退出登陆提示框-->
+      <QuitLogIn v-if="ShowLog" :ShowLog="ShowLog" @ShowFalse="ShowFalse($event)"></QuitLogIn>
+    </div>
+  </div>
 </template>
 
 <script>
     import PublicHeader from '../CommonComponents/wyh_header'
     import Vue from 'vue'
     import PublicPrompt from '../CommonComponents/wyh_PublicPrompt'//引入提示框组件
+    import QuitLogIn from '../CommonComponents/wyh_QuitLogIn'//引入退出提示框
     export default {
         name: "wyh_AccountInformation",
         data(){
@@ -76,15 +85,16 @@
             UeerAvatar:'',//存储用户头像
             showcom:'',
             promptContent:'',//提示框内容
+            ShowLog:'',
           }
         },
         components:{
           PublicHeader,
           PublicPrompt,
+          QuitLogIn,
         },
         created(){
           Vue.axios.get('https://elm.cangdu.org/v1/user').then((res)=>{
-
             this.Phone=res.data.mobile;//电话
             this.HeadPortrait=res.data.avatar;//头像
             // console.log(res.data);
@@ -106,6 +116,9 @@
           getMsg(data){
             this.showcom=data;
           },
+          ShowFalse(data){
+            this.ShowLog=data
+          },
           //跳转到修改用户名页面
           AmendUserName(){
             this.$router.push({path:'amendusername'})
@@ -113,6 +126,20 @@
           //跳转到编辑地址页面
           TakeSite(){
             this.$router.push({path:'takesite'})
+          },
+          //点击手机一栏
+          PhonePrompt(){
+            //弹出提示框
+            this.promptContent='请在手机APP中设置';
+            this.showcom=true;
+          },
+          //修改登陆密码
+          ChangesIn(){
+            this.$router.push({path:'changesin'})
+          },
+          //退出登陆
+          QuitLogIn(){
+            this.ShowLog=true;
           }
         }
 
@@ -124,6 +151,16 @@
   width: 100%;
   height: 100%;
   background-color: #F2F2F2;
+}
+/*遮罩效果*/
+.masking{
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.2);
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 2;
 }
   .empty{
     clear: both;

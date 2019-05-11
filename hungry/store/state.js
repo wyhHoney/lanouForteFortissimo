@@ -29,7 +29,10 @@ let state={
 
   //王义豪声明的vuex变量
   UserName11:'',
-  //用户名传值
-  zg_name:''
+  GetName:{},//存储添加所选的收货地址
+  UserNameA:'',//存储添加地址收获人名字
+
+  //曾光声明的vuex变量
+  zg_name:'',//用户名传值
 };
 export default state
