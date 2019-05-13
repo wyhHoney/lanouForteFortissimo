@@ -76,8 +76,8 @@ export default new Router({
     {path:'/toinvoice',component:InVoice},//发票
     {path:'/tochooseaddress',component:ChoodeAddress},//选择外卖地址
     {path:'/toaddnewaddress',component:AddNewAddress},//添加定位地址
-    //曾光配置的路由
 
+    //曾光配置的路由
     {path: '/register', component: register}, //跳转到重置密码的路由
     {path: '/glogin', component: glogin},//登录界面
     {path: '/basice', component: basice, children: []},//会员特权返回会员中心的路由

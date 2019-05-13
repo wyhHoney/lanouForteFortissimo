@@ -1,6 +1,8 @@
 <template>
   <div id="app">
+    <transition name="cmp" mode="out-in" >
       <router-view></router-view>
+    </transition>
     <!--<MyHomePage></MyHomePage>-->
     <!--<wyh_-balance></wyh_-balance>-->
     <!--<Loading></Loading>-->
@@ -8,7 +10,7 @@
     <!--<MyHomePage></MyHomePage>-->
     <!--<wyh_-balance></wyh_-balance>-->
 
-<!--<Idiscount></Idiscount>-->
+    <!--<Idiscount></Idiscount>-->
 
 
   </div>
@@ -68,18 +70,25 @@
 <style>
   @import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
   @import "OverallSituationCSS/animate.min.css";
-
-  .slide-fade-enter-active {
-    transition: all 2s ease;
+  @keyframes Show_enter {
+    0%{
+      opacity: 0;
+    }
+    50%{
+      opacity: .5;
+    }
+    100%{
+      opacity: 1;
+    }
   }
-  .slide-fade-leave-active {
-    transition: all .5s ;
+  /*组件离开时的动画*/
+  .cmp-leave-active{
+    animation: Show_enter 0.3s reverse;
   }
-  .slide-fade-enter, .slide-fade-leave-to
-  {
-    opacity: 0;
+  /*组件进入时的动画*/
+  .cmp-enter-active{
+    animation: Show_enter 0.3s;
   }
-
   /*该样式为清除浮动造成的父级塌陷:在父级标签加clearfix*/
   .clearfix:after{
     content:'';

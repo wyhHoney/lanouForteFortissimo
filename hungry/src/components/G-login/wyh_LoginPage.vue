@@ -2,7 +2,7 @@
     <!--登陆页面-->
     <div class="LoginPage">
       <!--头部-->
-      <PublicHeader :pagetitle="PageTitle" :hops="routejump"></PublicHeader>
+      <PublicHeader :pagetitle="PageTitle"></PublicHeader>
 
       <!--登陆页面-->
       <div class="LoginPage_nr">
@@ -52,7 +52,6 @@
         data(){
           return {
             PageTitle:'密码登陆',
-            routejump:'myhomepage',
             Left:'0px', //修改球的left
             countenance:'#CCCCCC',   //修改下面的背景色
             writing:'password',//设置密码为明文显示
@@ -128,6 +127,7 @@
                   })
                 }else {
                   //通过点击事件完成路由跳转
+                  // console.log(res.data);
                   this.$router.push({path:'myhomepage'});
                 }
                 // console.log(res.data)

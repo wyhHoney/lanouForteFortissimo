@@ -13,7 +13,7 @@
                  <span class="message_list_left_span">头像</span>
                 </div>
                 <div class="message_list_right">
-                  <img src="../../../assets/yonghu.jpg" alt="" class="portrait">
+                  <img :src="'//elm.cangdu.org/img/'+HeadPortrait" alt="" class="portrait">
                   <img src="../../../assets/jiantou.png" alt="" class="arrows">
                 </div>
                 <p class="empty"></p>
@@ -97,7 +97,6 @@
           Vue.axios.get('https://elm.cangdu.org/v1/user').then((res)=>{
             this.Phone=res.data.mobile;//电话
             this.HeadPortrait=res.data.avatar;//头像
-            // console.log(res.data);
             if (this.$store.state.UserName11===''){
               this.UserName=res.data.username;//名字
             } else {

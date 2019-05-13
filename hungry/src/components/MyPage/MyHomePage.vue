@@ -12,7 +12,8 @@
       <div class="PersonalData_Header" @click="PersonalData_Header">
         <div class="PersonalData_Header_left">
 
-          <div class="HeadPortrait"><img :src="HeadPortrait" alt=""></div>
+          <div class="HeadPortrait"><img :src="'//elm.cangdu.org/img/'+HeadPortrait" alt=""></div>
+
           <div class="HeadPortrait_right">
             <h3 class="UserName">{{UserName}}</h3>
             <p class="CellPhoneNumber"><span class="CellPhoneNumber_shouji"></span>{{Phone}}</p>
@@ -102,41 +103,38 @@
       return {
         NoLogiIn:'',//判断是否登陆
         UserName:'登陆或注册',//存储用户名字
-        Phone:'',//存储用户电话
+        Phone:'暂无绑定手机号',//存储用户电话
         HeadPortrait:'',//存储用户头像
-        MyBalance:'',//我的余额
-        GiftAmount:'',//我的优惠
-        IsActive:'',//我的积分
+        MyBalance:'0.00',//我的余额
+        GiftAmount:'0',//我的优惠
+        IsActive:'0',//我的积分
       }
     },
     created(){
-
       Vue.axios.get('https://elm.cangdu.org/v1/user').then((res)=>{
         this.NoLogiIn=res.data.message;//判断是否登陆
-        if (this.$store.state.UserName11===''){
-          this.UserName=res.data.username;//名字
-        } else {
-          this.UserName=this.$store.state.UserName11;
+        //此时用户没有登陆不进行任何操作
+        if(res.data.message==='通过session获取用户信息失败'){
+
+        }else { //已经登陆
+          this.UserName=res.data.username;//修改用户名
+          //判断是手机号是否存在
+          if (res.data.point===0){
+
+          } else {
+            this.Phone=res.data.point;
+          }
+          this.HeadPortrait=res.data.avatar;//修改用户头像
+          this.MyBalance=res.data.balance.toFixed(2);//显示余额
+          this.GiftAmount=res.data.gift_amount;//我的优惠
+          this.IsActive=res.data.is_active;//我的积分
+
         }
-        this.Phone=res.data.mobile;//电话
-        if (this.Phone===""){
-          this.Phone="暂无绑定手机号"
-        }
-        this.HeadPortrait=res.data.avatar;//头像
-        this.MyBalance=res.data.balance;//余额
-        this.MyBalance=this.MyBalance.toFixed(2);
-        this.GiftAmount=res.data.gift_amount;//优惠统计
-        this.IsActive=res.data.is_active;//我的积分
-        // console.log(res.data);
       })
     },
     methods:{
-      //返回按钮的点击事件
-
       //用户信息的点击事件
       PersonalData_Header(){
-        // let zhi=this.NoLogiIn;
-        // console.log(zhi);
         if(this.NoLogiIn==='通过session获取用户信息失败'){
           this.$router.push({path:'publicheader'});
           this.NoLogiIn='';
@@ -256,8 +254,8 @@
   .HeadPortrait{
     width: 2.5rem;
     height: 2.5rem;
-    background: url("../../assets/yonghu.jpg") no-repeat center center;
-    background-size: 100% 100%;
+    background: url("../../assets/yonghu.jpg") no-repeat center 0rem;
+    background-size: 110% 110%;
     border-radius: 50%;
     display: inline-block;
     margin-right: .2rem;
@@ -265,6 +263,7 @@
   .HeadPortrait>img{
     width: 100%;
     height: 100%;
+    border-radius: 50%;
   }
   .UserName{
     margin-top: 0;
