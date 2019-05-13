@@ -10,20 +10,25 @@
         <p v-if="Show_p">请填写你的名字</p>
         <input type="text" placeholder="小区/写字楼/学校等" v-model="Roughly" @click="RoughlyClick">
         <input type="text" placeholder="请写详细送餐地址" v-model="InDetail">
+        <p v-if="Show_dizhi">送餐地址太短了,不能辨别</p>
         <input type="text" :style="{border:BorderRoudersHone}" placeholder="请填写能够联系到您的手机号" v-model="Cellphone">
         <p v-if="Show_hone">{{CellphoneText}}</p>
         <input type="text" placeholder="备用联系电话(选填)" v-model="Cellphone_Add">
+        <p v-if="Show_beizhu">请输入正确的手机号</p>
       </div>
       <!--按钮-->
       <div class="Button_Add">
-      <div class="Button_Add_nr" @click="AddLocation">新增地址</div>
+      <div class="Button_Add_nr" @click="AddLocation" :style="{color:TextColor}">新增地址</div>
       </div>
+      <!--弹出提示框-->
+      <PublicPrompt v-if="showcom" :showcom="showcom" @update="getMsg($event)" :prompt="promptContent"></PublicPrompt>
     </div>
 </template>
 
 <script>
     import PublicHeader from '../MyPage/CommonComponents/wyh_header'//引入头部组件
     import Vue from 'vue';
+    import PublicPrompt from '../MyPage/CommonComponents/wyh_PublicPrompt'//引入提示框组件
     export default {
         name: "wyh_AddLocation",
         data(){
@@ -38,12 +43,18 @@
             BorderRouders:'',//名字提示的边框
             Show_p:false,//控制名字提示语的显示
             Show_hone:false,//控制手机号码提示语的显示
+            Show_dizhi:false,//控制详细地址是否合格
+            Show_beizhu:false,//控制备注号码是否合格
             CellphoneText:'',//号码提示语的内容
             BorderRoudersHone:'',//号码提示的边框
+            TextColor:'#B7F0C1',//修改新增地址的颜色
+            showcom:'',//提示框显示隐藏
+            promptContent:'',//提示框内容
           }
         },
         components:{
           PublicHeader,
+          PublicPrompt
         },
         watch:{
           UserName:function (oldV) {
@@ -70,6 +81,27 @@
               this.BorderRoudersHone='';
               this.Show_hone=false;
             }
+          },
+          //改变添加地址的文字颜色
+          Cellphone_Add:function (oldV) {
+            if(this.UserName!==''&&this.Roughly!==''&&this.InDetail!==''&&this.Cellphone!==''&&this.Cellphone_Add!==''){
+              this.TextColor='white';
+              console.log(11)
+            }
+          },
+          InDetail:function (oldV) {
+            if (oldV.length<3){
+              this.Show_dizhi=true;
+            }else {
+              this.Show_dizhi=false
+            }
+          },
+          Cellphone_Add:function (oldV) {
+            if (oldV.length<11) {
+              this.Show_beizhu=true
+            }else {
+              this.Show_beizhu=false
+            }
           }
         },
         created(){
@@ -93,36 +125,38 @@
           },
           //点击添加该条数据
           AddLocation(){
-              Vue.axios.get('https://elm.cangdu.org/v1/user').then((res)=>{
-                // res.data.user_id;
-                // this.$store.state.GetName.address;
-                // this.InDetail;
-                // this.$store.state.GetName.geohash;
-                // this.UserName;
-                // this.Cellphone;
-                // //标签
-                // //性别
-                // this.Cellphone_Add;
-                // //标签类型
-                // console.log(this.Cellphone_Add);
-                Vue.axios.post('https://elm.cangdu.org/v1/users/:user_id/addresses',{
-                  user_id:res.data.id,//用户id
-                  address:this.$store.state.GetName.address,//地址
-                  address_detail:this.InDetail,//地址详情
-                  geohash:this.$store.state.GetName.geohash,//经纬度
-                  name:'this.UserName',//收货人姓名
-                  phone:this.Cellphone,//电话号码
-                  tag:'123456',//标签
-                  sex:1,//性别， 1:男，2:女
-                  poi_type:1,//类型，默认：0
-                  phone_bk:this.Cellphone_Add,//备注电话
-                  tag_type:2,//标签类型，2:家，3:学校，4:公司
-                }).then((res)=>{
-                  console.log(res.data)
-                });
-                // console.log(res.data);
-              });
-              // console.log(this.$store.state.GetName);
+                if (this.UserName!==''&&this.Roughly!==''&&this.InDetail.length>=3&&this.Cellphone.length>10&&this.Cellphone.length<12) {
+                  Vue.axios.get('https://elm.cangdu.org/v1/user').then((res)=>{
+                    Vue.axios.post('https://elm.cangdu.org/v1/users/'+res.data.user_id+'/addresses',{
+                      address:this.$store.state.GetName.address,//地址
+                      address_detail:this.InDetail,//地址详情
+                      geohash:this.$store.state.GetName.geohash,//经纬度
+                      name:this.UserName,//收货人姓名
+                      phone:this.Cellphone,//电话号码
+                      tag:'你好',//标签
+                      sex:1,//性别， 1:男，2:女
+                      poi_type:0,//类型，默认：0
+                      phone_bk:this.Cellphone_Add,//备注电话
+                      tag_type:2,//标签类型，2:家，3:学校，4:公司
+                    }).then((res)=>{
+                      if (res.data.success==="添加地址成功") {
+                        this.$router.push({path:'takesite'})
+                        this.$store.state.UserNameA='';
+                        this.$store.state.GetName='';
+
+                      }
+                    });
+                  });
+                } else {
+                  //弹出提示框
+                  this.promptContent='地址信息错误';
+                  this.showcom=true;
+                }
+
+          },
+          //接受提示框返回的数据
+          getMsg(data){
+            this.showcom=data;
           },
 
 
@@ -163,7 +197,6 @@
   .Button_Add_nr{
     width: 100%;
     background-color: #4CD964;
-    color: #B7F0C1;
     text-align: center;
     display: inline-block;
     line-height: 1.6rem;

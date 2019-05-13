@@ -1,7 +1,7 @@
 <template>
     <!--头-->
     <header>
-      <div class="Return" @click="Return"></div>
+      <div class="Return" @click="Return" ></div>
       <div class="Mynav"><p>{{pagetitle}}</p></div>
     </header>
 </template>

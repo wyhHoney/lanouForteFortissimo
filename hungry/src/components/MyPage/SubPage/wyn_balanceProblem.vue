@@ -30,7 +30,7 @@
         //beforeMount  created
         created(){
             this.routejump=this.$route.query.hopsroute;
-            // console.log(this.$route.query.hopsroute);
+            console.log(this.$route.query.hopsroute);
             //修改头部内容
             this.PageTitle=this.$route.query.Title;
             //修改说明字段

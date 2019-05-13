@@ -4,7 +4,7 @@
       <!--头部-->
       <PublicHeader :pagetitle="PageTitle" :hops="routejump"></PublicHeader>
       <div class="AmendUserName_nr">
-        <input type="text" name="username" placeholder="输入用户名" v-model="UserName">
+        <input type="text" name="username" placeholder="输入用户名" v-model="UserName" :style="{border:InputOutline}">
         <p :style="{color:PTextColor,fontSize:PFontSize}">{{PText}}</p>
         <div :style="{color: ButtonColor}" @click="SureToModify($event)">确定修改</div>
       </div>
@@ -24,7 +24,8 @@
           PTextColor: '',
           PFontSize:'',
           PText:'用户名只能修改一次(5-24字符字符之间)',
-          ButtonColor:'#ADCDF0'
+          ButtonColor:'#ADCDF0',
+          InputOutline:'',//修改输入框的选中颜色
 
         }
       },
@@ -38,15 +39,18 @@
             this.PText='用户名长度在5-24位之间';
             this.PTextColor='red';
             this.PFontSize='0.58rem';
+            this.InputOutline=' 1px solid red';
           }else if(this.UserName.length>=24){
             this.PText='用户名长度在5-24位之间';
             this.PTextColor='red';
             this.PFontSize='0.58rem';
+            this.InputOutline=' 1px solid red';
           }else {
             this.PTextColor='';
             this.PFontSize='';
             this.PText='用户名只能修改一次(5-24字符字符之间)';
             this.ButtonColor='white';
+            this.InputOutline='1px solid #ddd';
           }
           // console.log(this.UserName.length)
         }
@@ -91,7 +95,7 @@
     padding: .2rem .1rem;
     border: 1px solid #ddd;
     background-color: inherit;
-    /*outline: ;*/
+    outline: none;
   }
   .AmendUserName_nr>div{
     width: 100%;
