@@ -15,7 +15,7 @@
        <div class="address_empty_left">
          <img src="../../assets/position.png" alt="">
        </div>
-       <span class="address">
+       <span class="address" ref="address">
         请添加一个地址
       </span>
        <img src="../../assets/右箭头.png" alt="" class="xiangyou">
@@ -151,6 +151,12 @@
       }
     },
     mounted() {
+      //判断是点击收货地址
+      if(this.$store.state.waimaiAddress===''){
+        this.$refs.address.innerHTML='请添加收货地址'
+      }else{
+        this.$refs.address.innerHTML=this.$store.state.waimaiAddress
+      }
       console.log(this.$store.state.buy_specs_arr)
       this.$store.state.buy_specs_ar = this.buy_specs_arr1;
       setTimeout(()=>{
@@ -165,8 +171,14 @@
       surepaymoney(){
         console.log('确认下单')
         //弹出提示框
-        this.promptContent='请添加一个收货地址';
-        this.showcom=true;
+
+        if(this.$store.state.waimaiAddress===''){
+          this.promptContent='请添加一个收货地址';
+          this.showcom=true;
+        }else{
+         this.$router.push({path:'Payment'})
+        }
+
       },
       //点击返回确保购买商品还在
       back_inshop() {

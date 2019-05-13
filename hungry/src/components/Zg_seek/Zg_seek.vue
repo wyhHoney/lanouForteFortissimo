@@ -28,14 +28,17 @@
     <div class="Merchant" v-if="Show_merchant">
       <p class="history_p" v-if="Show_merchant">商家</p>
       <ul>
-        <li class="message clearfix" v-for="(pie,index) in HistoryMessage" @click="JumpMerchant(pie)">
-          <img :src="'//elm.cangdu.org/img/'+pie.image_path" alt="">
-          <div>
-            <p>{{pie.name}} <span class="payment">支付</span></p>
-            <p>月售{{pie.recent_order_num}}单</p>
-            <p>{{pie.float_minimum_order_amount}}元起送/距离{{pie.distance}}</p>
-          </div>
-        </li>
+       <router-link :to="{path:'/intoShop'}">
+
+         <li class="message clearfix" v-for="(pie,index) in HistoryMessage" @click="JumpMerchant(pie)">
+           <img :src="'//elm.cangdu.org/img/'+pie.image_path" alt="">
+           <div>
+             <p>{{pie.name}} <span class="payment">支付</span></p>
+             <p>月售{{pie.recent_order_num}}单</p>
+             <p>{{pie.float_minimum_order_amount}}元起送/距离{{pie.distance}}</p>
+           </div>
+         </li>
+       </router-link>
       </ul>
     </div>
 
@@ -172,6 +175,8 @@
           //跳转到商家
           JumpMerchant(data){
             console.log(data);
+            this.$store.state.shopId=data.id;
+            console.log(this.$store.state.shopId)
           },
 
           //底部按钮按钮的点击事件

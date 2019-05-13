@@ -72,11 +72,12 @@
         let id = this.$store.state.id
         Vue.axios.get('https://elm.cangdu.org/v1/pois?city_id=' + id + '&keyword=' + address + '&type=search').then((res) => {
           this.zp_searchResult = res.data
-          console.log(res.data)
+          console.log(this.zp_searchResult)
         });
 
       },
       zp_inAddress(i) {
+          this.$store.state.weizhi=this.zp_searchResult[i].geohash
         //存入点击的地址
         this.$store.state.afterSearchName = this.zp_searchResult[i].name;
         //存入点击的经纬度

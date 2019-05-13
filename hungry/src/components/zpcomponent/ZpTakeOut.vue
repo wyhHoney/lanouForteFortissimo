@@ -4,11 +4,11 @@
       <router-link :to="{path:'/seek'}">
         <a href="###"><img src="../../assets/fangdajing.png" alt=""></a>
       </router-link>
-    <router-link :to="{path:'/glogin'}" v-if=" ifshowdenglu">
-      <a href="###" class="zp_head_top_right">
-        <span>登陆|注册</span>
-      </a>
-    </router-link>
+      <router-link :to="{path:'/glogin'}" v-if=" ifshowdenglu">
+        <a href="###" class="zp_head_top_right">
+          <span>登陆|注册</span>
+        </a>
+      </router-link>
       <router-link :to="{path:'/glogin'}" v-if="ifshouheadimg">
         <img src="../../assets/personhead1.png" alt="" class="zp_head_top_right1">
       </router-link>
@@ -17,25 +17,27 @@
         <span>{{$store.state.afterSearchName}}</span>
       </a>
     </header>
-    <nav class="zp_nav">
-      <div class="swiper-container">
-        <div class="swiper-wrapper">
+    <nav class="zp_nav msite_nav">
+      <div class="swiper-container ">
+        <div class="swiper-wrapper lunbotu">
           <div class="swiper-slide zp_food_types">
             <a href="###" v-for="item in halfGoodsCateory1">
-              <figure>
+              <router-link :to="{path:'/toFoodClass'}">
+                <figure @click="inFoodClass(item.title)">
+                  <img :src="'//fuss10.elemecdn.com/'+item.image_url" alt="">
+                  <figcaption>{{item.title}}</figcaption>
+                </figure>
+              </router-link>
+            </a>
+          </div>
+          <div class="swiper-slide zp_food_types">
+            <a href="###" v-for="item in halfGoodsCateory2">
+              <figure @click="inFoodClass(item.title)">
                 <img :src="'//fuss10.elemecdn.com/'+item.image_url" alt="">
                 <figcaption>{{item.title}}</figcaption>
               </figure>
             </a>
           </div>
-          <!--<div class="swiper-slide zp_food_types">-->
-            <!--<a href="###" v-for="item in halfGoodsCateory2">-->
-              <!--<figure>-->
-                <!--<img :src="'//fuss10.elemecdn.com/'+item.image_url" alt="">-->
-                <!--<figcaption>{{item.title}}</figcaption>-->
-              <!--</figure>-->
-            <!--</a>-->
-          <!--</div>-->
 
         </div>
         <div class="swiper-pagination"></div>
@@ -96,7 +98,7 @@
     </div>
     <div class="BottomPart">
       <div @click="TakeOutFood">
-        <div class="bottom_logo bottom_logo_span1" ></div>
+        <div class="bottom_logo bottom_logo_span1"></div>
         <p>外卖</p>
       </div>
       <div @click="SearchButton">
@@ -124,50 +126,55 @@
     name: "ZpTakeOut",
     components: {Loading},
     methods: {
-      intoShop(i) {
-        this.$store.state.shopId=i
+      //进入商品列表
+      inFoodClass(i){
+      this.$store.state.foodKindName=i;
       },
-      adjustifshowimg(){
-        if(this.$store.state.nameArrAdjustIn.length===0){
-          this.ifshowdenglu=true;
-            this.ifshouheadimg=false
-        }else{
-          this.ifshowdenglu=false;
-          this.ifshouheadimg=true
+      intoShop(i) {
+        this.$store.state.shopId = i
+      },
+      adjustifshowimg() {
+        if (this.$store.state.nameArrAdjustIn.length === 0) {
+          this.ifshowdenglu = true;
+          this.ifshouheadimg = false
+        } else {
+          this.ifshowdenglu = false;
+          this.ifshouheadimg = true
         }
       },
 
       //底部按钮按钮的点击事件
-      TakeOutFood(){
-        this.$router.push({path:'zp_toMyHome'})
+      TakeOutFood() {
+        this.$router.push({path: 'zp_toMyHome'})
       },
       //底部搜索按钮的点击事件
-      SearchButton(){
-        this.$router.push({path:'seek'});
+      SearchButton() {
+        this.$router.push({path: 'seek'});
       },
       //底部订单按钮的点击事件
-      OrderButton(){
-        this.$router.push({path:'theorderoage'});
+      OrderButton() {
+        this.$router.push({path: 'theorderoage'});
       },
       //底部我的按钮的点击事件
-      MyInformation(){
-        this.$router.push({path:'myhomepage'})
+      MyInformation() {
+        this.$router.push({path: 'myhomepage'})
       },
     },
-      beforeMount(){
+    beforeMount() {
 
-      },
+    },
 
     created() {
       Vue.axios.get('https://elm.cangdu.org/shopping/restaurants?latitude=' + this.$store.state.afterSearchLatitude + '&longitude=' + this.$store.state.afterSearchLongitude + '').then((res) => {
         this.shopPro = res.data;
-
+        // console.log(res.data)
       });
       Vue.axios.get('https://elm.cangdu.org/v2/index_entry').then((res) => {
         this.goodsCategory = res.data
         this.halfGoodsCateory1 = this.goodsCategory.slice(0, this.goodsCategory.length / 2);
         this.halfGoodsCateory2 = this.goodsCategory.slice(this.goodsCategory.length / 2, this.goodsCategory.length)
-        this.ifShowLoading=false;
+        this.ifShowLoading = false;
+
       })
     },
     data() {
@@ -176,9 +183,9 @@
         halfGoodsCateory1: [],
         halfGoodsCateory2: [],
         shopPro: [],
-        ifShowLoading:true,//显示动画
-        ifshowdenglu:true,
-        ifshouheadimg:false,//判断是否登陆过显示那个头像
+        ifShowLoading: true,//显示动画
+        ifshowdenglu: true,
+        ifshouheadimg: false,//判断是否登陆过显示那个头像
       }
     },
 
@@ -196,6 +203,10 @@
 </script>
 
 <style scoped>
+  .lunbotu {
+    height: 7rem;
+  }
+
   .ppp {
     display: inline-block;
     font-size: .5rem;
@@ -209,9 +220,11 @@
     width: 1.5rem;
 
   }
-  .zp_head_top_right1{
+
+  .zp_head_top_right1 {
     margin-left: 14rem;
   }
+
   .zp-shop-detail-ul {
     display: flex;
     transform: scale(0.8);
@@ -424,7 +437,7 @@
     display: flex;
     flex-wrap: wrap;
     height: 100%;
-    /*position: relative;*/
+    position: relative;
   }
 
   .zp_food_types a {
@@ -435,6 +448,7 @@
   }
 
   .zp_food_types figure img {
+    margin-left: 1rem;
     margin-bottom: .3rem;
     width: 1.8rem;
     height: 1.8rem;
@@ -444,6 +458,21 @@
     text-align: center;
     font-size: .55rem;
     color: #666;
+  }
+  .zp_nav .swiper-container .swiper-slide:nth-of-type(2){
+    position: relative;
+    top: -7rem;
+    left: 14.5rem;
+  }
+  .zp_nav .swiper-container {
+    width: 100%;
+    height: auto;
+    padding-bottom: .6rem;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
   }
 
   .zp_nav {

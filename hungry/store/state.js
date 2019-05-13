@@ -3,6 +3,8 @@ let state={
   id:'',
   // 根据关键词搜索后的地址name
   afterSearchName:'',
+  //经纬度
+  weizhi:'',
   //根据光吃搜索后的经纬度
   afterSearchLatitude:'',
   afterSearchLongitude:'',
@@ -26,6 +28,13 @@ let state={
   satisfy_rate:Number,
   //商品页图片
   image_path:'',
+  //用户名id
+  ueseId:Number,
+  proArr:{},
+  //存取地址
+  waimaiAddress:'',
+  //商品分类的类名
+  foodKindName:"",
 
   //王义豪声明的vuex变量
   UserName11:'',

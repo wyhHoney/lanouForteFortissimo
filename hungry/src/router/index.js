@@ -12,6 +12,8 @@ import SureOrder from '../components/zpcomponent/SureOrder'
 import InVoice from '../components/zpcomponent/Invoice'
 import ChoodeAddress from '../components/zpcomponent/ChooseAdress'
 import AddNewAddress from '../components/zpcomponent/AddNewAddress'
+import CheckLunchAddress from '../components/zpcomponent/checkLunchAddress'
+import FoodClass from '../components/zpcomponent/FoodClass'
 
 //曾光配置的路由
 import register from '../components/G-login/zg_register'//重置密码页面的路由
@@ -76,7 +78,8 @@ export default new Router({
     {path:'/toinvoice',component:InVoice},//发票
     {path:'/tochooseaddress',component:ChoodeAddress},//选择外卖地址
     {path:'/toaddnewaddress',component:AddNewAddress},//添加定位地址
-
+    {path:'/tocheckLunchAddress',component:CheckLunchAddress},//添加送餐地址的定位组件
+    {path:'/toFoodClass',component:FoodClass},//食物分类界面
     //曾光配置的路由
     {path: '/register', component: register}, //跳转到重置密码的路由
     {path: '/glogin', component: glogin},//登录界面
