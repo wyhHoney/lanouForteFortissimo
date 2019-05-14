@@ -12,16 +12,15 @@
           </div>
         </div>
         <p><span><img src="" alt="">减30减5,满60减8(APP专享)</span> <span>2个活动 <img src="../../../assets/jiantou.png" alt=""></span></p>
-        <span></span>
+        <span @click="GetBack"></span>
       </div>
       <div class="ShopSubfield">
-        <div><span><router-link :to="{path:'commodity'}">商家</router-link></span></div>
-        <div><span><router-link :to="{path:'evaluate'}">评价</router-link></span></div>
+        <div><span @click="ShangJia"><router-link :to="{path:'commodity'}" :style="{borderBottom:TborderBottom,color:Tcolor }">商家</router-link></span></div>
+        <div><span @click="PingJia"><router-link :to="{path:'evaluate'}" :style="{borderBottom:PborderBottom,color:Pcolor }">评价</router-link></span></div>
       </div>
       <router-view></router-view>
 
       <div class="BottomShop clearfix">
-
         <div class="BottomShop_lift">
           <h4>400元</h4>
           <p>配送费5元</p>
@@ -40,15 +39,38 @@
         name: "wyh_ShopHost",
         data(){
           return {
+            TborderBottom:'.12rem solid #3190e8',//商家和评价点击变化样式
+            Tcolor:'#3190e8',//商家和评价点击变化样式
+            PborderBottom:'',//评价
+            Pcolor:'',//评价
 
           }
         },
         created(){
             Vue.axios.get("https://elm.cangdu.org/shopping/restaurant/1").then((res)=>{
-              console.log(res.data)
-            })
+              // console.log(res.data)
+            });
+            console.log(this.$store.state.shopId)
         },
         methods:{
+          //返回上一层列表
+          GetBack(){
+            this.$router.push({path:'zp_toMyHome'})
+          },
+          //切换到商家
+          ShangJia(){
+            this.TborderBottom='.12rem solid #3190e8';
+            this.Tcolor='#3190e8';
+            this.PborderBottom='';
+            this.Pcolor='';
+          },
+          //切换到评价
+          PingJia(){
+            this.PborderBottom='.12rem solid #3190e8';
+            this.Pcolor='#3190e8';
+            this.TborderBottom='';
+            this.Tcolor='';
+          }
 
         }
     }
@@ -145,11 +167,12 @@
     display: inline-block;
     text-align: center;
   }
-  .ShopSubfield>div>span{
+  .ShopSubfield>div>span>a{
     font-size: .65rem;
     color: #666;
     padding: .2rem .1rem;
-    border-bottom: .12rem solid #3190e8;
+    /*border-bottom: .12rem solid #3190e8;*/
+    text-decoration: none;
   }
   .BottomShop{
     width: 100%;

@@ -51,7 +51,7 @@
       </header>
       <div class="zp_shopListContainer">
         <ul>
-          <router-link :to="{path:'/intoShop'}">
+          <!--<router-link :to="{path:'/intoShop'}">-->
             <li class="zp_shop_li" v-for="item in shopPro" @click="intoShop(item.id,item)">
               <section>
                 <img :src="'//elm.cangdu.org/img/'+item.image_path" alt="" class="zp_shop_img">
@@ -94,7 +94,7 @@
                 </h5>
               </div>
             </li>
-          </router-link>
+          <!--</router-link>-->
         </ul>
       </div>
     </div>
@@ -138,7 +138,8 @@
       },
       intoShop(i,pro) {
         this.$store.state.shopId = i;
-        this.$store.state.shoppro1=pro
+        this.$store.state.shoppro1=pro;
+        this.$router.push({path:'shophost'})
       },
       adjustifshowimg() {
         if (this.$store.state.nameArrAdjustIn.length === 0) {
@@ -184,9 +185,8 @@
 
       })
       Vue.axios.get('https://elm.cangdu.org/v1/user').then((res) => {
-        console.log(res.data)
+        // console.log(res.data)
         if (res.data.message === '通过session获取用户信息失败') {
-
           this.ifshowdenglu = true;
           this.ifshouheadimg = false;
         } else {

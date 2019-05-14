@@ -71,6 +71,7 @@ export default new Router({
     {path: '/servicecenterwithin',component:ServiceCenterWithin},//服务中心内的公共说明组件
     {path: '/anotherlist',component:AnotherList},//订单详细页面
     {path: '/shophost',component:ShopHost,children: [
+        {path:'',redirect:{path: '/commodity',component:Commodity}},
         {path: '/commodity',component:Commodity},//商品信息
         {path: '/evaluate',component:Evaluate},//评价信息
       ]},//店铺信息页
