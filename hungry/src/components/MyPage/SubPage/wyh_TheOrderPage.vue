@@ -4,7 +4,7 @@
       <PublicHeader :pagetitle="PageTitle" :hops="routejump"></PublicHeader>
       <!--内容-->
        <ul class="TheOrderPage_nr">
-          <li class="TheOrderPage_nr_li clearfix" v-for="(pie,index) in TheOrderList" >
+          <li class="TheOrderPage_nr_li clearfix" v-for="(pie,index) in TheOrderList" @click="AnotherList(pie)">
             <img :src="'//elm.cangdu.org/img/'+pie.restaurant_image_url" alt="" class="IndentLogo">
             <div class="TheOrderPage_nr_li_div">
               <h4>{{pie.restaurant_name}} <img src="../../../assets/jiantou.png" alt=""><span>等待支付</span></h4>
@@ -73,32 +73,30 @@
         mounted(){
           this.CountDown();
         },
-        watch:{
-          Second:function(oldV){
-              this.Second=oldV;
-          },
-          Minute:function (oldV) {
-            if (oldV===0&&this.Second===0){
-              clearInterval(countdown);
-            }
-          }
-        },
         methods:{
           CountDown(){
-            // let countdown= setInterval(()=>{
-            //     this.Second--;
-            //     if (this.Second===0){
-            //       this.Second=60;
-            //       this.Minute--;
-            //     }
-            //     if (this.Minute===0&&this.Second===0){
-            //     clearInterval(countdown);
-            //     //弹出提示框
-            //     this.promptContent='支付超时';
-            //     this.showcom=true;
-            //   }
-            // },1)
+            let countdown= setInterval(()=>{
+                this.Second--;
+                if (this.Second===0){
+                  if(this.Minute !== 0){
+                    this.Minute--;
+                    this.Second=60;
+                  }
+                  if (this.Minute===0 && this.Second===0){
+                    clearInterval(countdown);
+                    //弹出提示框
+                    this.promptContent='支付超时';
+                    this.showcom=true;
+                  }
+                }
 
+            },1000)
+
+          },
+
+          //点击跳转再来一单页面
+          AnotherList(data){
+            this.$router.push({path:'anotherlist',query:{GetDate:data}})
           },
 
 

@@ -2,7 +2,7 @@
     <!--登陆页面-->
     <div class="LoginPage">
       <!--头部-->
-      <PublicHeader :pagetitle="PageTitle"></PublicHeader>
+      <PublicHeader :pagetitle="PageTitle" :hops="routejump"></PublicHeader>
 
       <!--登陆页面-->
       <div class="LoginPage_nr">
@@ -36,7 +36,7 @@
         <p>温馨提示：未注册过的账号，登录时将自动注册</p>
         <p>注册过的用户可凭账号密码登录</p>
         <div @click="landing">登陆</div>
-        <span>重置密码?</span>
+        <span @click="Reset">重置密码?</span>
         </div>
       </div>
       <PublicPrompt v-if="showcom" :showcom="showcom" @update="getMsg($event)" :prompt="promptContent"></PublicPrompt>
@@ -49,9 +49,11 @@
     import Vue from 'vue'
     export default {
         name: "wyh_LoginPage",
+
         data(){
           return {
             PageTitle:'密码登陆',
+            routejump:'myhomepage',
             Left:'0px', //修改球的left
             countenance:'#CCCCCC',   //修改下面的背景色
             writing:'password',//设置密码为明文显示
@@ -132,12 +134,15 @@
                 }
                 // console.log(res.data)
               });
-
             }
           },
           getMsg(data){
             this.showcom=data;
           },
+          //点击跳转到重置密码页面
+          Reset(){
+            this.$router.push({path:'changesin'})
+          }
         },
         created(){
             //发起获取验证码请求

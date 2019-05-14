@@ -66,11 +66,13 @@
         <p>我的</p>
       </div>
     </div>
-
+    <!--弹出提示框-->
+    <PublicPrompt v-if="showcom" :showcom="showcom" @update="getMsg($event)" :prompt="promptContent"></PublicPrompt>
   </div>
 </template>
 <script>
     import Vue from 'vue'
+    import PublicPrompt from '../MyPage/CommonComponents/wyh_PublicPrompt'//引入提示框组件
     export default {
         name: "Zg_seek",
         data(){
@@ -83,6 +85,8 @@
             LongitudeAndLatitude:'',//所选城市经纬度
             HistoryMessage:[],//获取到的商铺信息
             SearchRecord:[],//存储历史搜索的记录
+            showcom:'',//提示框显示隐藏
+            promptContent:'',//提示框内容
 
           }
         },
@@ -116,12 +120,20 @@
               this.SearchRecord.push(this.Search_val);
               //获取所选城市信息
               Vue.axios.get('https://elm.cangdu.org/v1/cities/2').then((res)=>{
+                // console.log(res.data)
                 //提取经纬度
                 this.LongitudeAndLatitude=res.data.latitude+','+res.data.longitude;
                 // console.log(this.LongitudeAndLatitude);
+                // console.log(this.Search_val);
                 //搜索餐馆信息
                 Vue.axios.get('https://elm.cangdu.org/v4/restaurants?geohash='+this.LongitudeAndLatitude+'&keyword='+this.Search_val).then((res)=>{
-                  if (res.data.length===0){
+                  console.log(res.data);
+                  if (res.data.message==="搜索餐馆数据失败"){
+                    //弹出提示框
+                    this.promptContent='后台请求数据错误';
+                    this.showcom=true;
+                    // console.log('11')
+                  }else if (res.data.length===0){
                     this.Show_Regret=true;
                     this.Show_merchant=false;
                     this.Show_history=false;
@@ -195,7 +207,14 @@
           MyInformation(){
             this.$router.push({path:'myhomepage'})
           },
+          //接受提示框返回的数据
+          getMsg(data){
+            this.showcom=data;
+          },
       },
+      components:{
+        PublicPrompt
+      }
 
     }
 </script>

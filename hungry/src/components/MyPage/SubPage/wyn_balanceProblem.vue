@@ -8,7 +8,6 @@
         <p>{{pie.paragraph}}</p>
         <!--<li v-for="pp in pie.li">{{pie}}</li>-->
     </div>
-
   </div>
 </template>
 

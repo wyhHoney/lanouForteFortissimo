@@ -43,7 +43,11 @@ import TakeSite from '../components/TakeSite/wyh_CompileSite'
 import AddLocation from '../components/TakeSite/wyh_AddLocation'
 import AearchSith from '../components/TakeSite/wyh_AearchSite'
 import ChangesIn from '../components/MyPage/SubPage/wyh_ChangesIn'
-
+import ServiceCenterWithin from '../components/MyPage/wyh_TheWidget/wyh_ServiceCenterWthin'
+import AnotherList from '../components/MyPage/SubPage/wyh_AnotherList'
+import ShopHost from '../components/MyPage/wyh_BusinessInformation/wyh_ShopHost'
+import Commodity from '../components/MyPage/wyh_BusinessInformation/wyh_Commodity'
+import Evaluate from '../components/MyPage/wyh_BusinessInformation/wyh_Evaluate'
 
 export default new Router({
   routes: [
@@ -64,6 +68,13 @@ export default new Router({
     {path: '/AddLocation', component: AddLocation},//新增地址页面
     {path: '/aearchsith', component: AearchSith},//搜索地址页面
     {path: '/changesin',component:ChangesIn},//重置密码页面
+    {path: '/servicecenterwithin',component:ServiceCenterWithin},//服务中心内的公共说明组件
+    {path: '/anotherlist',component:AnotherList},//订单详细页面
+    {path: '/shophost',component:ShopHost,children: [
+        {path: '/commodity',component:Commodity},//商品信息
+        {path: '/evaluate',component:Evaluate},//评价信息
+      ]},//店铺信息页
+
 
     //张鹏配置的路由
     {path: '', component: zpposition},//路由重定向，进入定位界面

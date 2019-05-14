@@ -39,7 +39,7 @@
           <div class="ThreeLists_nr_right">></div>
           <div class="empty"></div>
         </div>
-        <div class="ThreeLists_nr1">
+        <div class="ThreeLists_nr1" @click="IntegralMall">
           <span class="ThreeLists_logo ThreeLists_Discount"></span>
           <div class="ThreeLists_nr_left"><p>积分商场</p></div>
           <div class="ThreeLists_nr_right">></div>
@@ -160,6 +160,10 @@
       //我的订单点击事件
       TheOrderPage(){
         this.$router.push({path:'theorderoage'})
+      },
+      //积分商场点击事件
+      IntegralMall(){
+        this.$router.push({path:'shophost'})
       },
 
 

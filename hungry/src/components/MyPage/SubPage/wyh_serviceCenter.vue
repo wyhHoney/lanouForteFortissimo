@@ -52,12 +52,8 @@
             console.log('点击了右边的在线客服');
           },
           InDetail(data){
-            // console.log(data);
             //通过点击事件完成路由跳转
-            // this.$router.push({path:'balanceProblem',query:{Title:data.Issue,Description:data.Answer,hopsroute:this.fanhui}});
-            //弹出提示框
-            this.promptContent='暂不支持此功能';
-            this.showcom=true;
+            this.$router.push({path:'servicecenterwithin',query:{Title:data.Issue,Description:data.Answer}});
           },
           getMsg(data){
             this.showcom=data;
@@ -115,7 +111,8 @@
               Obj.Answer=this.Dissue[i];
               this.GetData.push(Obj);
             }
-            // console.log(this.GetData)
+            // console.log(res.data)
+
           })
         }
 
