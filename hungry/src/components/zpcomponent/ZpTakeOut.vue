@@ -52,14 +52,15 @@
       <div class="zp_shopListContainer">
         <ul>
           <router-link :to="{path:'/intoShop'}">
-            <li class="zp_shop_li" v-for="item in shopPro" @click="intoShop(item.id)">
+            <li class="zp_shop_li" v-for="item in shopPro" @click="intoShop(item.id,item)">
               <section>
                 <img :src="'//elm.cangdu.org/img/'+item.image_path" alt="" class="zp_shop_img">
               </section>
               <div class="zp_shop_right">
                 <header class="zp_shopDetailHeader">
 
-                  <h4 class="zp_shop_title">{{item.name}}</h4>
+                  <h4 class="zp_shop_title">
+                    <p class="pinpai">品牌</p>{{item.name}}</h4>
 
                   <ul class="zp-shop-detail-ul">
                     <li>保</li>
@@ -70,6 +71,7 @@
                 <h5 class="zp_shopDetailOrderNum">
                   <section class="zp_rate_num_left">
                     <section class="zp_rating_section">
+                      <img src="../../assets/xingxinghuang.png" alt="" class="xingxing">
                       <span class="rating_num">{{item.rating}}</span>
                     </section>
                     <section class="zp_order_section">月售{{item.recent_order_num}}单</section>
@@ -134,8 +136,9 @@
       inFoodClass(i) {
         this.$store.state.foodKindName = i;
       },
-      intoShop(i) {
-        this.$store.state.shopId = i
+      intoShop(i,pro) {
+        this.$store.state.shopId = i;
+        this.$store.state.shoppro1=pro
       },
       adjustifshowimg() {
         if (this.$store.state.nameArrAdjustIn.length === 0) {
@@ -218,6 +221,24 @@
 </script>
 
 <style scoped>
+  .xingxing{
+    position: relative;
+    top: 0rem;
+    width: 2rem;
+    height: .5rem;
+  }
+  .pinpai{
+    width: 1.5rem;
+    content: "\54C1\724C";
+    display: inline-block;
+    font-size: .5rem;
+    line-height: .6rem;
+    color: #333;
+    background-color: #ffd930;
+    padding: 0 .1rem;
+    border-radius: .1rem;
+    margin-right: .2rem;
+  }
   .lunbotu {
     height: 7rem;
   }
@@ -548,5 +569,201 @@
   .bottom_logo_span4 {
     background: url("../../assets/bottom4.png") no-repeat center center;
     background-size: 100% 100%;
+  }
+
+  .zp_arte_num_right_left {
+    color: #fff;
+    background-color: #3190e8;
+    border: .025rem solid #3190e8;
+    font-size: .4rem;
+    padding: .04rem .08rem 0;
+    border-radius: .08rem;
+    margin-left: .08rem;
+  }
+
+  .zp_arte_num_right_right {
+    color: #3190e8;
+    border: .025rem solid #3190e8;
+    font-size: .4rem;
+    padding: .04rem .08rem 0;
+    border-radius: .08rem;
+    margin-left: .08rem;
+  }
+
+  .zp_distance_time {
+    transform: scale(.9);
+    width: 40%;
+  }
+
+  .zp_fee {
+    transform: scale(.9);
+    font-size: .5rem;
+    color: #666;
+
+  }
+
+  .zp_shopDetailDistance {
+
+    display: flex;
+    justify-content: space-between;
+    font-size: .5rem;
+    color: #333;
+    width: 11rem;
+  }
+
+  .zp_rate_num_right {
+    display: flex;
+    align-items: center;
+    transform: scale(.7);
+    min-width: 5rem;
+    justify-content: flex-end;
+    margin-right: -.8rem;
+  }
+
+  .zp_order_section {
+    transform: scale(.8);
+    margin-left: -.2rem;
+    font-size: .4rem;
+    color: #666;
+  }
+
+  .zp_rating_section {
+    display: flex;
+  }
+
+  .zp_rate_num_left {
+    display: flex;
+    justify-content: flex-start;
+  }
+
+  .zp_shopDetailOrderNum {
+    display: flex;
+    justify-content: space-between;
+    height: .6rem;
+  }
+
+  .zp_shop_title {
+    width: 8.5rem;
+    color: #333;
+    padding-top: .01rem;
+    font: .65rem/.65rem PingFangSC-Regular;
+    font-weight: 700;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    margin-bottom: 0;
+  }
+
+  .zp_shopListContainer {
+    background-color: #fff;
+    margin-bottom: 2rem;
+  }
+
+  .zp_shop_li {
+    display: flex;
+    border-bottom: .025rem solid #f1f1f1;
+    padding:0 .4rem;
+  }
+
+  .zp_shop_img {
+    width: 2.7rem;
+    height: 2.7rem;
+    display: block;
+    margin-right: .4rem;
+    margin-top: 0.5rem;
+  }
+
+  .zp_shop_right {
+    flex: auto;
+    display: block;
+  }
+
+  .zp_shopDetailHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .zp_head_top img {
+    width: 1rem;
+    height: 1rem;
+    box-sizing: border-box;
+    position: fixed;
+    left: 0.4rem;
+    top: 0.4rem;
+  }
+
+  .zp_shopList {
+    padding-right: 2rem;
+  }
+
+
+  .zp_head_top_right a {
+    color: #fff;
+  }
+
+
+  .zp_head_top_middle > span {
+    font-size: .5rem;
+    color: #fff;
+    text-align: center;
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .zp_shopListContainer {
+    background-color: #fff;
+    margin-bottom: 2rem;
+    width: 100%;
+  }
+
+  .zp_food_types a {
+    width: 25%;
+    padding: .3rem 0;
+    /*display: flex;*/
+    /*justify-content: center;*/
+  }
+
+  .zp_food_types figure img {
+    margin-left: 1rem;
+    margin-bottom: .3rem;
+    width: 1.8rem;
+    height: 1.8rem;
+  }
+
+  .zp_food_types figure figcaption {
+    text-align: center;
+    font-size: .55rem;
+    color: #666;
+  }
+
+  .zp_nav .swiper-container .swiper-slide:nth-of-type(2) {
+    position: relative;
+    top: -7rem;
+    left: 14.5rem;
+  }
+
+  .zp_nav .swiper-container {
+    width: 100%;
+    height: auto;
+    padding-bottom: .6rem;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+  }
+
+
+  .BottomPart > div {
+    box-sizing: border-box;
+    padding-top: .3rem;
+    width: 25%;
+    height: 100%;
+    display: inline-block;
+    text-align: center;
+    font-size: .45rem;
+    color: #666666;
   }
 </style>

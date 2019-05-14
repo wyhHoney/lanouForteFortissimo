@@ -348,10 +348,10 @@
       //加入购物车
       in_cart() {
         if (this.buy_specs_arr.length === 0) {
-          let obj = {pro: this.kindSpec, count: 1,};
+          let obj = {pro: this.kindSpec, count: 1,pro1:this.$store.state.shoppro1};
           this.buy_specs_arr.push(obj)
         } else {
-          let obj = {pro: this.kindSpec, count: 1,};
+          let obj = {pro: this.kindSpec, count: 1,pro1:this.$store.state.shoppro1};
           let isHas = this.buy_specs_arr.some((v) => {
             return v.pro._id === this.kindSpec._id;
           });
@@ -452,7 +452,7 @@
     created() {
       Vue.axios.get('https://elm.cangdu.org/shopping/getcategory/' + this.$store.state.shopId + '').then((res) => {
         this.foodPro = res.data.category_list;
-        // console.log(this.foodPro)
+        console.log(this.foodPro)
       });
       this.buy_specs_arr = this.$store.state.buy_specs_arr;
 

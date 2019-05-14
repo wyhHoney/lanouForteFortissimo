@@ -6,13 +6,13 @@
       <div class="recur">
         <img :src="'//elm.cangdu.org/img/'+ LogoImg" alt="">
         <h5>等待支付</h5>
-        <div>再来一单</div>
+        <div @click="inshop">再来一单</div>
       </div>
       <div class="Particular">
-        <p><img :src="'//elm.cangdu.org/img/'+ LogoImg" alt=""><span>演示效果</span><img src="../../../assets/jiantou.png" alt=""></p>
-        <p>{{groupname}} <span>*{{groupquantity}}</span><span>{{grouppirice}}</span></p>
-        <p>{{delivername}} <span>{{deliverprice}}</span></p>
-        <p>实付{{totalquantity}}</p>
+        <p @click="inshop"><img :src="'//elm.cangdu.org/img/'+ LogoImg" alt=""><span>演示效果</span><img src="../../../assets/jiantou.png" alt=""></p>
+        <p>{{groupname}} <span>x{{groupquantity}}</span><span>{{grouppirice}}</span></p>
+        <p>配送费 <span>4</span></p>
+        <p>实付￥{{17328+$store.state.allPrice}}.00</p>
       </div>
       <div class="distribution">
         <h4>配送信息</h4>
@@ -59,12 +59,10 @@
         },
         created(){
           console.log(this.$route.query.GetDate);
-          this.LogoImg=this.$route.query.GetDate.restaurant_image_url;
-          this.groupname=this.$route.query.GetDate.basket.group[0][0].name;
-          this.grouppirice=this.$route.query.GetDate.basket.group[0][0].price;
-          this.groupquantity=this.$route.query.GetDate.basket.group[0][0].quantity;
-          this.delivername=this.$route.query.GetDate.basket.deliver_fee.name;
-          this.deliverprice=this.$route.query.GetDate.basket.deliver_fee.price;
+          this.LogoImg=this.$route.query.GetDate.pro1.image_path;
+          this.groupname=this.$route.query.GetDate.pro1.name;
+          this.grouppirice=this.$route.query.GetDate.pro.price;
+          this.groupquantity=this.$route.query.GetDate.count;
           this.totalquantity=this.$route.query.GetDate.total_amount;
           this.addressid=this.$route.query.GetDate.address_id;
           this.formattedcreatedat=this.$route.query.GetDate.formatted_created_at;
@@ -72,6 +70,11 @@
 
 
         },
+      methods:{
+          inshop(){
+            this.$router.push({path:'/toinshop'})
+          }
+      }
     }
 </script>
 

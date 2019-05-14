@@ -36,6 +36,9 @@ let state={
   //商品分类的类名
   foodKindName:"",
   yourname:'',
+  //店铺信息
+  shoppro1:'',
+
 
   //王义豪声明的vuex变量
   UserName11:'',

@@ -121,7 +121,8 @@
             <li class="filter_li" @click="ifshuxing1">
               <img src="../../assets/选择勾号1.png" alt="" v-if="ifshowshuxing1">
               <span class="filter_icon"
-                    style="color: rgb(63, 189, 230); border-color: rgb(63, 189, 230);" v-if="ifshowshuxing11">品</span><span>品牌商家</span>
+                    style="color: rgb(63, 189, 230); border-color: rgb(63, 189, 230);"
+                    v-if="ifshowshuxing11">品</span><span>品牌商家</span>
             </li>
             <li class="filter_li" @click="ifshuxing2">
               <img src="../../assets/选择勾号1.png" alt="" v-if="ifshowshuxing2">
@@ -131,16 +132,19 @@
             <li class="filter_li" @click="ifshuxing3">
               <img src="../../assets/选择勾号1.png" alt="" v-if="ifshowshuxing3">
               <span class="filter_icon"
-                    style="color: rgb(63, 189, 230); border-color: rgb(63, 189, 230);" v-if="ifshowshuxing33">准</span><span>准时达</span>
+                    style="color: rgb(63, 189, 230); border-color: rgb(63, 189, 230);"
+                    v-if="ifshowshuxing33">准</span><span>准时达</span>
             </li>
             <li class="filter_li" @click="ifshuxing4">
               <img src="../../assets/选择勾号1.png" alt="" v-if="ifshowshuxing4">
               <span class="filter_icon"
-                    style="color: rgb(232, 132, 45); border-color: rgb(232, 132, 45);" v-if="ifshowshuxing44">新</span><span>新店</span>
+                    style="color: rgb(232, 132, 45); border-color: rgb(232, 132, 45);"
+                    v-if="ifshowshuxing44">新</span><span>新店</span>
             </li>
             <li class="filter_li" @click="ifshuxing5">
               <img src="../../assets/选择勾号1.png" alt="" v-if="ifshowshuxing5">
-              <span class="filter_icon" style="color: rgb(255, 78, 0); border-color: rgb(255, 78, 0);" v-if="ifshowshuxing55">付</span><span>在线支付</span>
+              <span class="filter_icon" style="color: rgb(255, 78, 0); border-color: rgb(255, 78, 0);"
+                    v-if="ifshowshuxing55">付</span><span>在线支付</span>
             </li>
             <li class="filter_li" @click="ifshuxing6">
               <img src="../../assets/选择勾号1.png" alt="" v-if="ifshowshuxing6">
@@ -166,10 +170,6 @@
 
     <!--复制过来-->
     <div class="zp_shopList" style="margin-left: 0.5rem">
-      <header class="zp_shopListHeader">
-        <!--<img src="../../assets/shangcheng.png" alt="">-->
-        <span class="zp_shopHeaderTitle">附近商家</span>
-      </header>
       <div class="zp_shopListContainer">
         <ul>
           <router-link :to="{path:'/intoShop'}">
@@ -180,7 +180,9 @@
               <div class="zp_shop_right">
                 <header class="zp_shopDetailHeader">
 
-                  <h4 class="zp_shop_title">{{item.name}}</h4>
+                  <h4 class="zp_shop_title">
+                    <p class="pinpai">品牌</p>{{item.name}}
+                  </h4>
 
                   <ul class="zp-shop-detail-ul">
                     <li>保</li>
@@ -191,6 +193,7 @@
                 <h5 class="zp_shopDetailOrderNum">
                   <section class="zp_rate_num_left">
                     <section class="zp_rating_section">
+                      <img src="../../assets/xingxinghuang.png" alt="" class="xingxing">
                       <span class="rating_num">{{item.rating}}</span>
                     </section>
                     <section class="zp_order_section">月售{{item.recent_order_num}}单</section>
@@ -254,44 +257,44 @@
         shopPro: [],
         //  定义数组 存储处理过的数据 然后v-for
         doneArr: [],
-        ifshowshuxing1:false,
-        ifshowshuxing11:true,
-        ifshowshuxing2:false,
-        ifshowshuxing22:true,
-        ifshowshuxing3:false,
-        ifshowshuxing33:true,
-        ifshowshuxing4:false,
-        ifshowshuxing44:true,
-        ifshowshuxing5:false,
-        ifshowshuxing55:true,
-        ifshowshuxing6:false,
-        ifshowshuxing66:true,
+        ifshowshuxing1: false,
+        ifshowshuxing11: true,
+        ifshowshuxing2: false,
+        ifshowshuxing22: true,
+        ifshowshuxing3: false,
+        ifshowshuxing33: true,
+        ifshowshuxing4: false,
+        ifshowshuxing44: true,
+        ifshowshuxing5: false,
+        ifshowshuxing55: true,
+        ifshowshuxing6: false,
+        ifshowshuxing66: true,
       }
     },
     methods: {
-      ifshuxing1(){
-        this.ifshowshuxing1=!this.ifshowshuxing1
-        this.ifshowshuxing11=!this.ifshowshuxing11
+      ifshuxing1() {
+        this.ifshowshuxing1 = !this.ifshowshuxing1
+        this.ifshowshuxing11 = !this.ifshowshuxing11
       },
-      ifshuxing2(){
-        this.ifshowshuxing2=!this.ifshowshuxing2
-        this.ifshowshuxing22=!this.ifshowshuxing22
+      ifshuxing2() {
+        this.ifshowshuxing2 = !this.ifshowshuxing2
+        this.ifshowshuxing22 = !this.ifshowshuxing22
       },
-      ifshuxing3(){
-        this.ifshowshuxing3=!this.ifshowshuxing3
-        this.ifshowshuxing33=!this.ifshowshuxing33
+      ifshuxing3() {
+        this.ifshowshuxing3 = !this.ifshowshuxing3
+        this.ifshowshuxing33 = !this.ifshowshuxing33
       },
-      ifshuxing4(){
-        this.ifshowshuxing4=!this.ifshowshuxing4
-        this.ifshowshuxing44=!this.ifshowshuxing44
+      ifshuxing4() {
+        this.ifshowshuxing4 = !this.ifshowshuxing4
+        this.ifshowshuxing44 = !this.ifshowshuxing44
       },
-      ifshuxing5(){
-        this.ifshowshuxing5=!this.ifshowshuxing5
-        this.ifshowshuxing55=!this.ifshowshuxing55
+      ifshuxing5() {
+        this.ifshowshuxing5 = !this.ifshowshuxing5
+        this.ifshowshuxing55 = !this.ifshowshuxing55
       },
-      ifshuxing6(){
-        this.ifshowshuxing6=!this.ifshowshuxing6
-        this.ifshowshuxing66=!this.ifshowshuxing66
+      ifshuxing6() {
+        this.ifshowshuxing6 = !this.ifshowshuxing6
+        this.ifshowshuxing66 = !this.ifshowshuxing66
       },
       chooseSort1() {
         Vue.axios.get('https://elm.cangdu.org/shopping/restaurants?latitude=' + this.$store.state.afterSearchLatitude + '&longitude=' + this.$store.state.afterSearchLongitude + '&order_by=1').then((res) => {
@@ -418,11 +421,32 @@
 </script>
 
 <style scoped>
-  .filter_li img{
+  .xingxing {
+    position: relative;
+    top: 0rem;
+    width: 2rem;
+    height: .5rem;
+  }
+
+  .pinpai {
+    width: 1.5rem;
+    content: "\54C1\724C";
+    display: inline-block;
+    font-size: .5rem;
+    line-height: .6rem;
+    color: #333;
+    background-color: #ffd930;
+    padding: 0 .1rem;
+    border-radius: .1rem;
+    margin-right: .2rem;
+  }
+
+  .filter_li img {
     width: .8rem;
     height: .8rem;
     margin-right: 0.25rem;
   }
+
   .sort_container {
     border-bottom: .05rem solid #f1f1f1 !important;
   }
@@ -702,28 +726,6 @@
     box-sizing: border-box;
   }
 
-  .lunbotu {
-    height: 7rem;
-  }
-
-  .ppp {
-    display: inline-block;
-    font-size: .5rem;
-    line-height: 0.8rem;
-    font-weight: 800;
-    color: #333;
-    background-color: #ffd930;
-    padding: 0 .1rem;
-    border-radius: .1rem;
-    margin-right: .2rem;
-    width: 1.5rem;
-
-  }
-
-  .zp_head_top_right1 {
-    margin-left: 14rem;
-  }
-
   .zp-shop-detail-ul {
     display: flex;
     transform: scale(0.8);
@@ -772,6 +774,7 @@
 
   .zp_distance_time {
     transform: scale(.9);
+    width: 40%;
   }
 
   .zp_fee {
@@ -782,13 +785,12 @@
   }
 
   .zp_shopDetailDistance {
-    margin-top: .52rem;
-    display: -ms-flexbox;
+
     display: flex;
-    -ms-flex-pack: justify;
     justify-content: space-between;
     font-size: .5rem;
     color: #333;
+    width: 11rem;
   }
 
   .zp_rate_num_right {
@@ -813,16 +815,13 @@
 
   .zp_rate_num_left {
     display: flex;
-    -ms-flex-pack: start;
     justify-content: flex-start;
   }
 
   .zp_shopDetailOrderNum {
     display: flex;
-    -ms-flex-pack: justify;
     justify-content: space-between;
     height: .6rem;
-    margin-top: .52rem;
   }
 
   .zp_shop_title {
@@ -834,6 +833,7 @@
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+    margin-bottom: 0;
   }
 
   .zp_shopListContainer {
@@ -844,7 +844,7 @@
   .zp_shop_li {
     display: flex;
     border-bottom: .025rem solid #f1f1f1;
-    padding: .7rem .4rem;
+    padding: 0 .4rem;
   }
 
   .zp_shop_img {
@@ -852,6 +852,7 @@
     height: 2.7rem;
     display: block;
     margin-right: .4rem;
+    margin-top: 0.5rem;
   }
 
   .zp_shop_right {
@@ -863,16 +864,6 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-  }
-
-  .zp_head_top {
-    background-color: #3190e8;
-    position: fixed;
-    z-index: 100;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 1.95rem;
   }
 
   .zp_head_top img {
@@ -888,28 +879,8 @@
     padding-right: 2rem;
   }
 
-  .zp_head_top_right {
-    right: .55rem;
-    font-size: .65rem;
-    color: #fff;
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-  }
-
   .zp_head_top_right a {
     color: #fff;
-  }
-
-  .zp_head_top_middle {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 50%;
-    color: #fff;
-    text-align: center;
-    margin-left: -.5rem;
   }
 
   .zp_head_top_middle > span {
@@ -922,21 +893,10 @@
     white-space: nowrap;
   }
 
-  .zp_shopHeaderTitle {
-    color: #999;
-    font: .55rem/1.6rem Microsoft YaHei;
-  }
-
   .zp_shopListContainer {
     background-color: #fff;
     margin-bottom: 2rem;
-  }
-
-  .zp_food_types {
-    display: flex;
-    flex-wrap: wrap;
-    height: 100%;
-    position: relative;
+    width: 100%;
   }
 
   .zp_food_types a {
@@ -976,24 +936,6 @@
     z-index: 1;
   }
 
-  .zp_nav {
-    padding-top: 2.1rem;
-    background-color: #fff;
-    border-bottom: .025rem solid #e4e4e4;
-    height: 10.6rem;
-  }
-
-  .BottomPart {
-    width: 100%;
-    height: 1.95rem;
-    background-color: white;
-    font-size: 0;
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    box-shadow: 0 0px 2px rgba(0, 0, 0, 0.2);
-  }
-
   .BottomPart > div {
     box-sizing: border-box;
     padding-top: .3rem;
@@ -1005,32 +947,4 @@
     color: #666666;
   }
 
-  .bottom_logo {
-    width: .8rem;
-    height: .8rem;
-    margin: 0 auto;
-    box-sizing: border-box;
-    padding-top: .3rem;
-
-  }
-
-  .bottom_logo_span1 {
-    background: url("../../assets/bottom11.png") no-repeat center center;
-    background-size: 110% 110%;
-  }
-
-  .bottom_logo_span2 {
-    background: url("../../assets/bottom2.png") no-repeat center center;
-    background-size: 100% 100%;
-  }
-
-  .bottom_logo_span3 {
-    background: url("../../assets/bottom3.png") no-repeat center center;
-    background-size: 100% 100%;
-  }
-
-  .bottom_logo_span4 {
-    background: url("../../assets/bottom4.png") no-repeat center center;
-    background-size: 100% 100%;
-  }
 </style>
