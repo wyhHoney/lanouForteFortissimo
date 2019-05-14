@@ -66,6 +66,7 @@
         actieveAddressArr: [],//获取添加的地址
       }
     }, created() {
+
       Vue.axios.get('https://elm.cangdu.org/v1/user').then((res) => {
 
         this.user_id = res.data.user_id;

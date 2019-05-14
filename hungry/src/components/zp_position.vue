@@ -4,7 +4,8 @@
       <header id="zp_head-top" class="container text-center">
         <span class="pull-left">ele.me</span>
         <span class="pull-right">
-          <router-link :to="{path:'/glogin'}">登陆|注册</router-link>
+          <router-link :to="{path:'/glogin'}" v-if=" ifshowdenglu">登陆|注册</router-link>
+          <img src="../assets/personhead1.png" alt="" class="zp_head_top_right1" v-if="ifshouheadimg">
         </span>
       </header>
       <nav id="zp_city-nav">
@@ -55,7 +56,9 @@
         groupCity: {},
         guessCity: {},
         groupCityKey: [],
-        newObj: {}
+        newObj: {},
+        ifshowdenglu: true,
+        ifshouheadimg: false,//判断是否登陆过显示那个头像
       }
     },
   methods:{
@@ -83,11 +86,27 @@
       Vue.axios.get('https://elm.cangdu.org/v1/cities?type=guess').then((res) => {
         this.guessCity = res.data
       })
+      Vue.axios.get('https://elm.cangdu.org/v1/user').then((res) => {
+        console.log(res.data)
+        if (res.data.message === '通过session获取用户信息失败') {
+
+          this.ifshowdenglu = true;
+          this.ifshouheadimg = false;
+        } else {
+          this.ifshowdenglu = false;
+          this.ifshouheadimg = true;
+        }
+      })
     }
   }
 </script>
 
 <style scoped>
+  .zp_head_top_right1{
+    fill: #fff;
+    width: 1rem;
+    height: 1rem;
+  }
   .zp_hot-citys_p div{
 margin-left: 0.6rem;
   }

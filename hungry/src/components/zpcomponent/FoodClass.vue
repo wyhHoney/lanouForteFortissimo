@@ -18,7 +18,7 @@
         <section class="category_left">
           <ul>
             <li class="category_left_li" v-for="(item,i) in allShopClassArr"
-                @click="selfkind(item.sub_categories,$event)" ref="ooo">
+                @click="selfkind(item.sub_categories)">
               <section>
                 <img :src="imgArr[i]" alt="" class="category_icon">
                 <span class="xixixi">{{item.name}}</span>
@@ -31,7 +31,7 @@
         </section>
         <section class="category_right">
           <ul>
-            <li class="category_right_li" v-for="item in selfKindArr">
+            <li class="category_right_li" v-for="item in selfKindArr" @click="fengleiclass(item.name)">
               <span>{{item.name}}</span><span>{{item.count}}</span>
             </li>
           </ul>
@@ -49,42 +49,42 @@
       </div>
       <section class="sort_detail_type" v-if="ifshowshort">
         <ul class="sort_list_container">
-          <li class="sort_list_li">
+          <li class="sort_list_li" @click="chooseSort4">
             <img src="../../assets/updown.png" alt="">
             <p class="sort_select">
               <span>智能排序</span>
               <img src="" alt="">
             </p>
           </li>
-          <li class="sort_list_li">
+          <li class="sort_list_li" @click="chooseSort5">
             <img src="../../assets/定位.png" alt="">
             <p class="sort_select">
               <span>距离最近</span>
               <img src="" alt="">
             </p>
           </li>
-          <li class="sort_list_li">
+          <li class="sort_list_li" @click="chooseSort6">
             <img src="../../assets/热度.png" alt="">
             <p class="sort_select">
               <span>销量最高</span>
               <img src="" alt="">
             </p>
           </li>
-          <li class="sort_list_li">
+          <li class="sort_list_li" @click="chooseSort1">
             <img src="../../assets/emi价格.png" alt="">
             <p class="sort_select">
               <span>起送价最低</span>
               <img src="" alt="">
             </p>
           </li>
-          <li class="sort_list_li">
+          <li class="sort_list_li" @click="chooseSort2">
             <img src="../../assets/时间.png" alt="">
             <p class="sort_select">
               <span>配送速度最快</span>
               <img src="" alt="">
             </p>
           </li>
-          <li class="sort_list_li">
+          <li class="sort_list_li" @click="chooseSort3">
             <img src="../../assets/评价.png" alt="">
             <p class="sort_select">
               <span>评价最高</span>
@@ -108,7 +108,7 @@
           <header class="filter_header_style"> 配送方式</header>
           <ul class="filter_ul">
             <li class="filter_li">
-              <img src="" alt="">
+              <img src="../../assets/蜜蜂.png" alt="">
               <span>蜂鸟专送</span>
             </li>
           </ul>
@@ -118,34 +118,34 @@
             商家属性（可以多选）
           </header>
           <ul class="filter_ul" style="padding-bottom: 0.5rem">
-            <li class="filter_li">
-              <img src="" alt="">
+            <li class="filter_li" @click="ifshuxing1">
+              <img src="../../assets/选择勾号1.png" alt="" v-if="ifshowshuxing1">
               <span class="filter_icon"
-                    style="color: rgb(63, 189, 230); border-color: rgb(63, 189, 230);">品</span><span>品牌商家</span>
+                    style="color: rgb(63, 189, 230); border-color: rgb(63, 189, 230);" v-if="ifshowshuxing11">品</span><span>品牌商家</span>
             </li>
-            <li class="filter_li">
-              <img src="" alt="">
+            <li class="filter_li" @click="ifshuxing2">
+              <img src="../../assets/选择勾号1.png" alt="" v-if="ifshowshuxing2">
               <span class="filter_icon"
-                    style="color: rgb(153, 153, 153); border-color: rgb(153, 153, 153);">品</span><span>外卖保</span>
+                    style="color: rgb(153, 153, 153); border-color: rgb(153, 153, 153);" v-if="ifshowshuxing22">品</span><span>外卖保</span>
             </li>
-            <li class="filter_li">
-              <img src="" alt="">
+            <li class="filter_li" @click="ifshuxing3">
+              <img src="../../assets/选择勾号1.png" alt="" v-if="ifshowshuxing3">
               <span class="filter_icon"
-                    style="color: rgb(63, 189, 230); border-color: rgb(63, 189, 230);">准</span><span>准时达</span>
+                    style="color: rgb(63, 189, 230); border-color: rgb(63, 189, 230);" v-if="ifshowshuxing33">准</span><span>准时达</span>
             </li>
-            <li class="filter_li">
-              <img src="" alt="">
+            <li class="filter_li" @click="ifshuxing4">
+              <img src="../../assets/选择勾号1.png" alt="" v-if="ifshowshuxing4">
               <span class="filter_icon"
-                    style="color: rgb(232, 132, 45); border-color: rgb(232, 132, 45);">新</span><span>新店</span>
+                    style="color: rgb(232, 132, 45); border-color: rgb(232, 132, 45);" v-if="ifshowshuxing44">新</span><span>新店</span>
             </li>
-            <li class="filter_li">
-              <img src="" alt="">
-              <span class="filter_icon" style="color: rgb(255, 78, 0); border-color: rgb(255, 78, 0);">付</span><span>在线支付</span>
+            <li class="filter_li" @click="ifshuxing5">
+              <img src="../../assets/选择勾号1.png" alt="" v-if="ifshowshuxing5">
+              <span class="filter_icon" style="color: rgb(255, 78, 0); border-color: rgb(255, 78, 0);" v-if="ifshowshuxing55">付</span><span>在线支付</span>
             </li>
-            <li class="filter_li">
-              <img src="" alt="">
+            <li class="filter_li" @click="ifshuxing6">
+              <img src="../../assets/选择勾号1.png" alt="" v-if="ifshowshuxing6">
               <span class="filter_icon"
-                    style="color: rgb(153, 153, 153); border-color: rgb(153, 153, 153);">票</span><span>开发票</span>
+                    style="color: rgb(153, 153, 153); border-color: rgb(153, 153, 153);" v-if="ifshowshuxing66">票</span><span>开发票</span>
             </li>
 
           </ul>
@@ -173,7 +173,7 @@
       <div class="zp_shopListContainer">
         <ul>
           <router-link :to="{path:'/intoShop'}">
-            <li class="zp_shop_li" v-for="item in shopPro" @click="intoShop(item.id)">
+            <li class="zp_shop_li" v-for="item in doneArr" @click="intoShop(item.id)">
               <section>
                 <img :src="'//elm.cangdu.org/img/'+item.image_path" alt="" class="zp_shop_img">
               </section>
@@ -196,7 +196,7 @@
                     <section class="zp_order_section">月售{{item.recent_order_num}}单</section>
                   </section>
                   <section class="zp_rate_num_right">
-                    <span class="zp_arte_num_right_left">{{item.delivery_mode.text}}</span>
+                    <span class="zp_arte_num_right_left">蜂鸟专送</span>
                     <span class="zp_arte_num_right_right">准时达</span>
                   </section>
                 </h5>
@@ -230,7 +230,7 @@
       PublicHeader
     }, data() {
       return {
-        PageTitle: '川湘菜',
+        PageTitle: this.$store.state.foodKindName,
         routejump: 'zp_toMyHome',//返回编辑地址页面
         //  控制商品分类
         showfoodup: true,
@@ -251,15 +251,118 @@
         ifshowback: false,
         ifshowshort: false,
         ifshowfilter: false,
-        shopPro:[]
+        shopPro: [],
+        //  定义数组 存储处理过的数据 然后v-for
+        doneArr: [],
+        ifshowshuxing1:false,
+        ifshowshuxing11:true,
+        ifshowshuxing2:false,
+        ifshowshuxing22:true,
+        ifshowshuxing3:false,
+        ifshowshuxing33:true,
+        ifshowshuxing4:false,
+        ifshowshuxing44:true,
+        ifshowshuxing5:false,
+        ifshowshuxing55:true,
+        ifshowshuxing6:false,
+        ifshowshuxing66:true,
       }
     },
     methods: {
+      ifshuxing1(){
+        this.ifshowshuxing1=!this.ifshowshuxing1
+        this.ifshowshuxing11=!this.ifshowshuxing11
+      },
+      ifshuxing2(){
+        this.ifshowshuxing2=!this.ifshowshuxing2
+        this.ifshowshuxing22=!this.ifshowshuxing22
+      },
+      ifshuxing3(){
+        this.ifshowshuxing3=!this.ifshowshuxing3
+        this.ifshowshuxing33=!this.ifshowshuxing33
+      },
+      ifshuxing4(){
+        this.ifshowshuxing4=!this.ifshowshuxing4
+        this.ifshowshuxing44=!this.ifshowshuxing44
+      },
+      ifshuxing5(){
+        this.ifshowshuxing5=!this.ifshowshuxing5
+        this.ifshowshuxing55=!this.ifshowshuxing55
+      },
+      ifshuxing6(){
+        this.ifshowshuxing6=!this.ifshowshuxing6
+        this.ifshowshuxing66=!this.ifshowshuxing66
+      },
+      chooseSort1() {
+        Vue.axios.get('https://elm.cangdu.org/shopping/restaurants?latitude=' + this.$store.state.afterSearchLatitude + '&longitude=' + this.$store.state.afterSearchLongitude + '&order_by=1').then((res) => {
+          this.doneArr = res.data
+          console.log(res.data, 1)
+        });
+        this.showsortup = true
+        this.showsortdown = false
+        this.ifshowshort = false
+      },
+      chooseSort2() {
+        Vue.axios.get('https://elm.cangdu.org/shopping/restaurants?latitude=' + this.$store.state.afterSearchLatitude + '&longitude=' + this.$store.state.afterSearchLongitude + '&order_by=2').then((res) => {
+          this.doneArr = res.data
+          // console.log(res.data)
+        });
+        this.showsortup = true
+        this.showsortdown = false
+        this.ifshowshort = false
+      },
+      chooseSort3() {
+        Vue.axios.get('https://elm.cangdu.org/shopping/restaurants?latitude=' + this.$store.state.afterSearchLatitude + '&longitude=' + this.$store.state.afterSearchLongitude + '&order_by=3').then((res) => {
+          this.doneArr = res.data
+          // console.log(res.data)
+        });
+        this.showsortup = true
+        this.showsortdown = false
+        this.ifshowshort = false
+      },
+      chooseSort4() {
+        Vue.axios.get('https://elm.cangdu.org/shopping/restaurants?latitude=' + this.$store.state.afterSearchLatitude + '&longitude=' + this.$store.state.afterSearchLongitude + '&order_by=4').then((res) => {
+          this.doneArr = res.data
+          // console.log(res.data)
+        });
+        this.showsortup = true
+        this.showsortdown = false
+        this.ifshowshort = false
+      },
+      chooseSort5() {
+        Vue.axios.get('https://elm.cangdu.org/shopping/restaurants?latitude=' + this.$store.state.afterSearchLatitude + '&longitude=' + this.$store.state.afterSearchLongitude + '&order_by=5').then((res) => {
+          this.doneArr = res.data
+          // console.log(res.data)
+        });
+        this.showsortup = true
+        this.showsortdown = false
+        this.ifshowshort = false
+      },
+      chooseSort6() {
+        Vue.axios.get('https://elm.cangdu.org/shopping/restaurants?latitude=' + this.$store.state.afterSearchLatitude + '&longitude=' + this.$store.state.afterSearchLongitude + '&order_by=6').then((res) => {
+          this.doneArr = res.data
+          // console.log(res.data)
+        });
+        this.showsortup = true
+        this.showsortdown = false
+        this.ifshowshort = false
+      },
+      //点击分类
+      fengleiclass(q) {
+        for (let i in this.shopPro) {
+          if (this.shopPro[i].category.slice(this.shopPro[i].category.indexOf('/') + 1, this.shopPro[i].category.length) === q) {
+            console.log('相同')
+            this.doneArr.push(this.shopPro[i]);
+            console.log(this.doneArr)
+          } else {
+            this.doneArr = []
+          }
+        }
+
+      },
       //进入各个具体的商铺分类
       selfkind(i) {
-
         this.selfKindArr = i;
-        console.log(this.$refs.ooo)
       },
       //  点击下拉商铺分类
       clickFoodKind() {
@@ -306,31 +409,39 @@
         }
         console.log(res.data)
       });
-
-      Vue.axios.get('https://elm.cangdu.org/shopping/restaurants?latitude=31.22967&longitude=121.4762').then((res)=>{
-        console.log(res.data)
-        this.shopPro=res.data
-      })
+      Vue.axios.get('https://elm.cangdu.org/shopping/restaurants?latitude=' + this.$store.state.afterSearchLatitude + '&longitude=' + this.$store.state.afterSearchLongitude + '').then((res) => {
+        this.doneArr = this.shopPro = res.data
+        // console.log(res.data)
+      });
     }
   }
 </script>
 
 <style scoped>
-  .sort_container{
+  .filter_li img{
+    width: .8rem;
+    height: .8rem;
+    margin-right: 0.25rem;
+  }
+  .sort_container {
     border-bottom: .05rem solid #f1f1f1 !important;
   }
-  .zp_shopList{
+
+  .zp_shopList {
     margin-top: 4rem;
   }
-  .head_style{
+
+  .head_style {
     z-index: 50;
     position: fixed;
     top: 0;
     background-color: #3190E8 !important;
   }
-  .confirm_filter div{
+
+  .confirm_filter div {
     text-align: center;
   }
+
   .confirm_select {
     background-color: #56d176;
     color: #fff;
@@ -590,6 +701,7 @@
     z-index: 13;
     box-sizing: border-box;
   }
+
   .lunbotu {
     height: 7rem;
   }
@@ -846,11 +958,13 @@
     font-size: .55rem;
     color: #666;
   }
-  .zp_nav .swiper-container .swiper-slide:nth-of-type(2){
+
+  .zp_nav .swiper-container .swiper-slide:nth-of-type(2) {
     position: relative;
     top: -7rem;
     left: 14.5rem;
   }
+
   .zp_nav .swiper-container {
     width: 100%;
     height: auto;

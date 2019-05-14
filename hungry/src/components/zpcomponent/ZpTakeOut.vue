@@ -14,7 +14,7 @@
       </router-link>
       <a href="###" class="zp_head_top_middle">
         <!--定位地址-->
-        <span>{{$store.state.afterSearchName}}</span>
+        <span @click="backposition">{{$store.state.afterSearchName}}</span>
       </a>
     </header>
     <nav class="zp_nav msite_nav">
@@ -126,9 +126,13 @@
     name: "ZpTakeOut",
     components: {Loading},
     methods: {
+      //返回主页面
+      backposition(){
+        this.$router.push({path:'toCity'})
+      },
       //进入商品列表
-      inFoodClass(i){
-      this.$store.state.foodKindName=i;
+      inFoodClass(i) {
+        this.$store.state.foodKindName = i;
       },
       intoShop(i) {
         this.$store.state.shopId = i
@@ -176,6 +180,17 @@
         this.ifShowLoading = false;
 
       })
+      Vue.axios.get('https://elm.cangdu.org/v1/user').then((res) => {
+        console.log(res.data)
+        if (res.data.message === '通过session获取用户信息失败') {
+
+          this.ifshowdenglu = true;
+          this.ifshouheadimg = false;
+        } else {
+          this.ifshowdenglu = false;
+          this.ifshouheadimg = true;
+        }
+      })
     },
     data() {
       return {
@@ -191,7 +206,7 @@
 
     mounted() {
       //判断是否有登陆
-      this.adjustifshowimg();
+      // this.adjustifshowimg();
       new Swiper('.swiper-container', {
         pagination: {
           el: '.swiper-pagination',
@@ -459,11 +474,13 @@
     font-size: .55rem;
     color: #666;
   }
-  .zp_nav .swiper-container .swiper-slide:nth-of-type(2){
+
+  .zp_nav .swiper-container .swiper-slide:nth-of-type(2) {
     position: relative;
     top: -7rem;
     left: 14.5rem;
   }
+
   .zp_nav .swiper-container {
     width: 100%;
     height: auto;

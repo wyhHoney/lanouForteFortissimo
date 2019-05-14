@@ -58,7 +58,7 @@
                       <div class="shuliang">
                         <img src="../../assets/减小.png" alt="" class="jianxiao" @click="jianxiao(pro)">
                         <p class="cart_num">{{find_kind_count(pro.name)}}</p>
-                        <span class="show_chooseList" ref="abc" @click="zp_buy_shop(pro.specfoods,pro.name)">
+                        <span class="show_chooseList" ref="abc" @click="zp_buy_shop(pro.specfoods,pro.name,pro)">
                         {{ifspecialfood(pro.specfoods)}}
                       </span>
                       </div>
@@ -155,9 +155,10 @@
   import Vue from 'vue'
   import Loading from "./Loading";
   import PublicHeader from '../MyPage/CommonComponents/wyh_header'
+
   export default {
     name: "InShop",
-    components: {Loading,PublicHeader},
+    components: {Loading, PublicHeader},
     data() {
       return {
         PageTitle: '选择商品',
@@ -183,6 +184,10 @@
         allPrice: 0,//总价格
         allNum: 0,//总数
         kindSpec: Object,
+        //  点击规格获取数据
+        datainfor: {},
+        //  往后台传的数组
+        dataArr: []
 
 
       }
@@ -279,22 +284,22 @@
       }
       ,
       //点击减少
-      jianshao1() {
+      jianshao1(p) {
         for (let i in this.buy_specs_arr) {
-          if (this.buy_specs_arr[i].pro.specs_name === this.buy_specs_name) {
+          if (this.buy_specs_arr[i].pro.specs_name === p.pro.specs_name) {
             if (this.buy_specs_arr[i].count > 1) {
               this.buy_specs_arr[i].count--;
             } else {
-              this.buy_specs_arr = [];
+              this.buy_specs_arr.splice(i, 1);
             }
           }
         }
       }
       ,
       //点击购物清单界面增加
-      zengjia1() {
+      zengjia1(p) {
         for (let i in this.buy_specs_arr) {
-          if (this.buy_specs_arr[i].pro.specs_name === this.buy_specs_name) {
+          if (this.buy_specs_arr[i].pro.specs_name === p.pro.specs_name) {
             if (this.buy_specs_arr[i].count > 0) {
               this.buy_specs_arr[i].count++
             }
@@ -340,6 +345,7 @@
         }
         return sum
       },
+      //加入购物车
       in_cart() {
         if (this.buy_specs_arr.length === 0) {
           let obj = {pro: this.kindSpec, count: 1,};
@@ -357,13 +363,42 @@
             })
             arr[0].count++
           }
+          console.log()
         }
         console.log(this.buy_specs_arr)
         this.if_show_gray = false;
         this.if_show_cart = false;
+        // [{attrs:[],extra:{},id:食品id,name:食品名称,packing_fee:打包费,price:价格,quantity:数量,sku_id:规格id,specs:规格,stock:存量,}]
+
+        let datapro = {
+          attrs: this.datainfor.attrs,
+          extra: {},
+          id: this.kindSpec.food_id,
+          name: this.kindSpec.name,
+          packing_fee: this.kindSpec.packing_fee,
+          price: this.kindSpec.price,
+          quantity: 1,
+          sku_id: this.kindSpec.sku_id,
+          specs: this.buy_specs_name,
+          stock: this.kindSpec.stock
+        }
+
+        this.dataArr.push(datapro)
+        console.log(this.dataArr, this.$store.state.shopId, this.$store.state.weizhi, '测试数据')
+        console.log(this.show_spec_money)
+        //  向后台发起加入购物车
+        Vue.axios.post('https://elm.cangdu.org/v1/carts/checkout', {
+          restaurant_id: this.$store.state.shopId,
+          geohash: this.$store.state.weizhi,
+          entities: this.dataArr
+        }).then((res) => {
+          console.log(res.data,);
+        })
       }
       ,
+      //展示规格价格
       show_money(i, id, specs_name) {
+        console.log(i)
         //食物种类名字
         this.buy_specs_kind = i.name;
         //ID
@@ -386,7 +421,9 @@
         this.if_show_cart = !this.if_show_cart;
         this.if_show_gray = false;
       },
-      zp_buy_shop(i, name) {
+      //点击规格
+      zp_buy_shop(i, name, pro) {
+        this.datainfor = pro;
         this.show_spec_money = i[0].price;
         //数组存放特殊食物。如果没点击，默认选取第一个name
         this.spec_food_array = i;
@@ -415,6 +452,7 @@
     created() {
       Vue.axios.get('https://elm.cangdu.org/shopping/getcategory/' + this.$store.state.shopId + '').then((res) => {
         this.foodPro = res.data.category_list;
+        // console.log(this.foodPro)
       });
       this.buy_specs_arr = this.$store.state.buy_specs_arr;
 
@@ -424,11 +462,12 @@
 </script>
 
 <style scoped>
-  .headzujian{
-     position: fixed;
-     top: 0;
+  .headzujian {
+    position: fixed;
+    top: 0;
     z-index: 100;
-   }
+  }
+
   .op {
     font-size: .65rem;
     color: #666;

@@ -20,12 +20,10 @@
       <div v-if="zp_ifHistory">
         <ul>
           <li v-for="item in zp_afterDelete">
-            <router-link :to="{path:'/zp_toMyHome'}">
               <a href="###" @click="zp_inNextPage">
-                <h4 class="zp_searchProId">{{item.name}}</h4>
+                <h4 class="zp_searchProId">{{item.name}}pppppppp</h4>
                 <p class="zp_searchProAddress">{{item.address}}</p>
               </a>
-            </router-link>
           </li>
         </ul>
         <a href="###" @click="zp_clearHistory" v-if="zp_afterDelete.length===0?false:true">清除所有历史纪录</a>
@@ -77,7 +75,7 @@
 
       },
       zp_inAddress(i) {
-          this.$store.state.weizhi=this.zp_searchResult[i].geohash
+        this.$store.state.weizhi=this.zp_searchResult[i].geohash
         //存入点击的地址
         this.$store.state.afterSearchName = this.zp_searchResult[i].name;
         //存入点击的经纬度
@@ -96,6 +94,7 @@
       zp_inNextPage() {
         // //存入点击的地址
         // this.$store.state.afterSearchName = this.zp_searchResult[i].name;
+        this.$router.push({path:'/zp_toMyHome'})
       }
     },
     mounted() {

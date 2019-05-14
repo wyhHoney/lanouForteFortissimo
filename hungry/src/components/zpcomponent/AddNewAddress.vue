@@ -9,7 +9,7 @@
         </span>
         <section class="section_right">
           <input type="text" class="input_style" name="name" placeholder="你的名字" v-model="yourname">
-          <div class="choose_sex" >
+          <div class="choose_sex">
             <span class="choose_span" @click="chooseman">
               <img src="../../assets/选中.png" alt="" class="maning" v-if="manshow">
               <img src="../../assets/未选中.png" alt="" class="maning" v-if="womanshow">
@@ -38,7 +38,9 @@
         <span class="section_left">送餐地址</span>
         <section class="section_right">
           <!--选择定位地址-->
-          <router-link :to="{path:'/tocheckLunchAddress'}"><div class="choose_address">您的地址{{$store.state.GetName.name}}</div></router-link>
+          <router-link :to="{path:'/tocheckLunchAddress'}">
+            <div class="choose_address">您的地址{{$store.state.GetName.name}}</div>
+          </router-link>
           <input type="text" name="address_detail" placeholder="详细地址（如门牌号等）" class="input_style" v-model="yourdoor">
         </section>
       </section>
@@ -48,7 +50,8 @@
         </span>
         <section class="section_right">
           <div class="phone_add">
-            <input type="text" name="tag" placeholder="无/家/学校/公司" class="input_style"  v-model="biaoqian" @change="jianting">
+            <input type="text" name="tag" placeholder="无/家/学校/公司" class="input_style" v-model="biaoqian"
+                   @change="jianting">
           </div>
         </section>
       </section>
@@ -70,66 +73,87 @@
       return {
         PageTitle: '选择地址',
         routejump: 'tochooseaddress',
-        yourname:'',//存联系人名字
-        yoursex:Number,//存性别
-        yourphone:'',//你的号码
-        yourdoor:'',//你的门牌号
-        biaoqian:'',//标签
-        tg_type:Number,
-        showcom:'',//提示框显示隐藏
-        promptContent:'',//提示框内容
-        manshow:true,
-        womanshow:false
+        yourname: '',//存联系人名字
+        yoursex: Number,//存性别
+        yourphone: '',//你的号码
+        yourdoor: '',//你的门牌号
+        biaoqian: '',//标签
+        tg_type: Number,
+        showcom: '',//提示框显示隐藏
+        promptContent: '',//提示框内容
+        manshow: true,
+        womanshow: false,
+        statusID:Number
       }
     },
-    methods:{
+    beforeDestroy() {
+      this.$store.state.yourname = this.yourname;
+      this.$store.state.yoursex = this.yoursex;
+      this.$store.state.yourphone = this.yourphone;
+      this.$store.state. yourdoor = this. yourdoor;
+      this.$store.state. biaoqian = this. biaoqian;
+    },
+    mounted() {
+      this.yourname = this.$store.state.yourname
+      this.yoursex = this.$store.state.yoursex
+      this.yourphone = this.$store.state.yourphone
+      this.yourdoor = this.$store.state.yourdoor
+      this.biaoqian = this.$store.state.biaoqian
+
+    }
+    ,
+    methods: {
       //接受提示框返回的数据
-      getMsg(data){
-        this.showcom=data;
+      getMsg(data) {
+        this.showcom = data;
       },
-      jianting(){
-        if(this.biaoqian==='家'){
-          this.tg_type=1
-        }else if (this.biaoqian==='学校'){
-          this.tg_type=2
-        }else if(this.biaoqian==='公司'){
-          this.tg_type=3
-        }else {
-          this.tg_type=1
+      jianting() {
+        if (this.biaoqian === '家') {
+          this.tg_type = 1
+        } else if (this.biaoqian === '学校') {
+          this.tg_type = 2
+        } else if (this.biaoqian === '公司') {
+          this.tg_type = 3
+        } else {
+          this.tg_type = 1
         }
       },
 
       //点击选择性别
-      chooseman(){
-        this.yoursex=1
-        this.manshow=true
-          this.womanshow=false
+      chooseman() {
+        this.yoursex = 1
+        this.manshow = true
+        this.womanshow = false
       },
-      choosewoman(){
-        this.yoursex=2;
-        this.manshow=false
-          this.womanshow=true
+      choosewoman() {
+        this.yoursex = 2;
+        this.manshow = false
+        this.womanshow = true
       },
-      sureAdd(){
-        console.log(this.$store.state.GetName.name,this.yourdoor,this.$store.state.GetName.geohash,this.yourname,this.yourphone,this.yoursex,this.tg_type,this.$store.state.user_id)
-        Vue.axios.post('https://elm.cangdu.org/v1/users/'+this.$store.state.user_id+'/addresses',{
+
+      sureAdd() {
+        console.log(this.$store.state.GetName.name, this.yourdoor, this.$store.state.GetName.geohash, this.yourname, this.yourphone, this.yoursex, this.tg_type, this.$store.state.user_id)
+        Vue.axios.post('https://elm.cangdu.org/v1/users/' + this.$store.state.user_id + '/addresses', {
           // user_id :1,
-          address:this.$store.state.GetName.name,
-          address_detail:this.yourdoor,
-          geohash:this.$store.state.GetName.geohash,
-          name:this.yourname,
-          phone:this.yourphone,
-          tag:'12',
-          sex:this.yoursex,
-          phone_bk:"222",
-          tag_type:this.tg_type
-        }).then((res)=>{
+          address: this.$store.state.GetName.name,
+          address_detail: this.yourdoor,
+          geohash: this.$store.state.GetName.geohash,
+          name: this.yourname,
+          phone: this.yourphone,
+          tag: '12',
+          sex: this.yoursex,
+          phone_bk: "222",
+          tag_type: this.tg_type
+        }).then((res) => {
           console.log(res.data)
+          this.statusID=res.data.status
         })
-        if(this.$store.state.user_id===undefined){
+        if (this.statusID===0) {
           //弹出提示框
-          this.promptContent='用户名id错误';
-          this.showcom=true;
+          this.promptContent = '用户名id错误';
+          this.showcom = true;
+        }else if(this.statusID===1){
+          this.$router.push({path:'tochooseaddress'});
         }
       }
     }
@@ -137,30 +161,35 @@
 </script>
 
 <style scoped>
-  .section_right input{
+  .section_right input {
     outline: none;
   }
-  .choose_address{
+
+  .choose_address {
     font-size: .7rem;
     color: #999;
     line-height: 2.5rem;
     border-bottom: .025rem solid #f5f5f5;
   }
-  .phone_add{
+
+  .phone_add {
     display: flex;
     justify-content: space-between;
     align-items: center;
   }
-  .addphone{
+
+  .addphone {
     height: 20px;
     width: 20px;
   }
-  .maning,.womanimg{
+
+  .maning, .womanimg {
     margin-right: .3rem;
     width: .8rem;
     height: .8rem;
   }
-  .choose_span{
+
+  .choose_span {
     font-size: .7rem;
     color: #333;
     display: -ms-flexbox;
@@ -169,6 +198,7 @@
     align-items: center;
     margin-right: .8rem;
   }
+
   .choose_sex {
     display: flex;
     line-height: 2.5rem;

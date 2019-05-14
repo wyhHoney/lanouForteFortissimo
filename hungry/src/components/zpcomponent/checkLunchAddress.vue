@@ -58,6 +58,9 @@
         console.log(this.$store.state.GetName);
         this.$router.push({path:'toaddnewaddress'});
       }
+    },
+    created(){
+      console.log(this.$store.state.yourname,111)
     }
   }
 </script>
