@@ -4,8 +4,8 @@
     <Loading v-if="if_show_load"></Loading>
     <section class="shop_container">
       <!--<section class="change_show_type">-->
-        <!--<div><span class="activity_show">商品</span></div>-->
-        <!--<div><span>评价</span></div>-->
+      <!--<div><span class="activity_show">商品</span></div>-->
+      <!--<div><span>评价</span></div>-->
       <!--</section>-->
       <section class="food_container">
         <section class="menu_container">
@@ -85,9 +85,9 @@
             </div>
           </section>
           <section class="gotopay" ref="gotopay">
-            <router-link :to="{path: '/tosureorder'}" ref="tosureorder">
-              <a href="###" class="gotopay_btn" ref="gotopay_btn">去结算</a>
-            </router-link>
+            <!--<router-link :to="{path: '/tosureorder'}" ref="tosureorder">-->
+              <a href="###" class="gotopay_btn" ref="gotopay_btn" @click="tosureorder">去结算</a>
+            <!--</router-link>-->
           </section>
         </section>
         <section class="cart_food_list" v-if="if_show_cart_list1">
@@ -148,6 +148,8 @@
         </div>
       </footer>
     </section>
+    <!--提示框-->
+    <PublicPrompt v-if="showcom" :showcom="showcom" @update="getMsg($event)" :prompt="promptContent"></PublicPrompt>
   </div>
 </template>
 
@@ -155,7 +157,7 @@
   import Vue from 'vue'
   import Loading from "./Loading";
   import PublicHeader from '../MyPage/CommonComponents/wyh_header'
-
+  import PublicPrompt from '../MyPage/CommonComponents/wyh_PublicPrompt'//引入提示框组件
   export default {
     name: "InShop",
     components: {Loading, PublicHeader},
@@ -187,8 +189,9 @@
         //  点击规格获取数据
         datainfor: {},
         //  往后台传的数组
-        dataArr: []
-
+        dataArr: [],
+        showcom:'',
+        promptContent:'',//提示框内容
 
       }
     },
@@ -211,17 +214,27 @@
         this.if_show_load = false;
       }, 2000)
     },
-    computed: {
-      fenlancss(i) {
-        for (let j in this.buy_specs_arr) {
-          if (this.buy_specs_arr[j].pro.name === i) {
-            return true
-          }
-        }
-      }
+    components:{
+      PublicHeader,
+      PublicPrompt,
     }
     ,
     methods: {
+      getMsg(data){
+        this.showcom=data;
+      },
+      tosureorder(){
+        if(this.$store.state.allPrice<20){
+            // alert('差钱啊 兄弟')
+          //弹出提示框
+          this.showcom=true;
+          //提示内容
+          let money=20-this.$store.state.allPrice
+          this.promptContent='你很穷啊兄弟，还差'+money+'元，我们才起送哦！';
+        }else {
+          this.$router.push({path:'tosureorder'})
+        }
+      },
       //进入每一个具体的店铺
       inPerShop(pro) {
         this.$store.state.shop_head_title = pro.name;
@@ -348,10 +361,10 @@
       //加入购物车
       in_cart() {
         if (this.buy_specs_arr.length === 0) {
-          let obj = {pro: this.kindSpec, count: 1,pro1:this.$store.state.shoppro1};
+          let obj = {pro: this.kindSpec, count: 1, pro1: this.$store.state.shoppro1};
           this.buy_specs_arr.push(obj)
         } else {
-          let obj = {pro: this.kindSpec, count: 1,pro1:this.$store.state.shoppro1};
+          let obj = {pro: this.kindSpec, count: 1, pro1: this.$store.state.shoppro1};
           let isHas = this.buy_specs_arr.some((v) => {
             return v.pro._id === this.kindSpec._id;
           });
@@ -364,7 +377,7 @@
             arr[0].count++
           }
         }
-        console.log(this.buy_specs_arr,111)
+        console.log(this.buy_specs_arr, 111)
         this.if_show_gray = false;
         this.if_show_cart = false;
         // [{attrs:[],extra:{},id:食品id,name:食品名称,packing_fee:打包费,price:价格,quantity:数量,sku_id:规格id,specs:规格,stock:存量,}]

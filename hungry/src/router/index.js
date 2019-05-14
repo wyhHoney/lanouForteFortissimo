@@ -15,6 +15,8 @@ import AddNewAddress from '../components/zpcomponent/AddNewAddress'
 import CheckLunchAddress from '../components/zpcomponent/checkLunchAddress'
 import FoodClass from '../components/zpcomponent/FoodClass'
 import  ShopDetail from  '../components/zpcomponent/ShopDetail'
+import video from '../components/zpcomponent/video1'
+
 //曾光配置的路由
 import register from '../components/G-login/zg_register'//重置密码页面的路由
 import glogin from '../components/G-login/G-login'//登录页面的路由
@@ -78,7 +80,7 @@ export default new Router({
 
 
     //张鹏配置的路由
-    {path: '', component: zpposition},//路由重定向，进入定位界面
+    {path: '', component: video},//路由重定向，进入定位界面
     {path: '/city', component: SpecificAddress},//进入具体定位
     {path: '/toCity', component: zpposition},//定位界面
     {path: '/zp_toMyHome', component: ZpTakeOut},//获取商品，有轮播图
