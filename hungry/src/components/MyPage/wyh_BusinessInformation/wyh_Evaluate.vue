@@ -3,13 +3,13 @@
     <div class="Evaluate">
       <div class="Evaluate_header clearfix">
         <div class="Evaluate_header_left">
-          <p>5</p>
+          <p>{{Comprehensive}}</p>
           <p>综合评价</p>
-          <p>高于周边商家76.9%</p>
+          <p>高于周边商家{{Exceed}}%</p>
         </div>
         <div class="Evaluate_header_right">
-          <p>服务态度 <span></span><span>4.7</span></p>
-          <p>菜品评价 <span></span><span>4.7</span></p>
+          <p>服务态度 <span></span><span>{{service}}</span></p>
+          <p>菜品评价 <span></span><span>{{cuisine}}</span></p>
           <p>送达时间 <span>分钟</span></p>
         </div>
 
@@ -17,22 +17,18 @@
       <!--评价内容-->
       <div class="CommentsSection">
         <ul class="CommentsSection_lei">
-          <li>全部（473）</li>
-          <li>满意（473）</li>
-          <li>不满意（473）</li>
-          <li>有图（473）</li>
-          <li>有味道（473）</li>
+          <li v-for="(pie,i) in evaluateClassify" @click="ClickLi(i)" :class="biaoqian===i?'biaoqian11':pie.name==='不满意'?'biaoqian22':'biaoqian'" >{{pie.name}}（{{pie.count}}）</li>
         </ul>
+
           <ul class="Comment">
-            <li class="Comment_list clearfix">
-              <img src="" alt="">
+            <li class="Comment_list clearfix" v-for="pie in evaluateMessage">
+              <img :src="'https://fuss10.elemecdn.com/'+pie.avatar+'.jpeg'" alt="">
               <div class="Comment_div">
-                <p class="Comment_div_p1">12****66464  <span>2017-02-10</span></p>
-                <p class="Comment_div_p1"><span></span>按时送达</p>
-                <img src="" alt="">
+                <p class="Comment_div_p1">{{pie.username}}  <span>{{pie.rated_at}}</span></p>
+                <p class="Comment_div_p1"><span></span>{{pie.time_spent_desc}}</p>
+                <img :src="'https://fuss10.elemecdn.com/'+paa.image_hash+'.jpeg'" alt="" v-for="paa in pie.item_ratings">
                 <ul>
-                  <li>asd</li>
-                  <li>sadj</li>
+                  <li v-for="paa in pie.item_ratings">{{paa.food_name}}</li>
                 </ul>
               </div>
             </li>
@@ -47,15 +43,41 @@
         name: "wyh_Evaluate",
         data(){
           return {
+            Comprehensive:'',//综合评分
+            Exceed:'',//高于周边商家
+            cuisine:0,//菜品评价
+            service:0,//服务态度
+            evaluateClassify:[],//评价分类
+            evaluateMessage:[],//评价信息
+            biaoqian:'',//修改分类样式
 
           }
         },
         created(){
+          //18.获取评价分数
           Vue.axios.get('https://elm.cangdu.org/ugc/v2/restaurants/'+this.$store.state.shopId+'/ratings/scores').then((res)=>{
-            console.log(res.data)
+            this.Comprehensive= res.data.food_score.toFixed(1)//综合评分
+            this.Exceed =(res.data.compare_rating*100).toFixed(1)//高于周边商家
+            this.cuisine=res.data.food_score.toFixed(1)//菜品评价
+            this.service=res.data.service_score.toFixed(1)//服务态度
           });
-          console.log(this.$store.state.shopId)
+          //19.过去评价分类
+          Vue.axios.get('https://elm.cangdu.org/ugc/v2/restaurants/'+this.$store.state.shopId+'/ratings/tags').then((res)=>{
+            // console.log(res.data)
+            this.evaluateClassify=res.data;
+          });
+          //17.获取评价信息
+          Vue.axios.get('https://elm.cangdu.org/ugc/v2/restaurants/'+this.$store.state.shopId+'/ratings').then((res)=>{
+            this.evaluateMessage=res.data;
+          });
+
         },
+        methods:{
+          ClickLi(data){
+            this.biaoqian=data;
+          },
+        },
+
     }
 </script>
 
@@ -120,11 +142,31 @@
     list-style: none;
     padding: .5rem;
   }
-.CommentsSection_lei>li{
+.biaoqian{
   display: inline-block;
-  background-color: #3190e8;
-  /*background-color: #ebf5ff;*/
+  /*background-color: #3190e8;*/
+  background-color: #ebf5ff;
   color: #fff;
+  font-size: .6rem;
+  padding: .3rem;
+  border-radius: .2rem;
+  border: 1px;
+  margin: 0 .4rem .2rem 0;
+}
+.biaoqian11{
+  background-color: #3190e8;
+  display: inline-block;
+  color: #fff;
+  font-size: .6rem;
+  padding: .3rem;
+  border-radius: .2rem;
+  border: 1px;
+  margin: 0 .4rem .2rem 0;
+}
+.biaoqian22{
+  background-color: #F5F5F5;
+  display: inline-block;
+  color: #AAAAAA;
   font-size: .6rem;
   padding: .3rem;
   border-radius: .2rem;
@@ -146,7 +188,8 @@
   border-radius: 50%;
   margin-right: .8rem;
   display: inline-block;
-  background-color: red;
+  background:url("../../../wyhImg/default.jpg") no-repeat center center;
+  background-size: 100% 100%;
   float: left;
 }
   .Comment_div{
@@ -167,8 +210,7 @@
   width: 3rem;
   height: 3rem;
   margin-right: .4rem;
-  display: block;
-  background-color: coral;
+  display: inline-block;
   margin-bottom: .2rem;
 }
 .Comment_div>ul{
@@ -176,6 +218,9 @@
   list-style: none;
 }
 .Comment_div>ul>li{
+  white-space:nowrap;
+  overflow: hidden;
+  text-overflow:ellipsis;
   display: inline-block;
   font-size: .55rem;
   color: #999;
