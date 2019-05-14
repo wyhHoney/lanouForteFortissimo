@@ -77,7 +77,7 @@
                     <section class="zp_order_section">月售{{item.recent_order_num}}单</section>
                   </section>
                   <section class="zp_rate_num_right">
-                    <span class="zp_arte_num_right_left">{{item.delivery_mode.text}}</span>
+                    <span class="zp_arte_num_right_left">蜂鸟专送</span>
                     <span class="zp_arte_num_right_right">准时达</span>
                   </section>
                 </h5>
@@ -137,6 +137,7 @@
         this.$store.state.foodKindName = i;
       },
       intoShop(i,pro) {
+        console.log(pro)
         this.$store.state.shopId = i;
         this.$store.state.shoppro1=pro;
         this.$router.push({path:'shophost'})

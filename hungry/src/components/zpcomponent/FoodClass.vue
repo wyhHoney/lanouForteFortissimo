@@ -155,10 +155,10 @@
           </ul>
         </section>
         <footer class="confirm_filter">
-          <div class="clearall">
+          <div class="clearall" @click="clearall">
             清空
           </div>
-          <div class="confirm_select">
+          <div class="confirm_select" @click="sureall">
             确定
           </div>
         </footer>
@@ -361,7 +361,6 @@
             this.doneArr = []
           }
         }
-
       },
       //进入各个具体的商铺分类
       selfkind(i) {
@@ -392,6 +391,25 @@
         this.ifshowfilter = !this.ifshowfilter
         this.ifshowshort = false
         this.ifshowkindFood = false
+      },
+      clearall() {
+        this.ifshowshuxing1 = false
+        this.ifshowshuxing11 = true
+        this.ifshowshuxing2 = false
+        this.ifshowshuxing22 = true
+        this.ifshowshuxing3 = false
+        this.ifshowshuxing33 = true
+        this.ifshowshuxing4 = false
+        this.ifshowshuxing44 = true
+        this.ifshowshuxing5 = false
+        this.ifshowshuxing55 = true
+        this.ifshowshuxing6 = false
+        this.ifshowshuxing66 = true
+      },
+      sureall(){
+        this.showfilterup = true;
+        this.showfilterdown = false;
+        this.ifshowfilter = false
       }
     },
     mounted() {

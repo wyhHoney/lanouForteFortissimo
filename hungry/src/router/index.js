@@ -14,7 +14,7 @@ import ChoodeAddress from '../components/zpcomponent/ChooseAdress'
 import AddNewAddress from '../components/zpcomponent/AddNewAddress'
 import CheckLunchAddress from '../components/zpcomponent/checkLunchAddress'
 import FoodClass from '../components/zpcomponent/FoodClass'
-
+import  ShopDetail from  '../components/zpcomponent/ShopDetail'
 //曾光配置的路由
 import register from '../components/G-login/zg_register'//重置密码页面的路由
 import glogin from '../components/G-login/G-login'//登录页面的路由
@@ -71,8 +71,8 @@ export default new Router({
     {path: '/servicecenterwithin',component:ServiceCenterWithin},//服务中心内的公共说明组件
     {path: '/anotherlist',component:AnotherList},//订单详细页面
     {path: '/shophost',component:ShopHost,children: [
-        {path:'',redirect:{path: '/commodity',component:Commodity}},
-        {path: '/commodity',component:Commodity},//商品信息
+        {path:'',redirect:{path: '/toinshop',component: InShop}},
+        {path: '/toinshop',component: InShop},//商品信息
         {path: '/evaluate',component:Evaluate},//评价信息
       ]},//店铺信息页
 
@@ -85,13 +85,14 @@ export default new Router({
     {path: '/zpMine', component: MyHomePage},
     {path: '/intoShop', component: InShop},//购物车界面
     {path: '/toshop', component: Shop},//加入购物车
-    {path: '/toinshop', component: InShop},
+    // {path: '/toinshop', component: InShop},
     {path:'/tosureorder',component:SureOrder},//确认购买
     {path:'/toinvoice',component:InVoice},//发票
     {path:'/tochooseaddress',component:ChoodeAddress},//选择外卖地址
     {path:'/toaddnewaddress',component:AddNewAddress},//添加定位地址
     {path:'/tocheckLunchAddress',component:CheckLunchAddress},//添加送餐地址的定位组件
     {path:'/toFoodClass',component:FoodClass},//食物分类界面
+    {path:'/toshopdetail',component:ShopDetail},
     //曾光配置的路由
     {path: '/register', component: register}, //跳转到重置密码的路由
     {path: '/glogin', component: glogin},//登录界面

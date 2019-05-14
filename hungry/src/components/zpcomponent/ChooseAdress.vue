@@ -36,8 +36,8 @@
     name: "ChooseAdress",
     methods: {
       chooseAddress(i) {
-      this.$router.push({path:'tosureorder'})
-        this.$store.state.waimaiAddress=i;
+        this.$router.push({path: 'tosureorder'})
+        this.$store.state.waimaiAddress = i;
       },
       sexfun(i) {
         if (i === 1) {
@@ -74,7 +74,7 @@
         this.$store.state.user_id = this.user_id;
         // console.log(res.data)
         Vue.axios.get('https://elm.cangdu.org/v1/users/' + this.user_id + '/addresses').then((resq) => {
-          console.log(resq.data,111)
+          console.log(resq.data, 111)
           this.actieveAddressArr = resq.data;
         }).catch((err) => {
           // console.log(err)

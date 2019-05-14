@@ -137,7 +137,7 @@
     }, data() {
       return {
         PageTitle: '确认订单',
-        routejump: 'intoShop',
+        routejump: 'shophost',
         //是否显示选择方式
         if_show_choose_pay: false,
         //  是否显示蒙版

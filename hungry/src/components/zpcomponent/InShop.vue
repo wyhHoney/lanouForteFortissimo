@@ -1,12 +1,12 @@
 <template>
   <div>
-    <PublicHeader :pagetitle="PageTitle" :hops="routejump" class="headzujian"></PublicHeader>
+    <!--<PublicHeader :pagetitle="PageTitle" :hops="routejump" class="headzujian"></PublicHeader>-->
     <Loading v-if="if_show_load"></Loading>
     <section class="shop_container">
-      <section class="change_show_type">
-        <div><span class="activity_show">商品</span></div>
-        <div><span>评价</span></div>
-      </section>
+      <!--<section class="change_show_type">-->
+        <!--<div><span class="activity_show">商品</span></div>-->
+        <!--<div><span>评价</span></div>-->
+      <!--</section>-->
       <section class="food_container">
         <section class="menu_container">
           <section class="menu_left">
@@ -214,7 +214,7 @@
     computed: {
       fenlancss(i) {
         for (let j in this.buy_specs_arr) {
-          if (this.buy_specs_arr[j].pro.name == i) {
+          if (this.buy_specs_arr[j].pro.name === i) {
             return true
           }
         }
@@ -363,9 +363,8 @@
             })
             arr[0].count++
           }
-          console.log()
         }
-        console.log(this.buy_specs_arr)
+        console.log(this.buy_specs_arr,111)
         this.if_show_gray = false;
         this.if_show_cart = false;
         // [{attrs:[],extra:{},id:食品id,name:食品名称,packing_fee:打包费,price:价格,quantity:数量,sku_id:规格id,specs:规格,stock:存量,}]

@@ -1,20 +1,8 @@
 <template>
   <div id="app">
-
     <transition name="cmp" mode="out-in" >
       <router-view></router-view>
     </transition>
-
-    <!--<MyHomePage></MyHomePage>-->
-    <!--<wyh_-balance></wyh_-balance>-->
-    <!--<Loading></Loading>-->
-    <!--<router-view></router-view>-->
-    <!--<MyHomePage></MyHomePage>-->
-    <!--<wyh_-balance></wyh_-balance>-->
-
-    <!--<Idiscount></Idiscount>-->
-
-
   </div>
 </template>
 
