@@ -25,9 +25,7 @@
                                                :style="{borderBottom:PborderBottom,color:Pcolor }">评价</router-link></span>
       </div>
     </div>
-    <div class="dingwei">
     <router-view></router-view>
-    </div>
   </div>
 </template>
 
@@ -73,11 +71,11 @@
         this.Tcolor = '';
       },
       huodong(i){
-        if(i.activities.length===0){
-          return ''
-        }else {
-          return i.activities[0].icon_name
-        }
+        // if(i.activities.length===0){
+        //   return ''
+        // }else {
+        //   return i.activities[0].icon_name
+        // }
       },
       huodongjian(i){
         // if(i.length===0){
@@ -90,7 +88,14 @@
         this.$router.push({path:'toshopdetail'})
       },
       shuliang(i){
-       return i.activities.length
+        console.log(i)
+       // return i.activities.length
+        if(i.activities[0]===null){
+          console.log(i.activities)
+          return 0
+        }else {
+          // return i.activities.length
+        }
       }
     }
   }
@@ -117,12 +122,6 @@
   .ShopHost_header {
     background-color: rebeccapurple;
     padding: .4rem;
-    position: fixed;
-    top: 0;
-    z-index: 200;
-  }
-  .dingwei{
-    margin-top: 7rem;
   }
 
   .ShopHost_header > img {
@@ -137,6 +136,7 @@
     float: right;
     width: 80%;
     font-size: 0;
+
   }
 
   .ShopHost_header > div > h4 {
@@ -199,7 +199,7 @@
     left: 0rem;
     top: .2rem;
   }
-
+  .ShopHost_header{}
   /*商家分栏*/
   .ShopSubfield {
     width: 100%;
@@ -207,9 +207,6 @@
     padding: .3rem 0 .6rem;
     border-bottom: 1px solid #ebebeb;
     font-size: 0;
-    position: fixed;
-    top: 5rem;
-    z-index: 200;
   }
 
   .ShopSubfield > div {

@@ -9,20 +9,20 @@
       <!--</section>-->
       <section class="food_container">
         <section class="menu_container">
-          <section class="menu_left">
-            <ul>
-              <li v-for="item1 in foodPro" class="menu_left_li">
-                <span>{{item1.name}}</span>
+          <section class="menu_left"  style="overflow: auto;height: 800px">
+            <ul >
+              <li v-for="(item1,index) in foodPro" class="menu_left_li" :key="index">
+                <span><a :href="'#'+index" >{{item1.name}}</a></span>
                 <span :class="{category_num:hot_kind(item1.foods)>0?true:false}">{{hot_kind(item1.foods)}}</span>
               </li>
             </ul>
           </section>
-          <section class="menu_right">
-            <ul>
+          <section class="menu_right" style="overflow: auto ;height: 800px">
+            <ul >
               <li v-for="(item, index) in foodPro" :key="index">
                 <header class="menu_detail_header">
                   <section class="menu_detail_header_left">
-                    <strong class="menu_item_title">{{item.name}}</strong>
+                    <strong class="menu_item_title" :id="index">{{item.name}}</strong>
                     <span class="menu_item_description">{{item.description}}</span>
                   </section>
                 </header>
@@ -193,6 +193,7 @@
         dataArr: [],
         showcom:'',
         promptContent:'',//提示框内容
+        leftfoods:[]
 
       }
     },
