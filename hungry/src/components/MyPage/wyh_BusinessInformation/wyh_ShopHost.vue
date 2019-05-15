@@ -12,8 +12,8 @@
         </div>
       </div>
       <p><span>
-        <div class="jian">{{huodong(objpro.activities)}}</div>
-          {{huodongjian(objpro.activities)}}</span> <span>{{shuliang(objpro.activities)}}个活动 <img src="../../../assets/jiantou.png" alt=""></span>
+        <div class="jian">{{huodong(objpro)}}</div>
+          {{huodongjian(objpro)}}</span> <span>{{shuliang(objpro)}}个活动 <img src="../../../assets/jiantou.png" alt=""></span>
       </p>
       <span @click="GetBack"></span>
     </div>
@@ -71,24 +71,24 @@
         this.Tcolor = '';
       },
       huodong(i){
-        if(i.length===0){
+        if(i.activities.length===0){
           return ''
         }else {
-          return i[0].icon_name
+          return i.activities[0].icon_name
         }
       },
       huodongjian(i){
-        if(i.length===0){
-          return ''
-        }else {
-          return i[0].description
-        }
+        // if(i.length===0){
+        //   return ''
+        // }else {
+        //   return i[0].description
+        // }
       },
       toshopdetail(){
         this.$router.push({path:'toshopdetail'})
       },
       shuliang(i){
-       return i.length
+       return i.activities.length
       }
     }
   }

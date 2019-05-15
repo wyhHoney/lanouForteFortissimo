@@ -1,7 +1,7 @@
 <template>
   <div>
     <!--<PublicHeader :pagetitle="PageTitle" :hops="routejump" class="headzujian"></PublicHeader>-->
-    <Loading v-if="if_show_load"></Loading>
+
     <section class="shop_container">
       <!--<section class="change_show_type">-->
       <!--<div><span class="activity_show">商品</span></div>-->
@@ -56,7 +56,7 @@
                       <span class="food_price2">20</span>
                       <span class="food_price3">起</span>
                       <div class="shuliang">
-                        <img src="../../assets/减小.png" alt="" class="jianxiao" @click="jianxiao(pro)">
+                        <img src="../../assets/减小.png" alt=""  @click="jianxiao(pro)" :class="{hehehe:find_kind_count(pro.name)>0?false:true ,jianxiao:true}">
                         <p class="cart_num">{{find_kind_count(pro.name)}}</p>
                         <span class="show_chooseList" ref="abc" @click="zp_buy_shop(pro.specfoods,pro.name,pro)">
                         {{ifspecialfood(pro.specfoods)}}
@@ -158,6 +158,7 @@
   import Loading from "./Loading";
   import PublicHeader from '../MyPage/CommonComponents/wyh_header'
   import PublicPrompt from '../MyPage/CommonComponents/wyh_PublicPrompt'//引入提示框组件
+  import qs from 'qs'
   export default {
     name: "InShop",
     components: {Loading, PublicHeader},
@@ -224,7 +225,7 @@
         this.showcom=data;
       },
       tosureorder(){
-        if(this.$store.state.allPrice<20){
+        if(this.allPrice<20){
             // alert('差钱啊 兄弟')
           //弹出提示框
           this.showcom=true;
@@ -380,37 +381,37 @@
         console.log(this.buy_specs_arr, 111)
         this.if_show_gray = false;
         this.if_show_cart = false;
+        //向后抬
         // [{attrs:[],extra:{},id:食品id,name:食品名称,packing_fee:打包费,price:价格,quantity:数量,sku_id:规格id,specs:规格,stock:存量,}]
 
-        let datapro = {
-          attrs: this.datainfor.attrs,
-          extra: {},
-          id: this.kindSpec.food_id,
-          name: this.kindSpec.name,
-          packing_fee: this.kindSpec.packing_fee,
-          price: this.kindSpec.price,
-          quantity: 1,
-          sku_id: this.kindSpec.sku_id,
-          specs: this.buy_specs_name,
-          stock: this.kindSpec.stock
-        }
-
-        this.dataArr.push(datapro)
-        console.log(this.dataArr, this.$store.state.shopId, this.$store.state.weizhi, '测试数据')
-        console.log(this.show_spec_money)
-        //  向后台发起加入购物车
-        Vue.axios.post('https://elm.cangdu.org/v1/carts/checkout', {
-          restaurant_id: this.$store.state.shopId,
-          geohash: this.$store.state.weizhi,
-          entities: this.dataArr
-        }).then((res) => {
-          console.log(res.data,);
-        })
+        // let datapro = {
+        //   attrs: this.datainfor.attrs,
+        //   extra: {},
+        //   id: this.kindSpec.food_id,
+        //   name: this.kindSpec.name,
+        //   packing_fee: this.kindSpec.packing_fee,
+        //   price: this.kindSpec.price,
+        //   quantity: 1,
+        //   sku_id: this.kindSpec.sku_id,
+        //   specs: this.buy_specs_name,
+        //   stock: this.kindSpec.stock
+        // }
+        //
+        // this.dataArr.push(datapro)
+        // console.log(this.dataArr, this.$store.state.shopId, this.$store.state.weizhi, '测试数据')
+        // console.log(this.show_spec_money)
+        // //  向后台发起加入购物车
+        // Vue.axios.post('https://elm.cangdu.org/v1/carts/checkout', {
+        //   restaurant_id: this.$store.state.shopId,
+        //   geohash: this.$store.state.weizhi,
+        //   entities: qs.stringify(this.dataArr)
+        // }).then((res) => {
+        //   console.log(res.data,11111111);
+        // })
       }
       ,
       //展示规格价格
       show_money(i, id, specs_name) {
-        console.log(i)
         //食物种类名字
         this.buy_specs_kind = i.name;
         //ID
@@ -464,7 +465,6 @@
     created() {
       Vue.axios.get('https://elm.cangdu.org/shopping/getcategory/' + this.$store.state.shopId + '').then((res) => {
         this.foodPro = res.data.category_list;
-        console.log(this.foodPro)
       });
       this.buy_specs_arr = this.$store.state.buy_specs_arr;
 
@@ -474,12 +474,16 @@
 </script>
 
 <style scoped>
+
   .headzujian {
     position: fixed;
     top: 0;
     z-index: 100;
   }
+.hehehe{
 
+  opacity: 0;
+}
   .op {
     font-size: .65rem;
     color: #666;
@@ -861,7 +865,8 @@
     color: #666;
   }
 
-  .category_num {
+  .category_num
+  {
     position: absolute;
     top: .1rem;
     right: .1rem;
@@ -980,7 +985,9 @@
     overflow-y: hidden;
     position: relative;
   }
-
+  .category_num1{
+    opacity: 1;
+  }
   .food_container {
     display: flex;
     flex: 1;

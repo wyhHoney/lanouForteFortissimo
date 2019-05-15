@@ -31,7 +31,7 @@
         </section>
         <section class="category_right">
           <ul>
-            <li class="category_right_li" v-for="item in selfKindArr" @click="fengleiclass(item.name)">
+            <li class="category_right_li" v-for="item in selfKindArr" @click="fengleiclass(item.name,item)">
               <span>{{item.name}}</span><span>{{item.count}}</span>
             </li>
           </ul>
@@ -172,8 +172,8 @@
     <div class="zp_shopList" style="margin-left: 0.5rem">
       <div class="zp_shopListContainer">
         <ul>
-          <router-link :to="{path:'/intoShop'}">
-            <li class="zp_shop_li" v-for="item in doneArr" @click="intoShop(item.id)">
+          <router-link :to="{path:'shophost'}">
+            <li class="zp_shop_li" v-for="item in doneArr">
               <section>
                 <img :src="'//elm.cangdu.org/img/'+item.image_path" alt="" class="zp_shop_img">
               </section>
@@ -299,7 +299,7 @@
       chooseSort1() {
         Vue.axios.get('https://elm.cangdu.org/shopping/restaurants?latitude=' + this.$store.state.afterSearchLatitude + '&longitude=' + this.$store.state.afterSearchLongitude + '&order_by=1').then((res) => {
           this.doneArr = res.data
-          console.log(res.data, 1)
+          // console.log(res.data, 1)
         });
         this.showsortup = true
         this.showsortdown = false
@@ -344,27 +344,26 @@
       chooseSort6() {
         Vue.axios.get('https://elm.cangdu.org/shopping/restaurants?latitude=' + this.$store.state.afterSearchLatitude + '&longitude=' + this.$store.state.afterSearchLongitude + '&order_by=6').then((res) => {
           this.doneArr = res.data
-          // console.log(res.data)
         });
         this.showsortup = true
         this.showsortdown = false
         this.ifshowshort = false
       },
       //点击分类
-      fengleiclass(q) {
-        for (let i in this.shopPro) {
-          if (this.shopPro[i].category.slice(this.shopPro[i].category.indexOf('/') + 1, this.shopPro[i].category.length) === q) {
-            console.log('相同')
-            this.doneArr.push(this.shopPro[i]);
-            console.log(this.doneArr)
-          } else {
-            this.doneArr = []
-          }
-        }
+      fengleiclass(q,pro) {
+        // console.log(pro)
+        Vue.axios.get('https://elm.cangdu.org/shopping/restaurants?latitude=' + this.$store.state.afterSearchLatitude + '&longitude=' + this.$store.state.afterSearchLongitude + '&restaurant_category_ids[] ='+pro.id).then((res) => {
+          this.doneArr = res.data
+          console.log(res.data,'数据')
+        });
+        this.showfoodup = true
+        this.showfooddown = false
+        this.ifshowkindFood = false
       },
       //进入各个具体的商铺分类
       selfkind(i) {
         this.selfKindArr = i;
+        // console.log(i)
       },
       //  点击下拉商铺分类
       clickFoodKind() {
@@ -414,7 +413,9 @@
     },
     mounted() {
       Vue.axios.get('https://elm.cangdu.org/shopping/v2/restaurant/category').then((res) => {
-        console.log(res.data)
+        // console.log(res.data)
+        this.selfKindArr=res.data[0].sub_categories
+        console.log(res.data,11)
         this.allShopClassArr = res.data;
         //处理图片格式
         for (let s of this.allShopClassArr) {
@@ -433,6 +434,7 @@
       Vue.axios.get('https://elm.cangdu.org/shopping/restaurants?latitude=' + this.$store.state.afterSearchLatitude + '&longitude=' + this.$store.state.afterSearchLongitude + '').then((res) => {
         this.doneArr = this.shopPro = res.data
         // console.log(res.data)
+
       });
     }
   }
