@@ -26,9 +26,8 @@
       </div>
     </div>
     <div class="dingwei">
-      <router-view></router-view>
+    <router-view></router-view>
     </div>
-
   </div>
 </template>
 
@@ -74,11 +73,11 @@
         this.Tcolor = '';
       },
       huodong(i){
-        // if(i.activities.length===0){
-        //   return ''
-        // }else {
-        //   return i.activities[0].icon_name
-        // }
+        if(i.activities.length===0){
+          return ''
+        }else {
+          return i.activities[0].icon_name
+        }
       },
       huodongjian(i){
         // if(i.length===0){
@@ -91,7 +90,7 @@
         this.$router.push({path:'toshopdetail'})
       },
       shuliang(i){
-       // return i.activities.length
+       return i.activities.length
       }
     }
   }
@@ -120,11 +119,9 @@
     padding: .4rem;
     position: fixed;
     top: 0;
-    left: 0;
     z-index: 200;
   }
   .dingwei{
-    position: absolute;
     margin-top: 7rem;
   }
 
@@ -132,7 +129,8 @@
     display: inline-block;
     width: 2.9rem;
     height: 2.9rem;
-    float: left;
+    background-color: red;
+  / / 店铺头像 float: left;
   }
 
   .ShopHost_header > div {
@@ -210,7 +208,7 @@
     border-bottom: 1px solid #ebebeb;
     font-size: 0;
     position: fixed;
-    margin-top: 5rem;
+    top: 5rem;
     z-index: 200;
   }
 

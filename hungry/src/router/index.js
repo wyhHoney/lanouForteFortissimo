@@ -90,7 +90,7 @@ export default new Router({
     {path: '/toCity', component: zpposition},//定位界面
     {path: '/zp_toMyHome', component: ZpTakeOut},//获取商品，有轮播图
     {path: '/zpMine', component: MyHomePage},
-    {path: '/intoShop', component: InShop},//购物车界面
+    // {path: '/intoShop', component: InShop},//购物车界面
     {path: '/toshop', component: Shop},//加入购物车
     // {path: '/toinshop', component: InShop},
     {path:'/tosureorder',component:SureOrder},//确认购买
