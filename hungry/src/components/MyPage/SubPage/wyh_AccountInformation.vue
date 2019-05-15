@@ -5,7 +5,7 @@
       <!--头部-->
       <PublicHeader :pagetitle="PageTitle" :hops="routejump"></PublicHeader>
       <div class="AccountInformation_nr">
-        <form v-show="false"><input type="file" id="file" name="file" @click="Uploading($event)"></form>
+        <form  v-show="false" enctype="multipart/form-data" method="post"><input type="file" id="file" name="type"></form>
         <div class="message">
             <label for="file" >
               <div class="message_list">
@@ -19,7 +19,6 @@
                 <p class="empty"></p>
               </div>
             </label>
-
 
           <div class="parcel" @click="AmendUserName">
               <span class="parcel_left" >用户名</span>
@@ -73,6 +72,7 @@
     import Vue from 'vue'
     import PublicPrompt from '../CommonComponents/wyh_PublicPrompt'//引入提示框组件
     import QuitLogIn from '../CommonComponents/wyh_QuitLogIn'//引入退出提示框
+    // var FormData=new FormData;
     export default {
         name: "wyh_AccountInformation",
         data(){
@@ -86,6 +86,7 @@
             showcom:'',
             promptContent:'',//提示框内容
             ShowLog:'',
+            document:'',//文件
           }
         },
         components:{
@@ -103,15 +104,9 @@
               this.UserName=this.$store.state.UserName11;
             }
           });
+
         },
         methods:{
-          //文件上传的事件
-          Uploading(event){
-            event.preventDefault();//取消默认行为
-            //弹出提示框
-            this.promptContent='暂不支持此功能';
-            this.showcom=true;
-          },
           getMsg(data){
             this.showcom=data;
           },

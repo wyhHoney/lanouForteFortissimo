@@ -163,7 +163,7 @@
       },
       //积分商场点击事件
       IntegralMall(){
-        this.$router.push({path:'shophost'})
+
       },
 
 

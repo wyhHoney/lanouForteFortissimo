@@ -50,6 +50,8 @@ import AnotherList from '../components/MyPage/SubPage/wyh_AnotherList'
 import ShopHost from '../components/MyPage/wyh_BusinessInformation/wyh_ShopHost'
 import Commodity from '../components/MyPage/wyh_BusinessInformation/wyh_Commodity'
 import Evaluate from '../components/MyPage/wyh_BusinessInformation/wyh_Evaluate'
+import IntegralDescription from '../components/MyPage/wyh_TheWidget/wyh_IntegralDescription'
+import IntegralProblems from '../components/MyPage/wyh_TheWidget/wyh_IntegralProblems'
 
 export default new Router({
   routes: [
@@ -77,6 +79,9 @@ export default new Router({
         {path: '/toinshop',component: InShop},//商品信息
         {path: '/evaluate',component:Evaluate},//评价信息
       ]},//店铺信息页
+    {path: '/integraldescription',component:IntegralDescription},//余额说明页面
+    {path: '/integralproblems', component:IntegralProblems},//积分说明页面
+
 
 
     //张鹏配置的路由
@@ -95,6 +100,8 @@ export default new Router({
     {path:'/tocheckLunchAddress',component:CheckLunchAddress},//添加送餐地址的定位组件
     {path:'/toFoodClass',component:FoodClass},//食物分类界面
     {path:'/toshopdetail',component:ShopDetail},
+
+
     //曾光配置的路由
     {path: '/register', component: register}, //跳转到重置密码的路由
     {path: '/glogin', component: glogin},//登录界面

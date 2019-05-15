@@ -60,7 +60,7 @@
               // console.log(res.data);
 
               //通过点击事件完成路由跳转
-              this.$router.push({path:'balanceProblem',query:{Title:this.DescriptionTitle,Description:this.IntegralDescription,hopsroute:this.Integral}});
+              this.$router.push({path:'integralproblems'});
             });
           }
         },

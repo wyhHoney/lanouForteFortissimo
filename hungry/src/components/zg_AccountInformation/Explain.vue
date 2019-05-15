@@ -1,94 +1,82 @@
 <template>
-  <div class="Zg_head">
-    <!--返回上一外卖的路由-->
-    <router-link :to="{path:'./basice'}"><img src="../../assets/fanhui.png" height="200" width="200" class="zg_fanhui4"/></router-link>
-    <div class="search">
-      <span>我的优惠</span>
-    </div>
-   <p class="Explain">尊敬的用户，随着会员体系逐渐完善，自2016年10月10日起，饿了么会员权益将做如下优化： 购卡后31天内，累积享有30单减免配送费服务（每日最多3单，每单最高减免4元）。 注：已购买的会员服务不受影响，当前会员服务失效前无法购买新卡。</p>
-    <div class="zg_introduce">
-      <h5 class="zg_h4">Q1:特权介绍</h5>
-    <p>身份标识：饿了么会员服务有效期内，享有专属皇冠标识。<br>
-    减免配送费： 饿了么会员卡自绑定账户之日起31天内，在「蜂鸟专送」标识商家下单，享有30次减免配送费特权，每日最多减免3单，每单最高可减4元。
-      更多特权，敬请期待！</p>
-    </div>
-    <div class="zg_txt">
-    <h5>Q2:资费标准</h5>
-    <p>饿了么会员卡:20元</p>
-    <h5>Q3:使用说明</h5>
-    <div>当用户满足以下任一条件，会员服务自动失效：
-    <p class="zg_p">自绑定之日起超过31天；
-      在31天内累计使用减免配送费的蜂鸟订单数量达到30单；</p>
-    </div>
-    <h5>Q4: 购卡说明</h5>
-    <p>在线购买：饿了么App>我的>饿了么会员卡</p>
-    <h5>Q5: 温馨提示</h5>
-    <p>用户在当前会员服务失效前，无法购买新卡。
-      请认准饿了么官方渠道，任何从其他第三方途径获得的会员卡，饿了么不保证其可用性。</p>
+  <div class="IntegralDescription">
+    <!--余额说明-->
+    <!--头部-->
+    <PublicHeader :pagetitle="PageTitle" :hops="routejump"></PublicHeader>
+    <!--内容-->
+    <div class="wenti">
+      <h4>Q1: 怎么获得红包？</h4>
+      <p>通过邀请好友获得</p>
+      <p>在下单返红包的商家下单获得</p>
+      <p>抢微信朋友分享的红包获得</p>
+      <h4>Q2: 红包可以做什么？</h4>
+      <p>可以抵扣在线支付时的实际支付金额。</p>
+      <h4>Q3: 红包的门槛金额按照什么金额计算？</h4>
+      <p>红包的的门槛金额按照（选购菜品折后价＋餐盒费）的金额作为计算门槛，即购物车显示的金额（7.3以上版本）。假设红包满30可用，只要选购的菜品现价（折后价）＋餐盒费超过30，就可以使用红包。</p>
+      <h4>Q4: 一个红包能拆开多次使用吗？</h4>
+      <p>不能，一个红包只能一次性使用，不能分开使用。</p>
+      <h4>Q5: 下单的时候使用了红包，但是后来订单取消了，红包还会返还吗？</h4>
+      <p>会的，订单无效后红包会自动返还到您的账户里。</p>
+      <h4>Q6: 红包兑换码怎样兑换成红包，怎样查看红包？</h4>
+      <p>在个人中心 > 我的红包 > 兑换红包，输入兑换码进行兑换。</p>
+      <h4>Q7: 邀请好友了，为什么没获得红包？</h4>
+      <p>先检查下您是否在同一设备上进行的邀请？或者被邀请人是否通过您发给对方的链接进行注册？而非自己复制链接注册的。同一设备上邀请或没有按照点击发送的链接邀请都是无效邀请。如果您是正常邀请没获得红包，可以致电客服进行查实。</p>
+      <h4>Q8: 预订早餐、预订午餐的红包怎么使用？在哪里查询？</h4>
+      <p>预订早餐、预订午餐的红包暂时不支持直接点外卖使用，并且当前点外卖的红包也暂时不支持在预订早餐、预订午餐时使用。</p>
+      <p>预订早餐、预订午餐的红包从APP首页点击“预订早餐”按钮进入后在右上角的个人中心中查找预订早餐、预订午餐的红包。</p>
+      <h4>Q9: 互斥红包怎么使用？</h4>
+      <p>互斥红包不与其他优惠活动（包含但不限于：新用户专享、满X元减X元、满X元赠XX）同时使用。</p>
+      <h4>Q10: 返红包活动， 红包领取规则是什么?</h4>
+      <p>同一个手机号一天限领取三个。</p>
+      <p>同一注册用户一天限领取三个。</p>
+      <p>注册用户红包直接发送至用户账户里。</p>
+      <p>非注册用户红包以兑换码短信的形式发送至用户手机，注册后凭兑换码兑换即可。</p>
+      <p>红包的使用周期为1周，自红包发放的第2天开始计算。</p>
+      <p>同一个手机号一天最多使用两个红包。</p>
+      <p>未收到红包短信的用户注意查看手机里的拦截短信。</p>
+      <p>有任何问题请拨打客服电话：10105757。</p>
     </div>
   </div>
 </template>
 
 <script>
+  import PublicHeader from '../MyPage/CommonComponents/wyh_header'
     export default {
-        name: "Explain"
+        name: "Explain",
+      data(){
+        return {
+          PageTitle:'红包说明',
+          routejump:'myhomepage',
+        }
+      },
+      components:{
+        PublicHeader
+      }
     }
 </script>
 
 <style scoped>
-  html,body{
-    font-size: 10px;
-    background-color: #5e5e5e;
-  }
-  .Zg_head{
-    background: #3190e8;
+  .IntegralDescription{
     width: 100%;
-    height: 1.8rem;
+    height: 100%;
+    background-color: #FFFFFF;
   }
-  .zg_fanhui4{
-    width: .7rem;
-    height: .9rem;
-    position: fixed;
-    left: .4rem;
-    top: .4rem;
-    font-weight: 800;
-  }
-  .search{
-    text-align: center;
-    font-size: .8rem;
-    padding-top:.4rem ;
-    font-weight: 800;
-    color: white;
-  }
-  .Explain{
-    margin: 1.5rem 3rem;
-    font-size: .5rem;
-  }
-  .zg_h4{
-    color: black;
-    font-weight: 800;
-  }
-  .zg_introduce{
-    margin: 0 1.3rem;
-    position: absolute;
-    top: 8.8rem;
-    font-size: .5rem;
-    font-weight: 400;
-  }
-  .zg_txt{
-    position: absolute;
-    bottom: 0;
-    left: 1rem;
-  }
-  .zg_txt,h5{
-    color: black;
-    font-weight: 800;
-  }
-  .zg_txt,p{
-    color: gray;
+  .wenti{
     font-size: .6rem;
+    color: #666;
+    padding: 0 .5rem .5rem;
   }
-  .zg_p{
-    margin: 0 .9rem;
+  .wenti>h4{
+    color: #333;
+    line-height: 2rem;
+    margin: 0;
+    font-weight: 400;
+    font-size: 1.17em;
+  }
+  .wenti>p{
+    font-size: .6rem;
+    color: #666;
+    line-height: 1rem;
+    margin: 0;
   }
 </style>

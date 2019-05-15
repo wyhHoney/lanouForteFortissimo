@@ -28,7 +28,7 @@
     <div class="Merchant" v-if="Show_merchant">
       <p class="history_p" v-if="Show_merchant">商家</p>
       <ul>
-       <router-link :to="{path:'/intoShop'}">
+       <router-link :to="{path:'/shophost'}">
 
          <li class="message clearfix" v-for="(pie,index) in HistoryMessage" @click="JumpMerchant(pie)">
            <img :src="'//elm.cangdu.org/img/'+pie.image_path" alt="">
@@ -120,30 +120,23 @@
               this.SearchRecord.push(this.Search_val);
               //获取所选城市信息
               Vue.axios.get('https://elm.cangdu.org/v1/cities/2').then((res)=>{
-                // console.log(res.data)
                 //提取经纬度
                 this.LongitudeAndLatitude=res.data.latitude+','+res.data.longitude;
-                // console.log(this.LongitudeAndLatitude);
-                // console.log(this.Search_val);
                 //搜索餐馆信息
                 Vue.axios.get('https://elm.cangdu.org/v4/restaurants?geohash='+this.LongitudeAndLatitude+'&keyword='+this.Search_val).then((res)=>{
-                  console.log(res.data);
                   if (res.data.message==="搜索餐馆数据失败"){
                     //弹出提示框
                     this.promptContent='后台请求数据错误';
                     this.showcom=true;
-                    // console.log('11')
                   }else if (res.data.length===0){
                     this.Show_Regret=true;
                     this.Show_merchant=false;
                     this.Show_history=false;
-                    // console.log("111")
                   }else {
                     //显示商家信息容器
                     this.Show_merchant=true;
                     this.HistoryMessage=res.data;
                     this.Show_history=false;
-                    // console.log(res.data);
                   }
                 })
               })
@@ -163,7 +156,6 @@
             Vue.axios.get('https://elm.cangdu.org/v1/cities/2').then((res)=>{
               //提取经纬度
               this.LongitudeAndLatitude=res.data.latitude+','+res.data.longitude;
-              // console.log(this.LongitudeAndLatitude);
               //搜索餐馆信息
               Vue.axios.get('https://elm.cangdu.org/v4/restaurants?geohash='+this.LongitudeAndLatitude+'&keyword='+data).then((res)=>{
                 if (res.data.length===0){
@@ -188,7 +180,7 @@
           JumpMerchant(data){
             console.log(data);
             this.$store.state.shopId=data.id;
-            console.log(this.$store.state.shopId)
+            // console.log(this.$store.state.shopId)
           },
 
           //底部按钮按钮的点击事件
