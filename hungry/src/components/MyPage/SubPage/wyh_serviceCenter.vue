@@ -12,7 +12,7 @@
       <div class="IssueList">
         <h4>热门问题</h4>
         <ul>
-          <li class="clearfix" v-for="pie in GetData"><span @click="InDetail(pie)">{{pie.Issue}}</span> <img src="../../../assets/jiantou.png" alt=""></li>
+          <li class="clearfix" v-for="pie in GetData" @click="InDetail(pie)"><span>{{pie.Issue}}</span> <img src="../../../assets/jiantou.png" alt=""></li>
         </ul>
       </div>
       <!--弹出提示框-->

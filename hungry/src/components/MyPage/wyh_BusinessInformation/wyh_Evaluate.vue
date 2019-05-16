@@ -8,8 +8,8 @@
           <p>高于周边商家{{Exceed}}%</p>
         </div>
         <div class="Evaluate_header_right">
-          <p>服务态度 <span></span><span>{{service}}</span></p>
-          <p>菜品评价 <span></span><span>{{cuisine}}</span></p>
+          <p>服务态度 <span class="xingxing"></span><span class="xingxing"></span><span class="xingxing"></span><span class="xingxing"></span><span>{{service}}</span></p>
+          <p>菜品评价 <span class="xingxing"></span><span class="xingxing"></span><span class="xingxing"></span><span class="xingxing"></span><span>{{cuisine}}</span></p>
           <p>送达时间 <span>分钟</span></p>
         </div>
 
@@ -231,4 +231,12 @@
   margin-right: .3rem;
   margin-bottom: 4px;
 }
+  .xingxing{
+    display: inline-block;
+    width: .5rem;
+    height: .5rem;
+    background: url("../../../assets/xingxing.png") no-repeat center center;
+    background-size: 100% 100%;
+    margin: 0 !important;
+  }
 </style>

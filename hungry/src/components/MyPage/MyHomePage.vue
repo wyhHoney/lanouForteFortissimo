@@ -45,7 +45,7 @@
           <div class="ThreeLists_nr_right">></div>
           <div class="empty"></div>
         </div>
-        <div class="ThreeLists_nr1">
+        <div class="ThreeLists_nr1" @click="MembershipCard">
           <span class="ThreeLists_logo ThreeLists_integral"></span>
           <div class="ThreeLists_nr_left"><p>饿了么会员卡</p></div>
           <div class="ThreeLists_nr_right">></div>
@@ -149,12 +149,16 @@
       },
       //我的优惠点击事件
       Discount(){
-        // this.$router.push({path:'discount'});//王义豪写的空白页面
-        this.$router.push({path:'explain'});
+        this.$router.push({path:'discount'});//王义豪写的空白页面
+
       },
       //我的积分点击事件
       integral(){
         this.$router.push({path:'integral'});
+      },
+      //我的会员卡页面
+      MembershipCard(){
+        this.$router.push({path:'basice'});
       },
 
       //我的订单点击事件
@@ -163,7 +167,7 @@
       },
       //积分商场点击事件
       IntegralMall(){
-
+        this.$router.push({path:'integralstore'})
       },
 
 

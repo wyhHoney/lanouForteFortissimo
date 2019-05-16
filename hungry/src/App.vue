@@ -79,6 +79,7 @@
   .cmp-enter-active{
     animation: Show_enter 0.3s;
   }
+
   /*该样式为清除浮动造成的父级塌陷:在父级标签加clearfix*/
   .clearfix:after{
     content:'';

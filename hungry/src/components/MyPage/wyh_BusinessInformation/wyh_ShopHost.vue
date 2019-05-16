@@ -11,18 +11,21 @@
           <img src="../../../assets/jiantou.png" alt="">
         </div>
       </div>
-      <p><span>
+      <p>
+        <span>
         <div class="jian">{{huodong(objpro)}}</div>
-          {{huodongjian(objpro)}}</span> <span>{{shuliang(objpro)}}个活动 <img src="../../../assets/jiantou.png" alt=""></span>
+          {{huodongjian(objpro)}}
+        </span>
+        <span @click="ActivityInformation">{{shuliang(objpro)}}个活动 <img src="../../../assets/jiantou.png" alt=""></span>
       </p>
       <span @click="GetBack"></span>
     </div>
     <div class="ShopSubfield">
-      <div><span @click="ShangJia"><router-link :to="{path:'toinshop'}"
-                                                :style="{borderBottom:TborderBottom,color:Tcolor }">商家</router-link></span>
+      <div>
+        <span @click="ShangJia"><router-link :to="{path:'toinshop'}" :style="{borderBottom:TborderBottom,color:Tcolor }">商家</router-link></span>
       </div>
-      <div><span @click="PingJia"><router-link :to="{path:'evaluate'}"
-                                               :style="{borderBottom:PborderBottom,color:Pcolor }">评价</router-link></span>
+      <div>
+        <span @click="PingJia"><router-link :to="{path:'evaluate'}" :style="{borderBottom:PborderBottom,color:Pcolor }">评价</router-link></span>
       </div>
     </div>
     <router-view></router-view>
@@ -95,6 +98,16 @@
        //  }else {
        //    // return i.activities.length
        //  }
+        if(i.activities[0]===null){
+          console.log(i.activities)
+          return 0
+        }else {
+          // return i.activities.length
+        }
+      },
+      //点击跳转活动信息页面
+      ActivityInformation(){
+        this.$router.push({path:'blankscreen'});
       }
     }
   }

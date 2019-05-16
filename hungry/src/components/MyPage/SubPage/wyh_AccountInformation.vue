@@ -1,7 +1,7 @@
 <template>
   <div>
     <!--账户信息-->
-    <div class="AccountInformation">
+    <div class="AccountInformation ">
       <!--头部-->
       <PublicHeader :pagetitle="PageTitle" :hops="routejump"></PublicHeader>
       <div class="AccountInformation_nr">
@@ -145,6 +145,7 @@
   width: 100%;
   height: 100%;
   background-color: #F2F2F2;
+  animation:slideInRight .3s;
 }
 /*遮罩效果*/
 .masking{

@@ -10,7 +10,7 @@
         <p >为账户{{$store.state.zg_bianliang}}购买会员</p>
       </div>
       <div  class="zg_span_father">
-        <router-link :to="{path:'./explain'}">
+        <router-link :to="{path:'/membershipprivileges'}">
           <span class="zg_span_1">会员特权</span>
           <span class="zg_span_2">会员说明></span>
         </router-link>

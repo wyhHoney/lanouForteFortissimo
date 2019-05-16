@@ -13,7 +13,7 @@
           <div class="empty"></div>
         </div>
         <div class="CurrentBalance_header_balance"><p><span>0</span>分</p></div>
-        <button class="CurrentBalance_header_button">积分兑换商品</button>
+        <div class="CurrentBalance_header_button" @click="Conversion">积分兑换商品</div>
       </div>
     </div>
 
@@ -29,13 +29,15 @@
       <p class="record_p">快去下单赚取大量积分吧</p>
     </div>
 
-
+    <!--引入提示框-->
+    <PublicPrompt v-if="showcom" :showcom="showcom" @update="getMsg($event)" :prompt="promptContent"></PublicPrompt>
   </div>
 </template>
 
 <script>
     import PublicHeader from '../CommonComponents/wyh_header'
     import Vue from 'vue'
+    import PublicPrompt from '../CommonComponents/wyh_PublicPrompt'//引入提示框组件
     let totalVue=new Vue();
     export default {
         name: "wyh_Integral",
@@ -45,7 +47,9 @@
             routejump:'myhomepage',
             Integral:'integral', //需要返回的路由
             DescriptionTitle:'',//积分说明标题
-            IntegralDescription:''//积分说明信息
+            IntegralDescription:'',//积分说明信息
+            showcom:'',
+            promptContent:'快去下单赚取大量积分吧',//提示框内容
           }
         },
         mounted(){
@@ -62,10 +66,20 @@
               //通过点击事件完成路由跳转
               this.$router.push({path:'integralproblems'});
             });
+          },
+          //点击兑换积分
+          Conversion(){
+            //弹出提示框
+            this.showcom=true;
+
+          },
+          getMsg(data){
+            this.showcom=data;
           }
         },
         components:{
           PublicHeader,
+          PublicPrompt,
         }
     }
 </script>

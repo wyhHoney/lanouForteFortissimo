@@ -1,6 +1,6 @@
 <template>
   <div class="IntegralDescription">
-    <!--余额说明-->
+    <!--红包说明页面 -->
     <!--头部-->
     <PublicHeader :pagetitle="PageTitle" :hops="routejump"></PublicHeader>
     <!--内容-->
@@ -46,7 +46,7 @@
       data(){
         return {
           PageTitle:'红包说明',
-          routejump:'myhomepage',
+          routejump:'discount',
         }
       },
       components:{

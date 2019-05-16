@@ -169,6 +169,7 @@
     width: 100%;
     height: 100%;
     background-color: #F2F2F2;
+    animation:slideInRight .3s;
   }
   .ImportList{
     width: 100%;

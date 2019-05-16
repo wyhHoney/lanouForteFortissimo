@@ -49,15 +49,26 @@ import ChangesIn from '../components/MyPage/SubPage/wyh_ChangesIn'
 import ServiceCenterWithin from '../components/MyPage/wyh_TheWidget/wyh_ServiceCenterWthin'
 import AnotherList from '../components/MyPage/SubPage/wyh_AnotherList'
 import ShopHost from '../components/MyPage/wyh_BusinessInformation/wyh_ShopHost'
-import Commodity from '../components/MyPage/wyh_BusinessInformation/wyh_Commodity'
 import Evaluate from '../components/MyPage/wyh_BusinessInformation/wyh_Evaluate'
+import IntegralDescription from '../components/MyPage/wyh_TheWidget/wyh_IntegralDescription'
+import IntegralProblems from '../components/MyPage/wyh_TheWidget/wyh_IntegralProblems'
+import MembershipPrivileges from '../components/MyPage/wyh_TheWidget/wyh_MembershipPrivileges'
+import BlankScreen from '../components/MyPage/wyh_TheWidget/wyh_BlankScreen'
+import RedPacket from '../components/MyPage/wyh_RedPacket/wyh_RedPacket'
+import Voucher from '../components/MyPage/wyh_RedPacket/wyh_Voucher'
+import HistoryRed from '../components/MyPage/wyh_RedPacket/wyh_historyRed'
+import IntegralStore from '../components/MyPage/SubPage/wyh_IntegralStore'
 
 export default new Router({
   routes: [
     //  王义豪配置的路由
     {path: '/myhomepage', component: MyHomePage}, //我的页面
     {path: '/balance', component: Balance},//余额页面
-    {path: '/discount', component: Discount},//我的优惠页面
+    {path: '/discount', component: Discount,children:[
+        {path: '',component:RedPacket},
+        {path: '/redpacket',component:RedPacket},//红包页面
+        {path: '/voucher', component:Voucher},//商家代金券页面
+      ]},//我的优惠页面
     {path: '/integral', component: Integral},//我的积分页面
     {path: '/balanceProblem', component: BalanceProblem},//说明组件
     {path: '/serviceCenter', component: ServiceCenter},//服务中心
@@ -73,6 +84,17 @@ export default new Router({
     {path: '/changesin',component:ChangesIn},//重置密码页面
     {path: '/servicecenterwithin',component:ServiceCenterWithin},//服务中心内的公共说明组件
     {path: '/anotherlist',component:AnotherList},//订单详细页面
+    {path: '/shophost',component:ShopHost,children: [
+        {path:'',redirect:{path: '/toinshop',component: InShop}},
+        {path: '/toinshop',component: InShop},//商品信息
+        {path: '/evaluate',component:Evaluate},//评价信息
+      ]},//店铺信息页
+    {path: '/integraldescription',component:IntegralDescription},//余额说明页面
+    {path: '/integralproblems', component:IntegralProblems},//积分说明页面
+    {path: '/membershipprivileges',component:MembershipPrivileges},//会员说明页面
+    {path: '/blankscreen',component:BlankScreen},//商家2个活动页面
+    {path: '/historyred',component:HistoryRed},//历史红包
+    {path: '/integralstore',component:IntegralStore},//积分商城页面
 
 
 
@@ -104,7 +126,7 @@ export default new Router({
     {path: '/register', component: register}, //跳转到重置密码的路由
     {path: '/glogin', component: glogin},//登录界面
     {path: '/basice', component: basice, children: []},//会员特权返回会员中心的路由
-    {path: '/explain', component: explain},//我的优惠
+    {path: '/explain', component: explain},//红包说明
     {path: '/Payment', component: Payment},//购买会员付款界面
     {path: '/exchangeMembers', component: exchangeMembers},//帐号注册
     {path: '/PurchaseHistory', component: PurchaseHistory},//购买记录
