@@ -21,8 +21,8 @@
       <div class="swiper-container ">
         <div class="swiper-wrapper lunbotu">
           <div class="swiper-slide zp_food_types">
-            <a href="###" v-for="item in halfGoodsCateory1">
-              <router-link :to="{path:'/toFoodClass'}">
+            <a href="###" v-for="item in halfGoodsCateory1" style="text-decoration: none">
+              <router-link :to="{path:'/toFoodClass'}" style="text-decoration: none">
                 <figure @click="inFoodClass(item.title)">
                   <img :src="'//fuss10.elemecdn.com/'+item.image_url" alt="">
                   <figcaption>{{item.title}}</figcaption>
@@ -31,7 +31,7 @@
             </a>
           </div>
           <div class="swiper-slide zp_food_types">
-            <a href="###" v-for="item in halfGoodsCateory2">
+            <a href="###" v-for="item in halfGoodsCateory2" style="text-decoration: none">
               <figure @click="inFoodClass(item.title)">
                 <img :src="'//fuss10.elemecdn.com/'+item.image_url" alt="">
                 <figcaption>{{item.title}}</figcaption>
@@ -52,7 +52,7 @@
       <div class="zp_shopListContainer">
         <ul>
           <!--<router-link :to="{path:'/intoShop'}">-->
-            <li class="zp_shop_li" v-for="item in shopPro" @click="intoShop(item.id,item)">
+            <li class="zp_shop_li" v-for="item in shopPro" @click="intoShop(item.id,item)" style="text-decoration: none">
               <section>
                 <img :src="'//elm.cangdu.org/img/'+item.image_path" alt="" class="zp_shop_img">
               </section>

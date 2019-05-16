@@ -87,7 +87,7 @@
         this.guessCity = res.data
       })
       Vue.axios.get('https://elm.cangdu.org/v1/user').then((res) => {
-        console.log(res.data)
+        // console.log(res.data)
         if (res.data.message === '通过session获取用户信息失败') {
 
           this.ifshowdenglu = true;

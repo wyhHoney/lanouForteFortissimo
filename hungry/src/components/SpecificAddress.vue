@@ -70,7 +70,7 @@
         let id = this.$store.state.id
         Vue.axios.get('https://elm.cangdu.org/v1/pois?city_id=' + id + '&keyword=' + address + '&type=search').then((res) => {
           this.zp_searchResult = res.data
-          console.log(this.zp_searchResult)
+          // console.log(this.zp_searchResult)
         });
 
       },
@@ -81,14 +81,14 @@
         //存入点击的经纬度
         this.$store.state.afterSearchLatitude=this.zp_searchResult[i].latitude
         this.$store.state.afterSearchLongitude=this.zp_searchResult[i].longitude
-        console.log(this.$store.state.afterSearchLatitude,this.$store.state.afterSearchLongitude)
+        // console.log(this.$store.state.afterSearchLatitude,this.$store.state.afterSearchLongitude)
         this.zp_historyPro.push(this.zp_searchResult[i]);
         localStorage.setItem('searchHistory', JSON.stringify(this.zp_historyPro));
 
       },
       zp_clearHistory() {
         localStorage.removeItem('searchHistory');
-        console.log(111);
+        // console.log(111);
         this.zp_afterDelete = [];
       },
       zp_inNextPage() {

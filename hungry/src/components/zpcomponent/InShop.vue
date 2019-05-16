@@ -1,7 +1,7 @@
 <template>
   <div>
     <!--<PublicHeader :pagetitle="PageTitle" :hops="routejump" class="headzujian"></PublicHeader>-->
-
+    <Loading v-if="loadload"></Loading>
     <section class="shop_container">
       <!--<section class="change_show_type">-->
       <!--<div><span class="activity_show">商品</span></div>-->
@@ -9,16 +9,16 @@
       <!--</section>-->
       <section class="food_container">
         <section class="menu_container">
-          <section class="menu_left"  style="overflow: auto;height: 800px">
-            <ul >
+          <section class="menu_left" style="overflow: auto;height: 800px">
+            <ul>
               <li v-for="(item1,index) in foodPro" class="menu_left_li" :key="index">
-                <span><a :href="'#'+index" >{{item1.name}}</a></span>
+                <span><a :href="'#'+index">{{item1.name}}</a></span>
                 <span :class="{category_num:hot_kind(item1.foods)>0?true:false}">{{hot_kind(item1.foods)}}</span>
               </li>
             </ul>
           </section>
           <section class="menu_right" style="overflow: auto ;height: 800px">
-            <ul >
+            <ul>
               <li v-for="(item, index) in foodPro" :key="index">
                 <header class="menu_detail_header">
                   <section class="menu_detail_header_left">
@@ -56,9 +56,11 @@
                       <span class="food_price2">20</span>
                       <span class="food_price3">起</span>
                       <div class="shuliang">
-                        <img src="../../assets/减小.png" alt=""  @click="jianxiao(pro)" :class="{hehehe:find_kind_count(pro.name)>0?false:true ,jianxiao:true}">
-                        <p class="cart_num">{{find_kind_count(pro.name)}}</p>
-                        <span class="show_chooseList" ref="abc" @click="zp_buy_shop(pro.specfoods,pro.name,pro)">
+                        <img src="../../assets/减小.png" alt="" @click="jianxiao(pro)"
+                             :class="{hehehe:find_kind_count(pro.name)>0?false:true ,jianxiao:true}">
+                        <p :class="{cart_num:true}">{{find_kind_count(pro.name)}}</p>
+                        <span :class="{show_chooseList:true,vvv:ifspecialfood(pro.specfoods)==='+'?true:false}"
+                              @click="zp_buy_shop(pro.specfoods,pro.name,pro,$event)">
                         {{ifspecialfood(pro.specfoods)}}
                       </span>
                       </div>
@@ -71,7 +73,7 @@
           </section>
         </section>
         <!--底部购物车部分-->
-        <section class="buy_cart_container">
+        <section class="buy_cart_container bounce delay-1s">
           <section class="buy_icon_num" ref="buy_icon_num">
             <div class="cart_icon_container" ref="cart_icon_container">
               <span class="cart_list_length" ref="cart_list_length">
@@ -86,7 +88,7 @@
           </section>
           <section class="gotopay" ref="gotopay">
             <!--<router-link :to="{path: '/tosureorder'}" ref="tosureorder">-->
-              <a href="###" class="gotopay_btn" ref="gotopay_btn" @click="tosureorder">去结算</a>
+            <a href="###" class="gotopay_btn" ref="gotopay_btn" @click="tosureorder">去结算</a>
             <!--</router-link>-->
           </section>
         </section>
@@ -150,7 +152,15 @@
     </section>
     <!--提示框-->
     <PublicPrompt v-if="showcom" :showcom="showcom" @update="getMsg($event)" :prompt="promptContent"></PublicPrompt>
+    <!--购物车小球动画-->
+    <transition @before-enter="beforeEnter"
+                @enter="enter"
+                @after-enter="afterEnter">
+      <div class="ball" v-show="ballFlag" ref="ball">1</div>
+    </transition>
   </div>
+
+
 </template>
 
 <script>
@@ -158,10 +168,13 @@
   import Loading from "./Loading";
   import PublicHeader from '../MyPage/CommonComponents/wyh_header'
   import PublicPrompt from '../MyPage/CommonComponents/wyh_PublicPrompt'//引入提示框组件
-  import qs from 'qs'
+
   export default {
     name: "InShop",
-    components: {Loading, PublicHeader},
+    components: {
+      Loading, PublicHeader,
+      PublicPrompt,
+    },
     data() {
       return {
         PageTitle: '选择商品',
@@ -191,10 +204,12 @@
         datainfor: {},
         //  往后台传的数组
         dataArr: [],
-        showcom:'',
-        promptContent:'',//提示框内容
-        leftfoods:[]
-
+        showcom: '',
+        promptContent: '',//提示框内容
+        leftfoods: [],
+        loadload: true,
+        ballFlag: false,
+        mouseevent: {},
       }
     },
     beforeDestroy() {
@@ -213,28 +228,37 @@
     },
     mounted() {
       setTimeout(() => {
-        this.if_show_load = false;
+        this.loadload = false;
       }, 2000)
-    },
-    components:{
-      PublicHeader,
-      PublicPrompt,
     }
     ,
     methods: {
-      getMsg(data){
-        this.showcom=data;
+      beforeEnter(el) {
+        el.style.transform = 'translate(0,0)'
       },
-      tosureorder(){
-        if(this.allPrice<20){
-            // alert('差钱啊 兄弟')
+      enter(el, done) {
+        el.offsetWidth;
+        let dis = this.$refs.cart_icon_container.getBoundingClientRect()
+        el.style.transform = 'translate(-6.5rem,6.4rem)'
+        el.style.transition = 'all 0.7s ease-in'
+        done()
+      },
+      afterEnter(el) {
+        this.ballFlag = !this.ballFlag
+      },
+      getMsg(data) {
+        this.showcom = data;
+      },
+      tosureorder() {
+        if (this.allPrice < 20) {
+          // alert('差钱啊 兄弟')
           //弹出提示框
-          this.showcom=true;
+          this.showcom = true;
           //提示内容
-          let money=20-this.$store.state.allPrice
-          this.promptContent='你很穷啊兄弟，还差'+money+'元，我们才起送哦！';
-        }else {
-          this.$router.push({path:'tosureorder'})
+          let money = 20 - this.$store.state.allPrice
+          this.promptContent = '你很穷啊兄弟，还差' + money + '元，我们才起送哦！';
+        } else {
+          this.$router.push({path: 'tosureorder'})
         }
       },
       //进入每一个具体的店铺
@@ -291,13 +315,11 @@
           PricSum += this.buy_specs_arr[i].count * this.buy_specs_arr[i].pro.price;
         }
         this.allPrice = PricSum;
-      }
-      ,
+      },
       //清空购物车
       clearall() {
         this.buy_specs_arr = [];
-      }
-      ,
+      },
       //点击减少
       jianshao1(p) {
         for (let i in this.buy_specs_arr) {
@@ -309,8 +331,7 @@
             }
           }
         }
-      }
-      ,
+      },
       //点击购物清单界面增加
       zengjia1(p) {
         for (let i in this.buy_specs_arr) {
@@ -320,8 +341,7 @@
             }
           }
         }
-      }
-      ,
+      },
       //点击蒙版显示主页面
       if_hidden_list() {
         this.if_show_cart_list = false;
@@ -332,8 +352,7 @@
         this.if_show_cart_list1 = !this.if_show_cart_list1;
         this.if_show_cart_list = !this.if_show_cart_list;
 
-      }
-      ,
+      },
       jianxiao(m) {
         // console.log(m)
         if (m.specfoods.length !== 1) {
@@ -341,10 +360,10 @@
         } else {
           for (let i in this.buy_specs_arr) {
             if (this.buy_specs_arr[i].pro.name === this.buy_specs_kind) {
-              if (this.buy_specs_arr[i].count >= 1) {
+              if (this.buy_specs_arr[i].count > 1) {
                 this.buy_specs_arr[i].count--;
               } else {
-                this.buy_specs_arr = [];
+                this.buy_specs_arr.splice(i, 1);
               }
             }
           }
@@ -362,6 +381,14 @@
       },
       //加入购物车
       in_cart() {
+        this.ballFlag = !this.ballFlag
+        this.$refs.cart_icon_container.style.animationName = 'bounceIn';
+        this.$refs.cart_icon_container.style.animationDuration = '1.2s';
+        this.$refs.cart_icon_container.style.animationDelay = '0.7s';
+        setTimeout(() => {
+          this.$refs.cart_icon_container.style.animationName = '';
+          this.$refs.cart_icon_container.style.animationDuration = '';
+        }, 2000)
         if (this.buy_specs_arr.length === 0) {
           let obj = {pro: this.kindSpec, count: 1, pro1: this.$store.state.shoppro1};
           this.buy_specs_arr.push(obj)
@@ -409,8 +436,7 @@
         // }).then((res) => {
         //   console.log(res.data,11111111);
         // })
-      }
-      ,
+      },
       //展示规格价格
       show_money(i, id, specs_name) {
         //食物种类名字
@@ -429,14 +455,14 @@
       zp_delete_cart() {
         this.if_show_gray = false;
         this.if_show_cart = false
-      }
-      ,
+      },
       if_show_cart1() {
         this.if_show_cart = !this.if_show_cart;
         this.if_show_gray = false;
       },
       //点击规格
-      zp_buy_shop(i, name, pro) {
+      zp_buy_shop(i, name, pro, e) {
+        this.kindSpec = i[0];
         this.datainfor = pro;
         this.show_spec_money = i[0].price;
         //数组存放特殊食物。如果没点击，默认选取第一个name
@@ -475,16 +501,41 @@
 </script>
 
 <style scoped>
+  .ball {
+    background-color: #ff461d;
+    line-height: .7rem;
+    text-align: center;
+    border-radius: 50%;
+    border: .025rem solid #ff461d;
+    min-width: .7rem;
+    height: .7rem;
+    font-size: .5rem;
+    color: #fff;
+    z-index: 1000;
+    position: fixed;
+    left: 9rem;
+    top: 19rem;
+    animate-delay: 1s;
+  }
+
+  .vvv {
+    width: .9rem !important;
+    height: .9rem !important;
+    border-radius: 50% !important;
+    z-index: 5;
+  }
 
   .headzujian {
     position: fixed;
     top: 0;
     z-index: 100;
   }
-.hehehe{
 
-  opacity: 0;
-}
+  .hehehe {
+
+    opacity: 0;
+  }
+
   .op {
     font-size: .65rem;
     color: #666;
@@ -866,8 +917,7 @@
     color: #666;
   }
 
-  .category_num
-  {
+  .category_num {
     position: absolute;
     top: .1rem;
     right: .1rem;
@@ -963,9 +1013,13 @@
     left: .5rem;
     top: -.7rem;
     background-color: #3190e8;
+    /*animation-name:bounce ;*/
+    /*animation-duration: 2s;*/
+
   }
 
   .buy_cart_container {
+
     position: fixed;
     background-color: #3d3d3f;
     bottom: 0;
@@ -986,9 +1040,11 @@
     overflow-y: hidden;
     position: relative;
   }
-  .category_num1{
+
+  .category_num1 {
     opacity: 1;
   }
+
   .food_container {
     display: flex;
     flex: 1;

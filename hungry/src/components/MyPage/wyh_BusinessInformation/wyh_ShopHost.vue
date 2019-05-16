@@ -88,14 +88,13 @@
         this.$router.push({path:'toshopdetail'})
       },
       shuliang(i){
-        console.log(i)
+        // console.log(i)
        // return i.activities.length
-        if(i.activities[0]===null){
-          console.log(i.activities)
-          return 0
-        }else {
-          // return i.activities.length
-        }
+       //  if(i.activities[0]===null){
+       //    console.log(i.activities)
+       //  }else {
+       //    // return i.activities.length
+       //  }
       }
     }
   }

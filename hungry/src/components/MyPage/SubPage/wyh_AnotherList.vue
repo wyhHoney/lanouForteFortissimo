@@ -2,6 +2,7 @@
     <!--再来一单页面-->
     <div class="AnotherList">
       <!--头部-->
+      <loading v-if="load"></loading>
       <PublicHeader :pagetitle="PageTitle" :hops="routejump"></PublicHeader>
       <div class="recur">
         <img :src="'//elm.cangdu.org/img/'+ LogoImg" alt="">
@@ -35,7 +36,9 @@
 </template>
 
 <script>
-    import PublicHeader from '../CommonComponents/wyh_header'//引入头部组件
+    import PublicHeader from '../CommonComponents/wyh_header'
+    import Loading from "../../zpcomponent/Loading";
+    //引入头部组件
     export default {
         name: "wyh_AnotherList",
         data(){
@@ -51,10 +54,12 @@
             totalquantity:0,//价格总量
             addressid:0,//订单编号
             formattedcreatedat:'',//下单时间
+            load:true,
 
           }
         },
         components:{
+          Loading,
           PublicHeader
         },
         created(){
@@ -74,6 +79,11 @@
           inshop(){
             this.$router.push({path:'/toinshop'})
           }
+      },
+      mounted(){
+        setInterval(()=>{
+          this.load=false
+        },1000)
       }
     }
 </script>

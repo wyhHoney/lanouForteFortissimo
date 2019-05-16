@@ -27,12 +27,14 @@
       </ul>
     </section>
     <section class="shop_status_container">
-      <a href="" class="shop_status_header">
-        <span class="shop_detail_title">食品监督安全公示</span>
-        <div><span class="identification_detail">企业认证详情</span></div>
-      </a>
+      <router-link  :to="{path:'/jiandu'}">
+        <a href="###" class="shop_status_header">
+          <span class="shop_detail_title" >食品监督安全公示</span>
+          <div><span class="identification_detail">企业认证详情</span></div>
+        </a>
+      </router-link>
       <section class="shop_statu_detail">
-        <div><img src="" alt="" class="res-well"></div>
+        <div><img src="../../assets/哭脸.png" alt="" class="res-well"></div>
         <div class="check_date">
           <p><span>监督检查结果：</span><span class="shop_status_bad">差</span></p>
           <p><span>检查日期：</span><span></span></p>
@@ -71,11 +73,17 @@
         console.log(res.data)
         this.objpro1 = res.data
       });
+    },methods:{
     }
   }
 </script>
 
 <style scoped>
+  .shop_status_container img{
+    width: 2rem;
+    height: 2rem;
+    margin-right: .6rem;
+  }
   .shop_status_info p img{
     width: 1.1rem;
     height: 1.1rem;

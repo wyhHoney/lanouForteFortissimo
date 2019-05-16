@@ -1,6 +1,7 @@
 <template>
   <div class="TheOrderPage">
       <!--头部-->
+    <loading v-if="load"></loading>
       <PublicHeader :pagetitle="PageTitle" :hops="routejump"></PublicHeader>
       <!--内容-->
       <ul class="TheOrderPage_nr">
@@ -44,7 +45,9 @@
 <script>
   import PublicHeader from '../CommonComponents/wyh_header'//引入头部组件
   import Vue from 'vue'
-  import PublicPrompt from '../CommonComponents/wyh_PublicPrompt'//引入提示框组件
+  import PublicPrompt from '../CommonComponents/wyh_PublicPrompt'
+  import Loading from "../../zpcomponent/Loading";
+  //引入提示框组件
   export default {
     name: "wyh_TheOrderPage",
     data() {
@@ -57,10 +60,12 @@
         Minute: 15,//分
         showcom: '',//提示框显示隐藏
         promptContent: '',//提示框内容
-        dataArr: []
+        dataArr: [],
+        load:true
       }
     },
     components: {
+      Loading,
       PublicHeader,
       PublicPrompt
     },
@@ -74,7 +79,10 @@
       });
     },
     mounted() {
-      this.CountDown();
+      this.CountDown()
+      setInterval(()=>{
+        this.load=false
+      },1000)
     },
     watch: {
       Second: function (oldV) {

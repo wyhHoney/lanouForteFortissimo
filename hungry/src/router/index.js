@@ -16,6 +16,7 @@ import CheckLunchAddress from '../components/zpcomponent/checkLunchAddress'
 import FoodClass from '../components/zpcomponent/FoodClass'
 import  ShopDetail from  '../components/zpcomponent/ShopDetail'
 import video from '../components/zpcomponent/video1'
+import  jiandu from  '../components/zpcomponent/shipin'
 
 //曾光配置的路由
 import register from '../components/G-login/zg_register'//重置密码页面的路由
@@ -50,8 +51,6 @@ import AnotherList from '../components/MyPage/SubPage/wyh_AnotherList'
 import ShopHost from '../components/MyPage/wyh_BusinessInformation/wyh_ShopHost'
 import Commodity from '../components/MyPage/wyh_BusinessInformation/wyh_Commodity'
 import Evaluate from '../components/MyPage/wyh_BusinessInformation/wyh_Evaluate'
-import IntegralDescription from '../components/MyPage/wyh_TheWidget/wyh_IntegralDescription'
-import IntegralProblems from '../components/MyPage/wyh_TheWidget/wyh_IntegralProblems'
 
 export default new Router({
   routes: [
@@ -74,13 +73,6 @@ export default new Router({
     {path: '/changesin',component:ChangesIn},//重置密码页面
     {path: '/servicecenterwithin',component:ServiceCenterWithin},//服务中心内的公共说明组件
     {path: '/anotherlist',component:AnotherList},//订单详细页面
-    {path: '/shophost',component:ShopHost,children: [
-        {path:'',redirect:{path: '/toinshop',component: InShop}},
-        {path: '/toinshop',component: InShop},//商品信息
-        {path: '/evaluate',component:Evaluate},//评价信息
-      ]},//店铺信息页
-    {path: '/integraldescription',component:IntegralDescription},//余额说明页面
-    {path: '/integralproblems', component:IntegralProblems},//积分说明页面
 
 
 
@@ -90,7 +82,7 @@ export default new Router({
     {path: '/toCity', component: zpposition},//定位界面
     {path: '/zp_toMyHome', component: ZpTakeOut},//获取商品，有轮播图
     {path: '/zpMine', component: MyHomePage},
-    // {path: '/intoShop', component: InShop},//购物车界面
+    {path: '/intoShop', component: InShop},//购物车界面
     {path: '/toshop', component: Shop},//加入购物车
     // {path: '/toinshop', component: InShop},
     {path:'/tosureorder',component:SureOrder},//确认购买
@@ -100,6 +92,12 @@ export default new Router({
     {path:'/tocheckLunchAddress',component:CheckLunchAddress},//添加送餐地址的定位组件
     {path:'/toFoodClass',component:FoodClass},//食物分类界面
     {path:'/toshopdetail',component:ShopDetail},
+    {path: '/shophost',component:ShopHost,children: [
+        {path:'',redirect:{path: '/toinshop',component: InShop}},
+        {path: '/toinshop',component: InShop},//商品信息
+        {path: '/evaluate',component:Evaluate},//评价信息
+      ]},//店铺信息页
+    {path:'/jiandu',component:jiandu},
 
 
     //曾光配置的路由
