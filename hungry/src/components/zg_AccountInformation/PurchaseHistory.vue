@@ -10,7 +10,7 @@
 </template>
 
 <script>
-    export default {
+    export default {  
         name: "PurchaseHistory",
         mounted(){
           let  zg_connector ='https://elm.cangdu.org/bos/v2/users/1/orders?limit=20&offset=10&restaurant_id=this.zg_user_id'

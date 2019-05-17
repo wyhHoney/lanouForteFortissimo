@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="aa">
     <!--<PublicHeader :pagetitle="PageTitle" :hops="routejump" class="headzujian"></PublicHeader>-->
     <Loading v-if="loadload"></Loading>
     <section class="shop_container">
@@ -507,6 +507,10 @@
 </script>
 
 <style scoped>
+  .aa{
+    width: 100%;
+    height: 100%;
+  }
   .ball {
     background-color: #ff461d;
     line-height: .7rem;
@@ -1052,9 +1056,12 @@
   }
 
   .food_container {
+    width: 100%;
     display: flex;
     flex: 1;
     padding-bottom: 2rem;
+    height: 20%;
+    overflow: hidden;
   }
 
   .activity_show {
@@ -1084,13 +1091,14 @@
   }
 
   .shop_container {
+    width: 100%;
+    height: 100%;
     display: flex;
     flex-direction: column;
     position: fixed;
     top: 7.5rem;
     right: 0;
     left: 0;
-    /*height: 100%;*/
   }
 
   .menu_right {

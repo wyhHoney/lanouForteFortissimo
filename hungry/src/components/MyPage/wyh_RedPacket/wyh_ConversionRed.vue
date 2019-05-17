@@ -63,8 +63,7 @@
             exchange_code:this.CDKEY,//兑换码
             captcha_code:this.AuthCode,//验证码
           }).then((ress)=>{
-            console.log(ress.data);
-            if (ress.data.message=="无效的兑换码") {
+            if (ress.data.message==="无效的兑换码") {
               //弹出提示框
               this.showcom=true;
               this.promptContent="无效的兑换码";
