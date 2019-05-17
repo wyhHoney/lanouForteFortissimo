@@ -1,5 +1,5 @@
 <template>
-  <div class="container zp_container">
+  <div class="container-fluid zp_container">
     <header class="zp_head_top">
       <router-link :to="{path:'/seek'}" style="text-decoration: none">
         <a href="###" style="text-decoration: none"><img src="../../assets/fangdajing.png" alt=""></a>
@@ -10,7 +10,7 @@
         </a>
       </router-link>
       <router-link :to="{path:'/glogin'}" v-if="ifshouheadimg" style="text-decoration: none">
-        <img src="../../assets/默认头像1.png" alt="" class="zp_head_top_right1">
+        <img src="../../assets/home.gif" alt="" class="zp_head_top_right1">
       </router-link>
       <a href="###" class="zp_head_top_middle" style="text-decoration: none">
         <!--定位地址-->
@@ -55,48 +55,49 @@
       <div class="zp_shopListContainer">
         <ul>
           <!--<router-link :to="{path:'/intoShop'}">-->
-            <li class="zp_shop_li" v-for="item in shopPro" @click="intoShop(item.id,item)" style="text-decoration: none">
-              <section>
-                <img :src="'//elm.cangdu.org/img/'+item.image_path" alt="" class="zp_shop_img">
-              </section>
-              <div class="zp_shop_right">
-                <header class="zp_shopDetailHeader">
+          <li class="zp_shop_li" v-for="item in shopPro" @click="intoShop(item.id,item)" style="text-decoration: none">
+            <section>
+              <img :src="'//elm.cangdu.org/img/'+item.image_path" alt="" class="zp_shop_img">
+            </section>
+            <div class="zp_shop_right">
+              <header class="zp_shopDetailHeader">
 
-                  <h4 class="zp_shop_title">
-                    <p class="pinpai">品牌</p>{{item.name}}</h4>
+                <h4 class="zp_shop_title">
+                  <p class="pinpai">品牌</p>{{item.name}}
+                </h4>
 
-                  <ul class="zp-shop-detail-ul">
-                    <li>保</li>
-                    <li>准</li>
-                    <li>票</li>
-                  </ul>
-                </header>
-                <h5 class="zp_shopDetailOrderNum">
-                  <section class="zp_rate_num_left">
-                    <section class="zp_rating_section">
-                      <img src="../../assets/xingxinghuang.png" alt="" class="xingxing">
-                      <span class="rating_num">{{item.rating}}</span>
-                    </section>
-                    <section class="zp_order_section">月售{{item.recent_order_num}}单</section>
+                <ul class="zp-shop-detail-ul">
+                  <li>保</li>
+                  <li>准</li>
+                  <li>票</li>
+                </ul>
+              </header>
+              <h5 class="zp_shopDetailOrderNum">
+                <section class="zp_rate_num_left">
+                  <section class="zp_rating_section">
+                    <img src="../../assets/xingxinghuang.png" alt="" class="xingxing">
+                    <span class="rating_num">{{item.rating}}</span>
                   </section>
-                  <section class="zp_rate_num_right">
-                    <span class="zp_arte_num_right_left">蜂鸟专送</span>
-                    <span class="zp_arte_num_right_right">准时达</span>
-                  </section>
-                </h5>
-                <h5 class="zp_shopDetailDistance">
-                  <p class="zp_fee">
-                    ￥{{item.float_minimum_order_amount}}起送
-                    <span class="segmentation">/</span>{{item.piecewise_agent_fee.tips}}
-                  </p>
-                  <p class="zp_distance_time">
-                    <span>{{item.distance}}</span>
-                    <span class="segmentation">/</span>
-                    <span class="order_time">{{item.order_lead_time}}</span>
-                  </p>
-                </h5>
-              </div>
-            </li>
+                  <section class="zp_order_section">月售{{item.recent_order_num}}单</section>
+                </section>
+                <section class="zp_rate_num_right">
+                  <span class="zp_arte_num_right_left">蜂鸟专送</span>
+                  <span class="zp_arte_num_right_right">准时达</span>
+                </section>
+              </h5>
+              <h5 class="zp_shopDetailDistance">
+                <p class="zp_fee">
+                  ￥{{item.float_minimum_order_amount}}起送
+                  <span class="segmentation">/</span>{{item.piecewise_agent_fee.tips}}
+                </p>
+                <p class="zp_distance_time">
+                  <span>{{item.distance}}</span>
+                  <span class="segmentation">/</span>
+                  <span class="order_time">{{item.order_lead_time}}</span>
+                </p>
+              </h5>
+            </div>
+          </li>
           <!--</router-link>-->
         </ul>
       </div>
@@ -139,23 +140,23 @@
         ifShowLoading: true,//显示动画
         ifshowdenglu: true,
         ifshouheadimg: false,//判断是否登陆过显示那个头像
-        headname:''
+        headname: ''
       }
     },
     methods: {
       //返回主页面
-      backposition(){
-        this.$router.push({path:'toCity'})
+      backposition() {
+        this.$router.push({path: 'toCity'})
       },
       //进入商品列表
       inFoodClass(i) {
         this.$store.state.foodKindName = i;
       },
       //点击进入购物车
-      intoShop(i,pro) {
+      intoShop(i, pro) {
         this.$store.state.shopId = i;
-        this.$store.state.shoppro1=pro;
-        this.$router.push({path:'shophost'})
+        this.$store.state.shoppro1 = pro;
+        this.$router.push({path: 'shophost'})
       },
       adjustifshowimg() {
         if (this.$store.state.nameArrAdjustIn.length === 0) {
@@ -184,9 +185,8 @@
       },
     },
     created() {
-      this.headname=sessionStorage.getItem('afterSearchName');
-      console.log(this.headname)
-      Vue.axios.get('https://elm.cangdu.org/shopping/restaurants?latitude=' +sessionStorage.getItem('latitude') + '&longitude=' + sessionStorage.getItem('longitude') + '').then((res) => {
+      this.headname = sessionStorage.getItem('afterSearchName');
+      Vue.axios.get('https://elm.cangdu.org/shopping/restaurants?latitude=' + sessionStorage.getItem('latitude') + '&longitude=' + sessionStorage.getItem('longitude') + '').then((res) => {
         this.shopPro = res.data;
       });
       Vue.axios.get('https://elm.cangdu.org/v2/index_entry').then((res) => {
@@ -205,7 +205,7 @@
           this.ifshowdenglu = false;
           this.ifshouheadimg = true;
         }
-      }).catch(()=>{
+      }).catch(() => {
 
       })
     },
@@ -221,13 +221,14 @@
 </script>
 <!--css部分-->
 <style scoped>
-  .xingxing{
+  .xingxing {
     position: relative;
     top: 0rem;
     width: 2rem;
     height: .5rem;
   }
-  .pinpai{
+
+  .pinpai {
     width: 1.5rem;
     content: "\54C1\724C";
     display: inline-block;
@@ -239,6 +240,7 @@
     border-radius: .1rem;
     margin-right: .2rem;
   }
+
   .lunbotu {
     height: 7rem;
   }
@@ -662,7 +664,7 @@
   .zp_shop_li {
     display: flex;
     border-bottom: .025rem solid #f1f1f1;
-    padding:0 .4rem;
+    padding: 0 .4rem;
   }
 
   .zp_shop_img {
@@ -683,6 +685,7 @@
     justify-content: space-between;
     align-items: center;
   }
+
   .zp_head_top img {
     width: 1rem;
     height: 1rem;
@@ -696,11 +699,9 @@
     padding-right: 2rem;
   }
 
-
   .zp_head_top_right a {
     color: #fff;
   }
-
 
   .zp_head_top_middle > span {
     font-size: .5rem;
@@ -754,7 +755,6 @@
     overflow: hidden;
     z-index: 1;
   }
-
 
   .BottomPart > div {
     box-sizing: border-box;

@@ -177,7 +177,7 @@
     background: initial;
     padding: .4rem;
     position: absolute;
-    z-index: 300;
+    z-index: 10;
 
   }
   .bottomroute {
@@ -272,7 +272,7 @@
     font-size: 0;
     position: absolute;
     margin-top: 5.5rem;
-    z-index: 300;
+    z-index:10;
   }
 
   .ShopSubfield > div {

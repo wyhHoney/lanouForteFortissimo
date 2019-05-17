@@ -39,7 +39,7 @@
         <section class="section_right">
           <!--选择定位地址-->
           <router-link :to="{path:'/tocheckLunchAddress'}">
-            <div class="choose_address">您的地址{{$store.state.GetName.name}}</div>
+            <div class="choose_address" >地址：{{$store.state.GetName.name}}</div>
           </router-link>
           <input type="text" name="address_detail" placeholder="详细地址（如门牌号等）" class="input_style" v-model="yourdoor">
         </section>
@@ -170,6 +170,8 @@
     color: #999;
     line-height: 2.5rem;
     border-bottom: .025rem solid #f5f5f5;
+    display: inline-block;
+    height: 2.5rem;
   }
 
   .phone_add {

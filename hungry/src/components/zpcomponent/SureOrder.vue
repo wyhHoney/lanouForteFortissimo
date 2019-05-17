@@ -53,7 +53,7 @@
       <!--具体信息-->
       <ul class="food_list_ul">
         <li class="food_item_style" v-for="item in $store.state.buy_specs_arr">
-          <div class="food_name">{{item.pro.specs_name}}</div>
+          <div class="food_name">{{item.pro.name}}{{item.pro.specs_name}}</div>
           <div class="num_price">
             <span class="first">x{{item.count}}</span>
             <span>{{item.pro.price}}</span>

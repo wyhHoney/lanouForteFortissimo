@@ -5,7 +5,7 @@
         <span class="pull-left">ele.me</span>
         <span class="pull-right">
           <router-link :to="{path:'/glogin'}" v-if=" ifshowdenglu" style="text-decoration: none">登陆|注册</router-link>
-          <img src="../assets/默认头像1.png" alt="" class="zp_head_top_right1" v-if="ifshouheadimg">
+          <img src="../assets/home.gif" alt="" class="zp_head_top_right1" v-if="ifshouheadimg">
         </span>
       </header>
       <nav id="zp_city-nav">
@@ -108,10 +108,12 @@
     height: 1.2rem;
   }
   .zp_hot-citys_p div{
+    display: inline-block;
 margin-left: 0.6rem;
+    text-overflow: ellipsis;
   }
   zp_hot-citys_p{
-    text-overflow: ellipsis;
+
   }
   .zp_hot-citys_pp{
     width: 25%;

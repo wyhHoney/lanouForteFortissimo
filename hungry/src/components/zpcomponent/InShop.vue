@@ -12,7 +12,7 @@
           <section class="menu_left" style="overflow: auto;height: 800px">
             <ul>
               <li v-for="(item1,index) in foodPro" class="menu_left_li" :key="index">
-                <span><a :href="'#'+index">{{item1.name}}</a></span>
+                <span><a :href="'#'+index" style="text-decoration: none">{{item1.name}}</a></span>
                 <span :class="{category_num:hot_kind(item1.foods)>0?true:false}">{{hot_kind(item1.foods)}}</span>
               </li>
             </ul>
@@ -53,7 +53,7 @@
                   <footer class="menu_detail_footer">
                     <section class="food_price">
                       <span class="food_price1">$</span>
-                      <span class="food_price2">20</span>
+                      <span class="food_price2">{{popp(pro)}}</span>
                       <span class="food_price3">起</span>
                       <div class="shuliang">
                         <img src="../../assets/减小.png" alt="" @click="jianxiao(pro)"
@@ -227,6 +227,19 @@
       this.shopcartcss();
     },
     methods: {
+      popp(i){
+
+        let a=[]
+        for(let q in i.specfoods){
+          a.push(i.specfoods[q].price)
+        }
+        a.sort();
+        if(a[0]===null){
+          return 0
+        }else{
+          return a[0]
+        }
+      },
       beforeEnter(el) {
         el.style.transform = 'translate(0,0)'
       },
@@ -399,7 +412,6 @@
             arr[0].count++
           }
         }
-        console.log(this.buy_specs_arr, 111)
         this.if_show_gray = false;
         this.if_show_cart = false;
         //向后抬
@@ -1074,10 +1086,11 @@
   .shop_container {
     display: flex;
     flex-direction: column;
-    position: absolute;
+    position: fixed;
+    top: 7.5rem;
     right: 0;
     left: 0;
-    height: 100%;
+    /*height: 100%;*/
   }
 
   .menu_right {

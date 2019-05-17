@@ -97,8 +97,6 @@
       },
       zp_inNextPage(i) {
         // //存入点击的地址
-        // this.$store.state.afterSearchName = this.zp_searchResult[i].name;
-        // console.log(i)
         sessionStorage.setItem('longitude', i.longitude)
         sessionStorage.setItem('afterSearchName', i.name)
         sessionStorage.setItem('latitude', i.latitude)
