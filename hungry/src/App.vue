@@ -1,11 +1,12 @@
 <template>
   <div id="app">
     <div id="xixi">
-      <loading v-if="ifshowload"></loading>
+      <!--<loading v-if="ifshowload"></loading>-->
     </div>
     <transition name="cmp" mode="out-in" >
       <router-view></router-view>
     </transition>
+    <!--<loading></loading>-->
   </div>
 </template>
 
@@ -61,18 +62,15 @@
         ifshowload:true,
       }
     },created(){
-      this.$store.state.afterSearchName=sessionStorage.getItem('afterSearchName')
-      this.$store.state.afterSearchLatitude=sessionStorage.getItem('afterSearchLatitude')
-      this.$store.state.afterSearchLongitude=sessionStorage.getItem('fterSearchLongitude=')
-      this.$store.state.id=sessionStorage.getItem('id1');
-      this.$store.state.name=sessionStorage.getItem('name1');
-      let xixi =document.getElementById('xixi')
-        this.ifshowload=false
-        console.log(this.ifshowload)
-      Vue.axios.get('https://elm.cangdu.org/v1/pois?city_id=' + id + '&keyword=' + address + '&type=search').then((res) => {
-        this.store.state.zp_searchResult = res.data
-      });
-    }
+      //在页面加载时读取sessionStorage里的状态信息
+      if (sessionStorage.getItem("store") ) {
+        this.$store.replaceState(Object.assign({}, this.$store.state,JSON.parse(sessionStorage.getItem("store"))))
+      }
+      //在页面刷新时将vuex里的信息保存到sessionStorage里
+      window.addEventListener("beforeunload",()=> {
+        sessionStorage.setItem("store", JSON.stringify(this.$store.state))
+      })
+      }
   }
 
 </script>
