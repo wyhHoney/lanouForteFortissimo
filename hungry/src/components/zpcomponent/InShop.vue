@@ -250,7 +250,8 @@
           this.showcom = true;
           //提示内容
           let money = 20 - this.$store.state.allPrice
-          this.promptContent = '你很穷啊兄弟，还差' + money + '元，我们才起送哦！';
+
+          this.promptContent = '你很穷啊兄弟，还差' + 20 + '元，我们才起送哦！';
         } else {
           this.$router.push({path: 'tosureorder'})
         }

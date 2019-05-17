@@ -4,7 +4,7 @@
       <header id="zp_head-top" class="container text-center">
         <span class="pull-left">ele.me</span>
         <span class="pull-right">
-          <router-link :to="{path:'/glogin'}" v-if=" ifshowdenglu">登陆|注册</router-link>
+          <router-link :to="{path:'/glogin'}" v-if=" ifshowdenglu" style="text-decoration: none">登陆|注册</router-link>
           <img src="../assets/personhead1.png" alt="" class="zp_head_top_right1" v-if="ifshouheadimg">
         </span>
       </header>
@@ -13,7 +13,7 @@
           <span>当前定位城市</span>
           <span>定位不准时，请在城市列表中选择</span>
         </div>
-        <router-link class="zp_guess-city" :to="{path: '/city'}"><a href="###" @click="zp_getAddress(guessCity.id,guessCity.name)" class="zp_hot-citys_pp " >{{guessCity.name}}</a></router-link>
+        <router-link class="zp_guess-city" :to="{path: '/city'}" style="text-decoration: none"><div @click="zp_getAddress(guessCity.id,guessCity.name)" class="zp_hot-citys_pp " >{{guessCity.name}}</div></router-link>
 
       </nav>
       <section id="zp_hot-city">
@@ -23,7 +23,7 @@
         <ul id="zp_city-body">
           <li v-for="item in hotCity" class="zp_hot-citys">
             <!--<a href="###"> {{item.name}}</a>-->
-            <router-link class="zp_guess-city" :to="{path: '/city'}"><a href="###" @click="zp_getAddress(item.id,item.name)" class="zp_hot-citys_p "><div>{{item.name}}</div></a></router-link>
+            <router-link class="zp_guess-city" :to="{path: '/city'}" style="text-decoration: none"><div @click="zp_getAddress(item.id,item.name)" class="zp_hot-citys_p "><div>{{item.name}}</div></div></router-link>
           </li>
         </ul>
       </section>
@@ -34,7 +34,7 @@
             <ul>
               <li  v-for="p in item" id="zp_all-city-city">
                 <!--<a href="###"> {{p.name}}</a>-->
-                <router-link class="zp_guess-city" :to="{path: '/city'}" ><a href="###" @click="zp_getAddress(p.id,p.name)" class="zp_hot-citys_p"><div>{{p.name}}</div></a></router-link>
+                <router-link class="zp_guess-city" :to="{path: '/city'}" style="text-decoration: none"><div @click="zp_getAddress(p.id,p.name)" class="zp_hot-citys_p"><div>{{p.name}}</div></div></router-link>
               </li>
             </ul>
 
@@ -66,9 +66,9 @@
       // Vue.axios.get('https://elm.cangdu.org/v1/cities/1').then((res) => {
       // });
       this.$store.state.name=name;
-      sessionStorage.setItem('name',name)
+      sessionStorage.setItem('name1',name)
       this.$store.state.id=id;
-      sessionStorage.setItem('id',id)
+      sessionStorage.setItem('id1',id)
       }
   },
     created() {

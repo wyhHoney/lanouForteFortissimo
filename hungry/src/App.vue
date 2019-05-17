@@ -13,7 +13,7 @@
   /*引入屏幕适配文件*/
   import {} from "../src/Third-party plug-ins/resize";
   import MyHomePage from "./components/MyPage/MyHomePage";
-
+  import Vue from 'vue'
 
   //张鹏引入的组件
   import Zp_position from "./components/zp_position";
@@ -64,8 +64,8 @@
       this.$store.state.afterSearchName=sessionStorage.getItem('afterSearchName')
       this.$store.state.afterSearchLatitude=sessionStorage.getItem('afterSearchLatitude')
       this.$store.state.afterSearchLongitude=sessionStorage.getItem('fterSearchLongitude=')
-      this.$store.state.id=sessionStorage.getItem('id');
-      this.$store.state.name=sessionStorage.getItem('name');
+      this.$store.state.id=sessionStorage.getItem('id1');
+      this.$store.state.name=sessionStorage.getItem('name1');
       let xixi =document.getElementById('xixi')
         this.ifshowload=false
         console.log(this.ifshowload)

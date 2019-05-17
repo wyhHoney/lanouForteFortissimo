@@ -5,9 +5,9 @@
       <section class="text-center zp_address">
         <span>{{name}}</span>
       </section>
-      <router-link :to="{path:'/toCity'}"><a href="###" class="zp_text-right">
+      <router-link :to="{path:'/toCity'}" style="text-decoration: none"><div class="zp_text-right">
         切换城市
-      </a></router-link>
+      </div></router-link>
     </header>
     <form id="zp_city_form">
       <div><input type="text" class="zp_input1" placeholder="输入学校、商务楼、地址" v-model="zp_checkAddress"></div>
@@ -20,20 +20,20 @@
       <div v-if="zp_ifHistory">
         <ul>
           <li v-for="item in zp_afterDelete">
-            <a href="###" @click="zp_inNextPage(item)">
+            <a href="###" @click="zp_inNextPage(item)" style="text-decoration: none">
               <h4 class="zp_searchProId">{{item.name}}pppppppp</h4>
               <p class="zp_searchProAddress">{{item.address}}</p>
             </a>
           </li>
         </ul>
-        <a href="###" @click="zp_clearHistory" v-if="zp_afterDelete.length===0?false:true">清除所有历史纪录</a>
+        <a href="###" @click="zp_clearHistory" v-if="zp_afterDelete.length===0?false:true" style="text-decoration: none">清除所有历史纪录</a>
       </div>
     </header>
     <ul>
-      <router-link :to="{path:'/zp_toMyHome'}">
+      <router-link :to="{path:'/zp_toMyHome'}" style="text-decoration: none">
         <li v-for="(item,i) in zp_searchResult" id="zp_searchPro">
           <!--//点击具体地址转入主界面-->
-          <a href="###" @click="zp_inAddress(i)">
+          <a href="###" @click="zp_inAddress(i)" style="text-decoration: none">
             <h4 class="zp_searchProId">{{item.name}}</h4>
             <p class="zp_searchProAddress">{{item.address}}</p>
           </a>

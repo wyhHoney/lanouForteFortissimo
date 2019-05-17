@@ -54,7 +54,6 @@
     },
     created() {
       Vue.axios.get('https://elm.cangdu.org/shopping/restaurant/' + this.$store.state.shopId + '').then((res) => {
-        console.log(res.data,11111)
         this.objpro = res.data
       });
       // console.log(this.$store.state.shopId)
