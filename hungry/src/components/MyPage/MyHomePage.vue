@@ -115,7 +115,7 @@
         this.NoLogiIn=res.data.message;//判断是否登陆
         //此时用户没有登陆不进行任何操作
         if(res.data.message==='通过session获取用户信息失败'){
-          this.HeadPortrait=require('../../assets/yonghu.png')
+          this.HeadPortrait=require('../../assets/yonghu.jpg')
         }else { //已经登陆
           this.UserName=res.data.username;//修改用户名
           //判断是手机号是否存在
