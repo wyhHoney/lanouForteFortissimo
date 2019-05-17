@@ -158,7 +158,7 @@
 
   }
   .bottomroute{
-    padding-top: 7rem;
+    padding-top: 7.5rem;
     height: 100%;
   }
 
@@ -245,7 +245,7 @@
     border-bottom: 1px solid #ebebeb;
     font-size: 0;
     position: absolute;
-    margin-top: 5rem;
+    margin-top: 5.5rem;
     z-index: 300;
   }
 
