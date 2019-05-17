@@ -1,5 +1,8 @@
 <template>
   <div id="app">
+    <div id="xixi">
+      <loading v-if="ifshowload"></loading>
+    </div>
     <transition name="cmp" mode="out-in" >
       <router-view></router-view>
     </transition>
@@ -52,6 +55,23 @@
       ResetPasswords,
       GLogin,
 
+    },
+    data(){
+      return{
+        ifshowload:true,
+      }
+    },created(){
+      this.$store.state.afterSearchName=sessionStorage.getItem('afterSearchName')
+      this.$store.state.afterSearchLatitude=sessionStorage.getItem('afterSearchLatitude')
+      this.$store.state.afterSearchLongitude=sessionStorage.getItem('fterSearchLongitude=')
+      this.$store.state.id=sessionStorage.getItem('id');
+      this.$store.state.name=sessionStorage.getItem('name');
+      let xixi =document.getElementById('xixi')
+        this.ifshowload=false
+        console.log(this.ifshowload)
+      Vue.axios.get('https://elm.cangdu.org/v1/pois?city_id=' + id + '&keyword=' + address + '&type=search').then((res) => {
+        this.store.state.zp_searchResult = res.data
+      });
     }
   }
 

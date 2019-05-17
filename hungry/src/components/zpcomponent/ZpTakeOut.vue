@@ -14,7 +14,7 @@
       </router-link>
       <a href="###" class="zp_head_top_middle">
         <!--定位地址-->
-        <span @click="backposition">{{$store.state.afterSearchName}}</span>
+        <span @click="backposition">{{headname}}</span>
       </a>
     </header>
     <nav class="zp_nav msite_nav">
@@ -43,6 +43,7 @@
         <div class="swiper-pagination"></div>
       </div>
     </nav>
+    <!--加载loading动画-->
     <Loading v-if="ifShowLoading"></Loading>
     <div class="zp_shopList">
       <header class="zp_shopListHeader">
@@ -127,6 +128,18 @@
   export default {
     name: "ZpTakeOut",
     components: {Loading},
+    data() {
+      return {
+        goodsCategory: [],
+        halfGoodsCateory1: [],
+        halfGoodsCateory2: [],
+        shopPro: [],
+        ifShowLoading: true,//显示动画
+        ifshowdenglu: true,
+        ifshouheadimg: false,//判断是否登陆过显示那个头像
+        headname:''
+      }
+    },
     methods: {
       //返回主页面
       backposition(){
@@ -136,8 +149,8 @@
       inFoodClass(i) {
         this.$store.state.foodKindName = i;
       },
+      //点击进入购物车
       intoShop(i,pro) {
-        console.log(pro)
         this.$store.state.shopId = i;
         this.$store.state.shoppro1=pro;
         this.$router.push({path:'shophost'})
@@ -151,7 +164,6 @@
           this.ifshouheadimg = true
         }
       },
-
       //底部按钮按钮的点击事件
       TakeOutFood() {
         this.$router.push({path: 'zp_toMyHome'})
@@ -169,14 +181,11 @@
         this.$router.push({path: 'myhomepage'})
       },
     },
-    beforeMount() {
-
-    },
-
     created() {
-      Vue.axios.get('https://elm.cangdu.org/shopping/restaurants?latitude=' + this.$store.state.afterSearchLatitude + '&longitude=' + this.$store.state.afterSearchLongitude + '').then((res) => {
+      this.headname=sessionStorage.getItem('afterSearchName');
+      console.log(this.headname)
+      Vue.axios.get('https://elm.cangdu.org/shopping/restaurants?latitude=' +sessionStorage.getItem('latitude') + '&longitude=' + sessionStorage.getItem('longitude') + '').then((res) => {
         this.shopPro = res.data;
-        // console.log(res.data)
       });
       Vue.axios.get('https://elm.cangdu.org/v2/index_entry').then((res) => {
         this.goodsCategory = res.data
@@ -194,33 +203,21 @@
           this.ifshowdenglu = false;
           this.ifshouheadimg = true;
         }
+      }).catch(()=>{
+
       })
     },
-    data() {
-      return {
-        goodsCategory: [],
-        halfGoodsCateory1: [],
-        halfGoodsCateory2: [],
-        shopPro: [],
-        ifShowLoading: true,//显示动画
-        ifshowdenglu: true,
-        ifshouheadimg: false,//判断是否登陆过显示那个头像
-      }
-    },
-
     mounted() {
-      //判断是否有登陆
-      // this.adjustifshowimg();
+      //引入swiper 加载轮播图
       new Swiper('.swiper-container', {
         pagination: {
           el: '.swiper-pagination',
         },
       });
-
     }
   }
 </script>
-
+<!--css部分-->
 <style scoped>
   .xingxing{
     position: relative;

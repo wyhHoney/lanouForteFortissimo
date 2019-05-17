@@ -63,10 +63,12 @@
     },
   methods:{
     zp_getAddress(id,name){
-      Vue.axios.get('https://elm.cangdu.org/v1/cities/1').then((res) => {
-      });
+      // Vue.axios.get('https://elm.cangdu.org/v1/cities/1').then((res) => {
+      // });
       this.$store.state.name=name;
+      sessionStorage.setItem('name',name)
       this.$store.state.id=id;
+      sessionStorage.setItem('id',id)
       }
   },
     created() {
@@ -89,7 +91,6 @@
       Vue.axios.get('https://elm.cangdu.org/v1/user').then((res) => {
         // console.log(res.data)
         if (res.data.message === '通过session获取用户信息失败') {
-
           this.ifshowdenglu = true;
           this.ifshouheadimg = false;
         } else {

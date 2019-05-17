@@ -226,12 +226,6 @@
       //调用显示购物车的css样式函数
       this.shopcartcss();
     },
-    mounted() {
-      setTimeout(() => {
-        this.loadload = false;
-      }, 2000)
-    }
-    ,
     methods: {
       beforeEnter(el) {
         el.style.transform = 'translate(0,0)'
@@ -291,8 +285,6 @@
           this.$refs.gotopay_btn.style.fontWeight = '700';
           this.$refs.cart_icon_container.style.backgroundColor = '#3d3d3f';
           this.$refs.cart_list_length.style.opacity = '0'
-          // this.$refs.xixixi.style.opacity='0';
-          // console.log(this.$refs.xixixi,111)
         } else {
           this.$refs.gotopay.style.backgroundColor = '#4cd964';
           this.$refs.gotopay_btn.innerHTML = '去结算';
@@ -492,6 +484,7 @@
     created() {
       Vue.axios.get('https://elm.cangdu.org/shopping/getcategory/' + this.$store.state.shopId + '').then((res) => {
         this.foodPro = res.data.category_list;
+        this.loadload=false
       });
       this.buy_specs_arr = this.$store.state.buy_specs_arr;
 

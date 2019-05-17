@@ -20,24 +20,25 @@
       <div v-if="zp_ifHistory">
         <ul>
           <li v-for="item in zp_afterDelete">
-              <a href="###" @click="zp_inNextPage">
-                <h4 class="zp_searchProId">{{item.name}}pppppppp</h4>
-                <p class="zp_searchProAddress">{{item.address}}</p>
-              </a>
+            <a href="###" @click="zp_inNextPage(item)">
+              <h4 class="zp_searchProId">{{item.name}}pppppppp</h4>
+              <p class="zp_searchProAddress">{{item.address}}</p>
+            </a>
           </li>
         </ul>
         <a href="###" @click="zp_clearHistory" v-if="zp_afterDelete.length===0?false:true">清除所有历史纪录</a>
       </div>
     </header>
     <ul>
-      <li v-for="(item,i) in zp_searchResult" id="zp_searchPro">
-        <!--//点击具体地址转入主界面-->
-        <router-link :to="{path:'/zp_toMyHome'}">
+      <router-link :to="{path:'/zp_toMyHome'}">
+        <li v-for="(item,i) in zp_searchResult" id="zp_searchPro">
+          <!--//点击具体地址转入主界面-->
           <a href="###" @click="zp_inAddress(i)">
             <h4 class="zp_searchProId">{{item.name}}</h4>
             <p class="zp_searchProAddress">{{item.address}}</p>
-          </a></router-link>
-      </li>
+          </a>
+        </li>
+      </router-link>
     </ul>
   </div>
 </template>
@@ -62,6 +63,7 @@
     },
     created() {
       this.name = this.$store.state.name
+      this.$store.state.zp_afterDelete = this.zp_searchResult
     },
     methods: {
       zp_submitPro() {
@@ -70,38 +72,43 @@
         let id = this.$store.state.id
         Vue.axios.get('https://elm.cangdu.org/v1/pois?city_id=' + id + '&keyword=' + address + '&type=search').then((res) => {
           this.zp_searchResult = res.data
-          // console.log(this.zp_searchResult)
         });
 
       },
       zp_inAddress(i) {
-        this.$store.state.weizhi=this.zp_searchResult[i].geohash
+        this.$store.state.weizhi = this.zp_searchResult[i].geohash
         //存入点击的地址
         this.$store.state.afterSearchName = this.zp_searchResult[i].name;
         //存入点击的经纬度
-        this.$store.state.afterSearchLatitude=this.zp_searchResult[i].latitude
-        this.$store.state.afterSearchLongitude=this.zp_searchResult[i].longitude
-        // console.log(this.$store.state.afterSearchLatitude,this.$store.state.afterSearchLongitude)
-        this.zp_historyPro.push(this.zp_searchResult[i]);
-        localStorage.setItem('searchHistory', JSON.stringify(this.zp_historyPro));
+        this.$store.state.afterSearchLatitude = this.zp_searchResult[i].latitude
+        this.$store.state.afterSearchLongitude = this.zp_searchResult[i].longitude
+        this.$store.state.zp_historyPro.push(this.zp_searchResult[i]);
+
+        localStorage.setItem('searchHistory', JSON.stringify(this.$store.state.zp_historyPro));
+        // console.log(localStorage.getItem('searchHistory'))
+        sessionStorage.setItem('longitude', this.zp_searchResult[i].longitude)
+        sessionStorage.setItem('afterSearchName', this.zp_searchResult[i].name)
+        sessionStorage.setItem('latitude', this.zp_searchResult[i].latitude)
 
       },
       zp_clearHistory() {
         localStorage.removeItem('searchHistory');
-        // console.log(111);
         this.zp_afterDelete = [];
       },
-      zp_inNextPage() {
+      zp_inNextPage(i) {
         // //存入点击的地址
         // this.$store.state.afterSearchName = this.zp_searchResult[i].name;
-        this.$router.push({path:'/zp_toMyHome'})
+        // console.log(i)
+        sessionStorage.setItem('longitude', i.longitude)
+        sessionStorage.setItem('afterSearchName', i.name)
+        sessionStorage.setItem('latitude', i.latitude)
+        this.$router.push({path: '/zp_toMyHome'})
       }
     },
     mounted() {
       this.zp_getHistoryPro = JSON.parse(localStorage.getItem('searchHistory'));
       this.zp_getHistoryPro = [...new Set(this.zp_getHistoryPro)];
       this.zp_afterDelete = this.zp_getHistoryPro
-
     }
   }
 </script>

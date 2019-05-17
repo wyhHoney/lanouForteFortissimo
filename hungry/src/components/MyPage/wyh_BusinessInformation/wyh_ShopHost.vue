@@ -16,7 +16,7 @@
         <div class="jian">{{huodong(objpro)}}</div>
           {{huodongjian(objpro)}}
         </span>
-        <span @click="ActivityInformation">{{shuliang(objpro)}}个活动 <img src="../../../assets/jiantou.png" alt=""></span>
+        <span @click="ActivityInformation">{{objpro.activities.length}}个活动 <img src="../../../assets/jiantou.png" alt=""></span>
       </p>
       <span @click="GetBack"></span>
     </div>
@@ -49,7 +49,7 @@
     },
     created() {
       Vue.axios.get('https://elm.cangdu.org/shopping/restaurant/' + this.$store.state.shopId + '').then((res) => {
-        // console.log(res.data)
+        console.log(res.data,11111)
         this.objpro = res.data
       });
       // console.log(this.$store.state.shopId)
@@ -98,12 +98,13 @@
        //  }else {
        //    // return i.activities.length
        //  }
-        if(i.activities[0]===null){
-          console.log(i.activities)
-          return 0
-        }else {
-          // return i.activities.length
-        }
+       //  if(i.activities===[]){
+       //    let a =0
+       //    console.log(i.activities)
+       //    return a
+       //  }else {
+       //    return i.activities.length
+       //  }
       },
       //点击跳转活动信息页面
       ActivityInformation(){

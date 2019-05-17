@@ -1,6 +1,7 @@
 <template>
   <div>
     <!--头组件-->
+    <loading v-if="ifshowload1"></loading>
     <PublicHeader :pagetitle="PageTitle" :hops="routejump" class="head_style"></PublicHeader>
     <section class="sort_container">
       <div class="sort_item">
@@ -30,11 +31,11 @@
           </ul>
         </section>
         <section class="category_right">
-          <ul>
-            <li class="category_right_li" v-for="item in selfKindArr" @click="fengleiclass(item.name,item)">
-              <span>{{item.name}}</span><span>{{item.count}}</span>
-            </li>
-          </ul>
+           <ul>
+             <li class="category_right_li " v-for="item in selfKindArr" @click="fengleiclass(item.name,item)">
+               <span>{{item.name}}</span><span>{{item.count}}</span>
+             </li>
+           </ul>
         </section>
       </section>
       <div class="sort_item">
@@ -107,7 +108,7 @@
         <section>
           <header class="filter_header_style"> 配送方式</header>
           <ul class="filter_ul">
-            <li class="filter_li">
+            <li class="filter_li" @click="fangshi">
               <img src="../../assets/蜜蜂.png" alt="">
               <span>蜂鸟专送</span>
             </li>
@@ -122,36 +123,41 @@
               <img src="../../assets/选择勾号1.png" alt="" v-if="ifshowshuxing1">
               <span class="filter_icon"
                     style="color: rgb(63, 189, 230); border-color: rgb(63, 189, 230);"
-                    v-if="ifshowshuxing11">品</span><span>品牌商家</span>
+                    v-if="ifshowshuxing11">品</span><span>8品牌商家</span>
             </li>
             <li class="filter_li" @click="ifshuxing2">
               <img src="../../assets/选择勾号1.png" alt="" v-if="ifshowshuxing2">
               <span class="filter_icon"
-                    style="color: rgb(153, 153, 153); border-color: rgb(153, 153, 153);" v-if="ifshowshuxing22">品</span><span>外卖保</span>
+                    style="color: rgb(153, 153, 153); border-color: rgb(153, 153, 153);" v-if="ifshowshuxing22">品</span><span>7外卖保</span>
             </li>
             <li class="filter_li" @click="ifshuxing3">
               <img src="../../assets/选择勾号1.png" alt="" v-if="ifshowshuxing3">
               <span class="filter_icon"
                     style="color: rgb(63, 189, 230); border-color: rgb(63, 189, 230);"
-                    v-if="ifshowshuxing33">准</span><span>准时达</span>
+                    v-if="ifshowshuxing33">准</span><span>9准时达</span>
             </li>
             <li class="filter_li" @click="ifshuxing4">
               <img src="../../assets/选择勾号1.png" alt="" v-if="ifshowshuxing4">
               <span class="filter_icon"
                     style="color: rgb(232, 132, 45); border-color: rgb(232, 132, 45);"
-                    v-if="ifshowshuxing44">新</span><span>新店</span>
+                    v-if="ifshowshuxing44">新</span><span>5新店</span>
             </li>
             <li class="filter_li" @click="ifshuxing5">
               <img src="../../assets/选择勾号1.png" alt="" v-if="ifshowshuxing5">
               <span class="filter_icon" style="color: rgb(255, 78, 0); border-color: rgb(255, 78, 0);"
-                    v-if="ifshowshuxing55">付</span><span>在线支付</span>
+                    v-if="ifshowshuxing55">付</span><span>3在线支付</span>
             </li>
             <li class="filter_li" @click="ifshuxing6">
               <img src="../../assets/选择勾号1.png" alt="" v-if="ifshowshuxing6">
               <span class="filter_icon"
-                    style="color: rgb(153, 153, 153); border-color: rgb(153, 153, 153);" v-if="ifshowshuxing66">票</span><span>开发票</span>
+                    style="color: rgb(153, 153, 153); border-color: rgb(153, 153, 153);" v-if="ifshowshuxing66">票</span><span>4开发票</span>
             </li>
-
+            <!--<li class="filter_li" @click="choosewitch(i)" v-for="(item ,i) in arr10" >-->
+              <!--<img src="../../assets/选择勾号1.png" alt="" v-if="showimg">-->
+              <!--<span class="filter_icon"-->
+                    <!--:style="{color:'#'+item.icon_color}"-->
+                    <!--v-if="showzi">{{item.icon_name}}</span><span>{{item.name}}</span>-->
+            <!--</li>-->
           </ul>
         </section>
         <footer class="confirm_filter">
@@ -172,8 +178,8 @@
     <div class="zp_shopList" style="margin-left: 0.5rem">
       <div class="zp_shopListContainer">
         <ul>
-          <router-link :to="{path:'shophost'}">
-            <li class="zp_shop_li" v-for="item in doneArr">
+          <router-link :to="{path:'/shophost'}">
+            <li class="zp_shop_li" v-for="item in doneArr" @click="inshophost">
               <section>
                 <img :src="'//elm.cangdu.org/img/'+item.image_path" alt="" class="zp_shop_img">
               </section>
@@ -226,10 +232,12 @@
 <script>
   import PublicHeader from '../MyPage/CommonComponents/wyh_header'//引入头部组件
   import Vue from 'vue'
+  import Loading from "./Loading";
 
   export default {
     name: "FoodClass",
     components: {
+      Loading,
       PublicHeader
     }, data() {
       return {
@@ -269,38 +277,98 @@
         ifshowshuxing55: true,
         ifshowshuxing6: false,
         ifshowshuxing66: true,
+        ifshowload1:false,
+        arr10:[],
+        showimg:false,
+        showzi:true,
+        shuzu:[],//村活动
       }
     },
     methods: {
+      qingqiu(){
+
+      },
+      inshophost(){
+        this.$router.push({path:'/shophost'})
+      },
       ifshuxing1() {
         this.ifshowshuxing1 = !this.ifshowshuxing1
         this.ifshowshuxing11 = !this.ifshowshuxing11
+        if(this.ifshowshuxing1){
+          this.shuzu.push(8)
+        }else{
+          if(this.shuzu.length===0){
+          }else{
+            this.shuzu.splice(this.shuzu.indexOf(8),1)
+          }
+        }
       },
       ifshuxing2() {
         this.ifshowshuxing2 = !this.ifshowshuxing2
         this.ifshowshuxing22 = !this.ifshowshuxing22
+        if(this.ifshowshuxing2){
+          this.shuzu.push(7)
+        }else{
+          if(this.shuzu.length===0){
+          }else{
+            this.shuzu.splice(this.shuzu.indexOf(7),1)
+          }
+        }
       },
       ifshuxing3() {
         this.ifshowshuxing3 = !this.ifshowshuxing3
         this.ifshowshuxing33 = !this.ifshowshuxing33
+        if(this.ifshowshuxing3){
+          this.shuzu.push(9)
+        }else{
+          if(this.shuzu.length===0){
+          }else{
+            this.shuzu.splice(this.shuzu.indexOf(9),1)
+          }
+        }
       },
       ifshuxing4() {
         this.ifshowshuxing4 = !this.ifshowshuxing4
         this.ifshowshuxing44 = !this.ifshowshuxing44
+        if(this.ifshowshuxing4){
+          this.shuzu.push(5)
+        }else{
+          if(this.shuzu.length===0){
+          }else{
+            this.shuzu.splice(this.shuzu.indexOf(5),1)
+          }
+        }
       },
       ifshuxing5() {
         this.ifshowshuxing5 = !this.ifshowshuxing5
         this.ifshowshuxing55 = !this.ifshowshuxing55
+        if(this.ifshowshuxing5){
+          this.shuzu.push(3)
+        }else{
+          if(this.shuzu.length===0){
+          }else{
+            this.shuzu.splice(this.shuzu.indexOf(3),1)
+          }
+        }
       },
       ifshuxing6() {
         this.ifshowshuxing6 = !this.ifshowshuxing6
         this.ifshowshuxing66 = !this.ifshowshuxing66
+        if(this.ifshowshuxing6){
+          this.shuzu.push(4)
+        }else{
+          if(this.shuzu.length===0){
+          }else{
+            this.shuzu.splice(this.shuzu.indexOf(4),1)
+          }
+        }
       },
       chooseSort1() {
-        Vue.axios.get('https://elm.cangdu.org/shopping/restaurants?latitude=' + this.$store.state.afterSearchLatitude + '&longitude=' + this.$store.state.afterSearchLongitude + '&order_by=1').then((res) => {
+        Vue.axios.get('https://elm.cangdu.org/shopping/restaurants?latitude=' +sessionStorage.getItem('latitude') + '&longitude=' + sessionStorage.getItem('longitude') + '&order_by=1').then((res) => {
           this.doneArr = res.data
+          this.ifshowload1=false;
           // console.log(res.data, 1)
-        });
+        });this.load1()
         this.showsortup = true
         this.showsortdown = false
         this.ifshowshort = false
@@ -308,8 +376,9 @@
       chooseSort2() {
         Vue.axios.get('https://elm.cangdu.org/shopping/restaurants?latitude=' + this.$store.state.afterSearchLatitude + '&longitude=' + this.$store.state.afterSearchLongitude + '&order_by=2').then((res) => {
           this.doneArr = res.data
+          this.ifshowload1=false;
           // console.log(res.data)
-        });
+        });this.load1()
         this.showsortup = true
         this.showsortdown = false
         this.ifshowshort = false
@@ -317,8 +386,9 @@
       chooseSort3() {
         Vue.axios.get('https://elm.cangdu.org/shopping/restaurants?latitude=' + this.$store.state.afterSearchLatitude + '&longitude=' + this.$store.state.afterSearchLongitude + '&order_by=3').then((res) => {
           this.doneArr = res.data
+          this.ifshowload1=false;
           // console.log(res.data)
-        });
+        });this.load1()
         this.showsortup = true
         this.showsortdown = false
         this.ifshowshort = false
@@ -326,8 +396,9 @@
       chooseSort4() {
         Vue.axios.get('https://elm.cangdu.org/shopping/restaurants?latitude=' + this.$store.state.afterSearchLatitude + '&longitude=' + this.$store.state.afterSearchLongitude + '&order_by=4').then((res) => {
           this.doneArr = res.data
+          this.ifshowload1=false;
           // console.log(res.data)
-        });
+        });this.load1()
         this.showsortup = true
         this.showsortdown = false
         this.ifshowshort = false
@@ -335,27 +406,35 @@
       chooseSort5() {
         Vue.axios.get('https://elm.cangdu.org/shopping/restaurants?latitude=' + this.$store.state.afterSearchLatitude + '&longitude=' + this.$store.state.afterSearchLongitude + '&order_by=5').then((res) => {
           this.doneArr = res.data
+          this.ifshowload1=false;
           // console.log(res.data)
-        });
+        });this.load1()
         this.showsortup = true
         this.showsortdown = false
         this.ifshowshort = false
       },
       chooseSort6() {
+        this.load1()
         Vue.axios.get('https://elm.cangdu.org/shopping/restaurants?latitude=' + this.$store.state.afterSearchLatitude + '&longitude=' + this.$store.state.afterSearchLongitude + '&order_by=6').then((res) => {
           this.doneArr = res.data
+          this.ifshowload1=false;
         });
         this.showsortup = true
         this.showsortdown = false
         this.ifshowshort = false
       },
+      //动画
+      load1(){
+        this.ifshowload1=true
+      },
       //点击分类
       fengleiclass(q,pro) {
-        // console.log(pro)
+        this.ifshowload1=true
         Vue.axios.get('https://elm.cangdu.org/shopping/restaurants?latitude=' + this.$store.state.afterSearchLatitude + '&longitude=' + this.$store.state.afterSearchLongitude + '&restaurant_category_ids[] ='+pro.id).then((res) => {
           this.doneArr = res.data
-          console.log(res.data,'数据')
+          this.ifshowload1=false;
         });
+
         this.showfoodup = true
         this.showfooddown = false
         this.ifshowkindFood = false
@@ -392,6 +471,7 @@
         this.ifshowkindFood = false
       },
       clearall() {
+        this.shuzu=[];
         this.ifshowshuxing1 = false
         this.ifshowshuxing11 = true
         this.ifshowshuxing2 = false
@@ -408,14 +488,29 @@
       sureall(){
         this.showfilterup = true;
         this.showfilterdown = false;
-        this.ifshowfilter = false
+        this.ifshowfilter = false;
+        console.log(this.shuzu,44444)
+        Vue.axios.get('https://elm.cangdu.org/shopping/restaurants?latitude=' + this.$store.state.afterSearchLatitude + '&longitude=' + this.$store.state.afterSearchLongitude + '&support_ids[]='+this.shuzu).then((res) => {
+          this.doneArr = res.data
+        console.log(res.data)
+        });
+      },
+      fangshi(){
+        Vue.axios.get('https://elm.cangdu.org/shopping/restaurants?latitude=' + this.$store.state.afterSearchLatitude + '&longitude=' + this.$store.state.afterSearchLongitude + '&delivery_mode[]='+1).then((res) => {
+          this.doneArr = res.data
+          console.log(res.data,5555)
+        });
       }
     },
     mounted() {
+      Vue.axios.get('https://elm.cangdu.org/shopping/v1/restaurants/activity_attributes').then((res)=>{
+
+        this.arr10=res.data
+        console.log(this.arr10,123)
+      })
       Vue.axios.get('https://elm.cangdu.org/shopping/v2/restaurant/category').then((res) => {
         // console.log(res.data)
         this.selfKindArr=res.data[0].sub_categories
-        console.log(res.data,11)
         this.allShopClassArr = res.data;
         //处理图片格式
         for (let s of this.allShopClassArr) {
@@ -431,9 +526,10 @@
         }
         console.log(res.data)
       });
-      Vue.axios.get('https://elm.cangdu.org/shopping/restaurants?latitude=' + this.$store.state.afterSearchLatitude + '&longitude=' + this.$store.state.afterSearchLongitude + '').then((res) => {
+      Vue.axios.get('https://elm.cangdu.org/shopping/restaurants?latitude=' +sessionStorage.getItem('latitude') + '&longitude=' + sessionStorage.getItem('longitude') + '').then((res) => {
         this.doneArr = this.shopPro = res.data
         // console.log(res.data)
+        this.ifshowload1=false;
 
       });
     }

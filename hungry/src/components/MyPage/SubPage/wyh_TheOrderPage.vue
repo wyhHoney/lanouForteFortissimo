@@ -75,14 +75,11 @@
       Vue.axios.get("https://elm.cangdu.org/v1/user").then((res) => {
         Vue.axios.get("https://elm.cangdu.org/bos/v2/users/" + res.data.id + "/orders?limit=10&offset=0").then((res) => {
           this.TheOrderList = res.data;
+          this.load=false
         });
       });
     },
     mounted() {
-      this.CountDown()
-      setInterval(()=>{
-        this.load=false
-      },1000)
     },
     watch: {
       Second: function (oldV) {

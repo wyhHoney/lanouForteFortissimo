@@ -27,9 +27,9 @@
       </ul>
     </section>
     <section class="shop_status_container">
-      <router-link  :to="{path:'/jiandu'}">
+      <router-link :to="{path:'/jiandu'}">
         <a href="###" class="shop_status_header">
-          <span class="shop_detail_title" >食品监督安全公示</span>
+          <span class="shop_detail_title">食品监督安全公示</span>
           <div><span class="identification_detail">企业认证详情</span></div>
         </a>
       </router-link>
@@ -60,31 +60,29 @@
     name: "ShopDetail",
     components: {
       PublicHeader
-    },
-    data() {
+    }, data() {
       return {
         PageTitle: '商家详情  ',
         routejump: 'toinshop',
-        objpro1:{}
+        objpro1: {}
       }
-    },
-    created(){
+    }, created() {
       Vue.axios.get('https://elm.cangdu.org/shopping/restaurant/' + this.$store.state.shopId + '').then((res) => {
         console.log(res.data)
         this.objpro1 = res.data
       });
-    },methods:{
     }
   }
 </script>
 
 <style scoped>
-  .shop_status_container img{
+  .shop_status_container img {
     width: 2rem;
     height: 2rem;
     margin-right: .6rem;
   }
-  .shop_status_info p img{
+
+  .shop_status_info p img {
     width: 1.1rem;
     height: 1.1rem;
     font-size: .6rem;
@@ -93,14 +91,16 @@
     position: absolute;
     right: 0;
   }
-  .shop_status_info header{
+
+  .shop_status_info header {
     line-height: 1.8rem;
     padding: 0 .6rem;
     font-size: .75rem;
     color: #333;
     border-bottom: .025rem solid #f1f1f1;
   }
-  .shop_status_info p{
+
+  .shop_status_info p {
     position: relative;
     font-size: .6rem;
     color: #666;
@@ -108,16 +108,19 @@
     margin-left: .6rem;
     border-bottom: .025rem solid #f5f5f5;
   }
-  .identification_detail{
+
+  .identification_detail {
     font-size: .7rem;
     color: #bbb;
     vertical-align: middle;
   }
-  .shop_detail_title{
+
+  .shop_detail_title {
     font-size: .75rem;
     color: #333;
   }
-  .shop_status_header{
+
+  .shop_status_header {
     display: flex;
     -ms-flex-pack: justify;
     justify-content: space-between;
@@ -127,14 +130,17 @@
     padding: 0 .6rem;
     border-bottom: .025rem solid #f1f1f1;
   }
-  .shop_statu_detail{
+
+  .shop_statu_detail {
     display: flex;
     padding: .6rem;
   }
-  .shop_status_bad{
+
+  .shop_status_bad {
     color: red;
   }
-  .actibities_ul span:first-of-type{
+
+  .actibities_ul span:first-of-type {
     font-size: .45rem;
     color: #fff;
     padding: .1rem;
@@ -143,13 +149,16 @@
     margin-right: .2rem;
 
   }
-  .actibities_ul{
+
+  .actibities_ul {
     padding: 0 .6rem;
   }
-  .actibities_ul li{
+
+  .actibities_ul li {
     list-style: none;
     margin-bottom: .5rem;
   }
+
   .activities_container header {
     font-size: .75rem;
     color: #333;

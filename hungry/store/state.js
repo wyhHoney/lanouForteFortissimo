@@ -1,4 +1,5 @@
 let state={
+  zp_searchResult:[],
   name:'',
   id:'',
   // 根据关键词搜索后的地址name
@@ -38,6 +39,7 @@ let state={
   yourname:'',
   //店铺信息
   shoppro1:'',
+  zp_historyPro:[],//历史信息
 
 
   //王义豪声明的vuex变量

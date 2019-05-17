@@ -10,17 +10,17 @@
     <router-link :to="{path:'/glogin'}"><img src="../../assets/personhead1.png" alt="" class="personhead"
                                              @click="back_inshop"></router-link>
     <!--添加收货地址-->
-   <router-link :to="{path:'/tochooseaddress'}">
-     <a href="" class="address_container">
-       <div class="address_empty_left">
-         <img src="../../assets/position.png" alt="">
-       </div>
-       <span class="address" ref="address">
+    <router-link :to="{path:'/tochooseaddress'}">
+      <a href="" class="address_container">
+        <div class="address_empty_left">
+          <img src="../../assets/position.png" alt="">
+        </div>
+        <span class="address" ref="address">
         请添加一个地址
       </span>
-       <img src="../../assets/右箭头.png" alt="" class="xiangyou">
-     </a>
-   </router-link>
+        <img src="../../assets/右箭头.png" alt="" class="xiangyou">
+      </a>
+    </router-link>
     <!--送的时间-->
     <section class="cotainer_style">
       <p class="diliver_text">送达时间</p>
@@ -108,7 +108,7 @@
     </section>
     <div class="cover" v-if="if_show_cover" @click="click_cover"></div>
     <!--选择支付方式界面-->
-    <section class="choose_type_container animated bounceInUp" v-if="if_show_choose_pay" >
+    <section class="choose_type_container animated bounceInUp" v-if="if_show_choose_pay">
       <header>支付方式</header>
       <ul>
         <li class="unchecked">
@@ -138,45 +138,27 @@
       return {
         PageTitle: '确认订单',
         routejump: 'shophost',
-        //是否显示选择方式
-        if_show_choose_pay: false,
-        //  是否显示蒙版
-        if_show_cover: false,
-        //设置变量接受vuex里的数组，待会再赋值回去 保证返回界面不丢失数据
-        buy_specs_arr1: [],
-        //  是否显示组件动画
-        if_show_load: true,
-        showcom:'',
-        promptContent:'',//提示框内容
+        if_show_choose_pay: false, //是否显示选择方式
+        if_show_cover: false, //  是否显示蒙版
+        buy_specs_arr1: [], //设置变量接受vuex里的数组，待会再赋值回去 保证返回界面不丢失数据
+        if_show_load: true, //  是否显示组件动画
+        showcom: '',
+        promptContent: '',//提示框内容
       }
-    },
-    mounted() {
-      //判断是点击收货地址
-      if(this.$store.state.waimaiAddress===''){
-        this.$refs.address.innerHTML='请添加收货地址'
-      }else{
-        this.$refs.address.innerHTML=this.$store.state.waimaiAddress
-      }
-      console.log(this.$store.state.buy_specs_arr)
-      this.$store.state.buy_specs_ar = this.buy_specs_arr1;
-      setTimeout(()=>{
-        this.if_show_load = false;
-      }, 2000)
-    },
-    methods: {
-      getMsg(data){
-        this.showcom=data;
+    }, methods: {
+      getMsg(data) {
+        this.showcom = data;
       },
       //确认下单
-      surepaymoney(){
+      surepaymoney() {
         console.log('确认下单')
         //弹出提示框
 
-        if(this.$store.state.waimaiAddress===''){
-          this.promptContent='请添加一个收货地址';
-          this.showcom=true;
-        }else{
-         this.$router.push({path:'Payment'})
+        if (this.$store.state.waimaiAddress === '') {
+          this.promptContent = '请添加一个收货地址';
+          this.showcom = true;
+        } else {
+          this.$router.push({path: 'Payment'})
         }
 
       },
@@ -200,14 +182,28 @@
         this.if_show_choose_pay = !this.if_show_choose_pay;
         this.if_show_cover = true;
       }
+    },
+    mounted() {
+      //判断是点击收货地址
+      if (this.$store.state.waimaiAddress === '') {
+        this.$refs.address.innerHTML = '请添加收货地址'
+      } else {
+        this.$refs.address.innerHTML = this.$store.state.waimaiAddress
+      }
+      console.log(this.$store.state.buy_specs_arr)
+      this.$store.state.buy_specs_ar = this.buy_specs_arr1;
+      setTimeout(() => {
+        this.if_show_load = false;
+      }, 2000)
     }
   }
 </script>
 
 <style scoped>
-  .fapiao{
+  .fapiao {
     margin-top: .6rem;
   }
+
   .cover {
     position: fixed;
     top: 0;
@@ -253,7 +249,7 @@
   }
 
   .choose_type_container {
-   animation: bounceInUp;
+    animation: bounceInUp;
     height: 10rem;
     background-color: #fff;
     position: fixed;
