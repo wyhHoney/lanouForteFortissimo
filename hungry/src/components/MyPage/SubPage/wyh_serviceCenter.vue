@@ -5,8 +5,8 @@
       <PublicHeader :pagetitle="PageTitle" :hops="routejump"></PublicHeader>
       <!--在线客服-->
       <div class="CustomerService">
-        <div class="CustomerService_lift" @click="Service_lift"><span class="CustomerService_span1">1</span><p>在线客服</p></div>
-        <div class="CustomerService_right" @click="Service_right"><span class="CustomerService_span2">1</span><p>在线客服</p></div>
+        <div class="CustomerService_lift" @click="Service_lift"><img src="../../../assets/kefu1.png" alt="" class="CustomerService_span1"><p>在线客服</p></div>
+        <div class="CustomerService_right" @click="Service_right"><img src="../../../assets/dianhua.png" alt="" class="CustomerService_span2"><p>在线客服</p></div>
         <p class="empty"></p>
       </div>
       <div class="IssueList">
@@ -149,18 +149,10 @@
     padding-top: 0.875rem;
     padding-bottom: 0.875rem;
   }
-  .CustomerService>div>span{
+  .CustomerService>div>img{
     width: 1rem;
     height: 1rem;
     display: inline-block;
-  }
-  .CustomerService_span1{
-    background: url("../../../assets/kefu1.png") no-repeat center center;
-    background-size: 100% 100%;
-  }
-  .CustomerService_span2{
-    background: url("../../../assets/dianhua.png") no-repeat center center;
-    background-size: 90% 90%;
   }
   .CustomerService>div>p{
     margin-bottom: 0;

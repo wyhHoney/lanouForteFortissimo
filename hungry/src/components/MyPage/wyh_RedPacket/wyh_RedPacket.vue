@@ -1,11 +1,13 @@
 <template>
+  <!--红包页面-->
   <div class="RedPacket">
     <div>
-      <p class="redpacket_p">有 <span class="red">{{RedArr.length}}</span>个红包即将过期 <span class="explain" @click="redexplain"><img src="" alt="">红包说明</span>
+      <p class="redpacket_p">有 <span class="red">{{RedArr.length}}</span>个红包即将过期 <span class="explain" @click="redexplain"><img src="../../../assets/wenhao.png" alt="">红包说明</span>
       </p>
-      <div class="package clearfix" v-for="pie in RedArr">
+      <div class="Redpackage" v-for="pie in RedArr">
+        <div class="package clearfix" >
         <div class="package_lift">
-          <p>￥<span>{{pie.amount}}</span></p>
+          <p>￥<span>{{pie.amount.toFixed(1)}}</span></p>
           <p>{{pie.description_map.sum_condition}}</p>
         </div>
         <div class="package_right clearfix">
@@ -17,15 +19,16 @@
           <div class="package_right_right">{{pie.description_map.validity_delta}}</div>
         </div>
       </div>
-      <p class="astrict">限品类：快餐便当、特色菜系、小吃夜宵、甜品饮品、异国料理</p>
+      <!--<p class="astrict">{{pie.limit_map}}</p>-->
+      </div>
 
       <div class="history">
         <span @click="historyred">查看历史红包></span>
       </div>
 
       <div class="bottomminute">
-        <div>兑换红包</div>
-        <div>推荐有奖</div>
+        <div @click="ConversionRed">兑换红包</div>
+        <div @click="Recommend">推荐有奖</div>
       </div>
     </div>
 
@@ -51,6 +54,14 @@
       //查看历史红包页面
       historyred() {
         this.$router.push({path: 'historyred'})
+      },
+      //兑换红包页面
+      ConversionRed(){
+        this.$router.push({path:'conversionred'})
+      },
+      //推荐有奖页面
+      Recommend(){
+        this.$router.push({path:'recommend'})
       }
     },
     created() {
@@ -66,6 +77,7 @@
 <style scoped>
   .RedPacket {
     padding: 0 .7rem;
+    background-color: #f5f5f5;
   }
 
   .redpacket_p {
@@ -87,13 +99,19 @@
 
   .explain > img {
     display: inline-block;
-    width: 1rem;
-    height: 1rem;
-    background: url("../../../assets/wenhao.png") no-repeat center center;
-    background-size: 70% 70%;
+    width: .7rem;
+    height: .7rem;
+    margin-right:.1rem ;
+    margin-bottom: .2rem;
+    /*background: url("../../../assets/wenhao.png") no-repeat center center;*/
+    /*background-size: 70% 70%;*/
   }
 
   /*红包样式*/
+  .Redpackage{
+    border-right: 10px;
+    margin-bottom: .5rem;
+  }
   .package {
     padding: 1rem .5rem .8rem;
     color: #333;
@@ -101,7 +119,6 @@
     border-radius: 10px;
     background: white url("../../../wyhImg/hongbao.png") repeat-x;
     background-size: 4% 4%;
-    margin-bottom: .5rem;
   }
 
   .package_lift {
@@ -179,6 +196,7 @@
     color: #999;
     margin-right: .2rem;
     margin-top: 1rem;
+    padding-bottom: 6rem;
   }
 
   .bottomminute {

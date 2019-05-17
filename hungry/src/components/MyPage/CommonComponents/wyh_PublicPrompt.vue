@@ -1,7 +1,7 @@
 <template>
     <!--提示框组件-->
     <div  class="PublicPrompt bounceIn" v-if="showcom1">
-      <span class="PublicPrompt_img"></span>
+      <img src="../../../assets/jinggao.png" alt="" class="PublicPrompt_img">
       <p>{{prompt}}</p>
       <div @click="CertainEvents">确认</div>
     </div>
@@ -47,7 +47,6 @@
     width: 3rem;
     height: 3rem;
     display: inline-block;
-    background: url("../../../assets/jinggao.png") no-repeat center center;
     background-size: 100% 100%;
   }
   .PublicPrompt>p{

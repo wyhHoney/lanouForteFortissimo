@@ -8,8 +8,8 @@
           <p>高于周边商家{{Exceed}}%</p>
         </div>
         <div class="Evaluate_header_right">
-          <p>服务态度 <span class="xingxing"></span><span class="xingxing"></span><span class="xingxing"></span><span class="xingxing"></span><span>{{service}}</span></p>
-          <p>菜品评价 <span class="xingxing"></span><span class="xingxing"></span><span class="xingxing"></span><span class="xingxing"></span><span>{{cuisine}}</span></p>
+          <p>服务态度 <span class="xingxing"></span><span class="xingxing"></span><span class="xingxing"></span><span class="xingxing"></span><span class="xingxing"></span><span>{{service}}</span></p>
+          <p>菜品评价 <span class="xingxing"></span><span class="xingxing"></span><span class="xingxing"></span><span class="xingxing"></span><span class="xingxing"></span><span>{{cuisine}}</span></p>
           <p>送达时间 <span>分钟</span></p>
         </div>
 
@@ -49,19 +49,20 @@
             service:0,//服务态度
             evaluateClassify:[],//评价分类
             evaluateMessage:[],//评价信息
-            biaoqian:'',//修改分类样式
+            biaoqian:0,//修改分类样式
+            HeadPortrait:'',//存储用户头像
 
           }
         },
         created(){
           //18.获取评价分数
           Vue.axios.get('https://elm.cangdu.org/ugc/v2/restaurants/'+this.$store.state.shopId+'/ratings/scores').then((res)=>{
-            this.Comprehensive= res.data.food_score.toFixed(1)//综合评分
-            this.Exceed =(res.data.compare_rating*100).toFixed(1)//高于周边商家
-            this.cuisine=res.data.food_score.toFixed(1)//菜品评价
-            this.service=res.data.service_score.toFixed(1)//服务态度
+            this.Comprehensive= res.data.food_score.toFixed(1);//综合评分
+            this.Exceed =(res.data.compare_rating*100).toFixed(1);//高于周边商家
+            this.cuisine=res.data.food_score.toFixed(1);//菜品评价
+            this.service=res.data.service_score.toFixed(1);//服务态度
           });
-          //19.过去评价分类
+          //19.获取评价分类
           Vue.axios.get('https://elm.cangdu.org/ugc/v2/restaurants/'+this.$store.state.shopId+'/ratings/tags').then((res)=>{
             // console.log(res.data)
             this.evaluateClassify=res.data;
@@ -84,7 +85,8 @@
 <style scoped>
 .Evaluate{
   width: 100%;
-  padding-bottom: 3rem;
+  height: 100%;
+  overflow: auto;
 }
   .Evaluate_header{
     background-color: #fff;

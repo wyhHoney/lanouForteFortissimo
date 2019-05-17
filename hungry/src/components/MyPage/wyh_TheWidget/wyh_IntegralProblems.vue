@@ -28,7 +28,7 @@
       data(){
         return {
           PageTitle:'积分问题',
-          routejump:'myhomepage',
+          routejump:'integral',
         }
       },
       components:{

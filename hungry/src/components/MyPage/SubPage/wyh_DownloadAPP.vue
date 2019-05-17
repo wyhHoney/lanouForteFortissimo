@@ -2,7 +2,10 @@
     <!--下载饿了么APP-->
     <div class="DownloadAPP zoomIn">
       <!--头部-->
-      <PublicHeader :pagetitle="PageTitle" :hops="routejump"></PublicHeader>
+      <header>
+        <div class="Return" @click="$router.back(-1)" ></div>
+        <div class="Mynav"><p>下载</p></div>
+      </header>
       <!--内容-->
       <div class="DownloadAPP_nr">
         <img src="../../../assets/eleme.png"/>
@@ -14,20 +17,16 @@
 </template>
 
 <script>
-    import PublicHeader from '../CommonComponents/wyh_header'//引入头部组件
     import PublicPrompt from '../CommonComponents/wyh_PublicPrompt'//引入提示框组件
     export default {
         name: "wyh_DownloadAPP",
         data(){
           return {
-            PageTitle:'下载',
-            routejump:'myhomepage',
             showcom:'',
             promptContent:'IOS用户请前往AppStore下载',//提示框内容
           }
         },
         components:{
-          PublicHeader,
           PublicPrompt,
         },
         methods:{
@@ -47,6 +46,37 @@
 </script>
 
 <style scoped>
+  /*头部导航条*/
+  header{
+    width: 100%;
+    height: 1.95rem;
+    background-color: #3190E8;
+    color: white;
+    font-weight: 700;
+    position:relative;
+  }
+  header>div{
+    display: inline-block;
+  }
+  .Return{
+    width: 1rem;
+    height: 100%;
+    line-height: 1.95rem;
+    position: absolute;
+    left: .2rem;
+    background: url("../../../assets/fanhui.png") no-repeat center center;
+    background-size: 100% 55%;
+  }
+  .Mynav{
+    width: 100%;
+    line-height: 1.95rem;
+    display: inline-block;
+    text-align: center;
+    font-size: .8rem;
+  }
+  .Mynav>p{
+    margin: 0;
+  }
   .DownloadAPP{
     width: 100%;
     height: 100%;

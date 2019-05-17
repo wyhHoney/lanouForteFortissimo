@@ -58,6 +58,9 @@ import RedPacket from '../components/MyPage/wyh_RedPacket/wyh_RedPacket'
 import Voucher from '../components/MyPage/wyh_RedPacket/wyh_Voucher'
 import HistoryRed from '../components/MyPage/wyh_RedPacket/wyh_historyRed'
 import IntegralStore from '../components/MyPage/SubPage/wyh_IntegralStore'
+import VoucherDescription from '../components/MyPage/wyh_RedPacket/wyh_VoucherDescription'
+import ConversionRed from '../components/MyPage/wyh_RedPacket/wyh_ConversionRed'
+import Recommend from '../components/MyPage/wyh_RedPacket/wyh_Recommend'
 
 export default new Router({
   routes: [
@@ -95,11 +98,14 @@ export default new Router({
     {path: '/blankscreen',component:BlankScreen},//商家2个活动页面
     {path: '/historyred',component:HistoryRed},//历史红包
     {path: '/integralstore',component:IntegralStore},//积分商城页面
+    {path: '/voucherdescription',component:VoucherDescription},//代金券说明页面
+    {path: '/conversionred',component:ConversionRed},//兑换红包
+    {path: '/recommend',component:Recommend},//推荐有奖页面
 
 
 
     //张鹏配置的路由
-    {path: '', component: video},//路由重定向，进入定位界面
+    {path: '', component: zpposition},//路由重定向，进入定位界面
     {path: '/city', component: SpecificAddress},//进入具体定位
     {path: '/toCity', component: zpposition},//定位界面
     {path: '/zp_toMyHome', component: ZpTakeOut},//获取商品，有轮播图

@@ -12,7 +12,7 @@
       <div class="PersonalData_Header" @click="PersonalData_Header">
         <div class="PersonalData_Header_left">
 
-          <div class="HeadPortrait"><img :src="'//elm.cangdu.org/img/'+HeadPortrait" alt=""></div>
+          <div class="HeadPortrait"><img :src="HeadPortrait" alt=""></div>
 
           <div class="HeadPortrait_right">
             <h3 class="UserName">{{UserName}}</h3>
@@ -115,7 +115,7 @@
         this.NoLogiIn=res.data.message;//判断是否登陆
         //此时用户没有登陆不进行任何操作
         if(res.data.message==='通过session获取用户信息失败'){
-
+          this.HeadPortrait=require('../../assets/yonghu.png')
         }else { //已经登陆
           this.UserName=res.data.username;//修改用户名
           //判断是手机号是否存在
@@ -124,7 +124,7 @@
           } else {
             this.Phone=res.data.point;
           }
-          this.HeadPortrait=res.data.avatar;//修改用户头像
+          this.HeadPortrait='//elm.cangdu.org/img/'+res.data.avatar;//修改用户头像
           this.MyBalance=res.data.balance.toFixed(2);//显示余额
           this.GiftAmount=res.data.gift_amount;//我的优惠
           this.IsActive=res.data.is_active;//我的积分
@@ -262,8 +262,8 @@
   .HeadPortrait{
     width: 2.5rem;
     height: 2.5rem;
-    background: url("../../assets/yonghu.jpg") no-repeat center 0rem;
-    background-size: 110% 110%;
+    /*background: url("../../assets/yonghu.png") no-repeat center 0rem;*/
+    /*background-size: 110% 110%;*/
     border-radius: 50%;
     display: inline-block;
     margin-right: .2rem;

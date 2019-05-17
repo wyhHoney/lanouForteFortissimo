@@ -20,6 +20,9 @@
       </p>
       <span @click="GetBack"></span>
     </div>
+    <!--设置头部背景图模糊-->
+    <div class="shade"><img :src="'//elm.cangdu.org/img/'+$store.state.shoppro1.image_path" alt=""></div>
+
     <div class="ShopSubfield">
       <div>
         <span @click="ShangJia"><router-link :to="{path:'toinshop'}" :style="{borderBottom:TborderBottom,color:Tcolor }">商家</router-link></span>
@@ -28,7 +31,9 @@
         <span @click="PingJia"><router-link :to="{path:'evaluate'}" :style="{borderBottom:PborderBottom,color:Pcolor }">评价</router-link></span>
       </div>
     </div>
+    <div class="bottomroute">
     <router-view></router-view>
+    </div>
   </div>
 </template>
 
@@ -124,6 +129,20 @@
     color: #fff;
     background-color: rgb(240, 115, 115);
   }
+  .shade{
+    width: 100%;
+    height: 5rem;
+    background-color: red;
+    position: absolute;
+    top: 0;
+    left: 0;
+    /*设置div模糊*/
+    filter:blur(.5rem);
+  }
+  .shade>img{
+    width: 100%;
+    height: 100%;
+  }
 
   .ShopHost {
     width: 100%;
@@ -133,15 +152,22 @@
 
   /*商家头部信息*/
   .ShopHost_header {
-    background-color: rebeccapurple;
+    background: initial;
     padding: .4rem;
+    position: absolute;
+    z-index: 300;
+
+  }
+  .bottomroute{
+    padding-top: 7rem;
+    height: 100%;
   }
 
   .ShopHost_header > img {
     display: inline-block;
     width: 2.9rem;
     height: 2.9rem;
-    background-color: red;
+    /*background-color: red;*/
   / / 店铺头像 float: left;
   }
 
@@ -149,7 +175,6 @@
     float: right;
     width: 80%;
     font-size: 0;
-
   }
 
   .ShopHost_header > div > h4 {
@@ -220,6 +245,9 @@
     padding: .3rem 0 .6rem;
     border-bottom: 1px solid #ebebeb;
     font-size: 0;
+    position: absolute;
+    margin-top: 5rem;
+    z-index: 300;
   }
 
   .ShopSubfield > div {
@@ -227,6 +255,7 @@
     font-size: .8rem;
     display: inline-block;
     text-align: center;
+
   }
 
   .ShopSubfield > div > span > a {

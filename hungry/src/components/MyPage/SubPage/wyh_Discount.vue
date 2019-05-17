@@ -28,8 +28,8 @@
           return {
             PageTitle:'我的优惠',
             routejump:'myhomepage',
-            textcole:'#3190e8',
-            textborderBottom:'.1rem solid #3190e8',
+            textcole:'',
+            textborderBottom:'',
             textcole2:'',
             textborderBottom2:'',
             ShowRed:false,//

@@ -9,7 +9,7 @@
       <div class="CurrentBalance_nr">
         <div class="CurrentBalance_header">
           <p class="CurrentBalance_header_left">当前积分</p>
-          <p class="CurrentBalance_header_right" @click="balanceProblem"><span></span>积分说明</p>
+          <p class="CurrentBalance_header_right" @click="balanceProblem"><img src="../../../assets/wenhao.png" alt="">积分说明</p>
           <div class="empty"></div>
         </div>
         <div class="CurrentBalance_header_balance"><p><span>0</span>分</p></div>
@@ -122,12 +122,10 @@
     color: #3190e8;
     margin: 0;
   }
-  .CurrentBalance_header_right>span{
+  .CurrentBalance_header_right>img{
     width: .6rem;
     height: .6rem;
     display: inline-block;
-    background: url("../../../assets/wenhao.png") no-repeat center center;
-    background-size: 110% 110%;
     margin-right: .2rem;
   }
   .CurrentBalance_header_balance{
