@@ -1,7 +1,7 @@
 <template>
     <!--推出登陆页面-->
     <div class="QuitLogIn" v-if="Show_Quit">
-      <span class="PublicPrompt_img"></span>
+      <img src="../../../assets/jinggao.png" alt="" class="PublicPrompt_img">
       <h2>是否退出登陆</h2>
       <div class="Button_er">
         <div @click="Again">再等等</div>
@@ -58,8 +58,6 @@
     width: 4.1rem;
     height: 4.1rem;
     display: inline-block;
-    background: url("../../../assets/jinggao.png") no-repeat center center;
-    background-size: 100% 100%;
     margin-top: 20px;
   }
   .PublicPrompt>h2{
