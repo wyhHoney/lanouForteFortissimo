@@ -5,7 +5,7 @@
         <span class="pull-left">ele.me</span>
         <span class="pull-right">
           <router-link :to="{path:'/glogin'}" v-if=" ifshowdenglu" style="text-decoration: none">登陆|注册</router-link>
-          <img src="../assets/personhead1.png" alt="" class="zp_head_top_right1" v-if="ifshouheadimg">
+          <img src="../assets/默认头像1.png" alt="" class="zp_head_top_right1" v-if="ifshouheadimg">
         </span>
       </header>
       <nav id="zp_city-nav">
@@ -104,9 +104,8 @@
 
 <style scoped>
   .zp_head_top_right1{
-    fill: #fff;
-    width: 1rem;
-    height: 1rem;
+    width: 1.2rem;
+    height: 1.2rem;
   }
   .zp_hot-citys_p div{
 margin-left: 0.6rem;
@@ -137,7 +136,7 @@ margin-left: 0.6rem;
     color: #666;
     font-weight: 400;
     text-indent: .45rem;
-    border-top: 2px solid #e4e4e4;
+    /*border-top: 2px solid #e4e4e4;*/
     border-bottom: 1px solid #e4e4e4;
     font: .55rem/1.45rem Helvetica Neue;
     padding: 0;
@@ -169,6 +168,7 @@ margin-left: 0.6rem;
     background-color: #3190EB;
     color: white;
     font-size: .7rem;
+    padding-top: 0.2rem;
   }
 
   #zp_city-nav {
@@ -182,8 +182,11 @@ margin-left: 0.6rem;
     list-style: none;
     text-decoration: none;
     color: #333;
+    background: black;
   }
-
+body{
+  background: black1 !important;
+}
   .zp_group-city {
     width: 100%;
     padding: 0;
@@ -206,7 +209,7 @@ margin-left: 0.6rem;
     float: left;
     text-align: center;
     color: #3190e8;
-    border-bottom: .025rem solid #e4e4e4;
+    /*border-bottom: .025rem solid #e4e4e4;*/
     border-right: .025rem solid #e4e4e4;
     width: 25%;
     height: 1.75rem;
@@ -249,11 +252,12 @@ margin-left: 0.6rem;
     color: #666;
     font-weight: 400;
     text-indent: .45rem;
-    border-top: 2px solid #e4e4e4;
+    /*border-top: 2px solid #e4e4e4;*/
     border-bottom: 1px solid #e4e4e4;
     font: .55rem/1.45rem Helvetica Neue;
     float: left;
     width: 100%;
+    margin: 0;
   }
 
   #zp_city-body {

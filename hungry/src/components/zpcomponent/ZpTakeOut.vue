@@ -10,7 +10,7 @@
         </a>
       </router-link>
       <router-link :to="{path:'/glogin'}" v-if="ifshouheadimg" style="text-decoration: none">
-        <img src="../../assets/personhead1.png" alt="" class="zp_head_top_right1">
+        <img src="../../assets/默认头像1.png" alt="" class="zp_head_top_right1">
       </router-link>
       <a href="###" class="zp_head_top_middle" style="text-decoration: none">
         <!--定位地址-->

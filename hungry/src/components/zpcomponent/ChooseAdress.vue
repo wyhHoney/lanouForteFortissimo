@@ -18,10 +18,10 @@
       </section>
     </section>
 
-    <router-link :to="{path:'/toaddnewaddress'}">
+    <router-link :to="{path:'/toaddnewaddress'}" style="text-decoration: none">
       <!--添加地址-->
-      <a href="" class="add_icon_footer">
-        <img src="../../assets/地点坐标添加.png" alt="">
+      <a href="" class="add_icon_footer" style="text-decoration: none">
+        <img src="../../assets/坐标.png" alt="">
         <span>新增加收获地址</span>
       </a>
     </router-link>
