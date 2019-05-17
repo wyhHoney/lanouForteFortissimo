@@ -32,10 +32,12 @@
           </div>
           <div class="swiper-slide zp_food_types">
             <a href="###" v-for="item in halfGoodsCateory2" style="text-decoration: none">
-              <figure @click="inFoodClass(item.title)">
-                <img :src="'//fuss10.elemecdn.com/'+item.image_url" alt="">
-                <figcaption>{{item.title}}</figcaption>
-              </figure>
+              <router-link :to="{path:'/toFoodClass'}" style="text-decoration: none">
+                <figure @click="inFoodClass(item.title)">
+                  <img :src="'//fuss10.elemecdn.com/'+item.image_url" alt="">
+                  <figcaption>{{item.title}}</figcaption>
+                </figure>
+              </router-link>
             </a>
           </div>
 

@@ -3,20 +3,20 @@
   <div class="ShopHost">
     <div class="ShopHost_header clearfix">
       <img :src="'//elm.cangdu.org/img/'+$store.state.shoppro1.image_path" alt="">
-      <div  @click="toshopdetail">
-        <h4>{{objpro.name}}</h4>
+      <div @click="toshopdetail">
+        <h4>{{objpro2.name}}</h4>
         <div>
           <p>商家专送/分钟送达/配送费5元</p>
-          <p>公告:{{objpro.promotion_info}}</p>
+          <p>公告:{{objpro2.promotion_info}}</p>
           <img src="../../../assets/jiantou.png" alt="">
         </div>
       </div>
       <p>
         <span>
-        <div class="jian">{{huodong(objpro)}}</div>
-          {{huodongjian(objpro)}}
+        <div class="jian">{{icon_name}}</div>
+          {{name}}{{description}}
         </span>
-        <span @click="ActivityInformation">{{objpro.activities.length}}个活动 <img src="../../../assets/jiantou.png" alt=""></span>
+        <span @click="ActivityInformation">{{objpro.length}}个活动 <img src="../../../assets/jiantou.png" alt=""></span>
       </p>
       <span @click="GetBack"></span>
     </div>
@@ -25,14 +25,15 @@
 
     <div class="ShopSubfield">
       <div>
-        <span @click="ShangJia"><router-link :to="{path:'toinshop'}" :style="{borderBottom:TborderBottom,color:Tcolor }">商家</router-link></span>
+        <span @click="ShangJia"><router-link :to="{path:'toinshop'}"
+                                             :style="{borderBottom:TborderBottom,color:Tcolor }">商家</router-link></span>
       </div>
       <div>
         <span @click="PingJia"><router-link :to="{path:'evaluate'}" :style="{borderBottom:PborderBottom,color:Pcolor }">评价</router-link></span>
       </div>
     </div>
     <div class="bottomroute">
-    <router-view></router-view>
+      <router-view></router-view>
     </div>
   </div>
 </template>
@@ -48,13 +49,33 @@
         Tcolor: '#3190e8',//商家和评价点击变化样式
         PborderBottom: '',//评价
         Pcolor: '',//评价
-        objpro: {},//存取商家详细信息
+        objpro: [],//存取商家详细信息
+        count: 0,
+        objpro2: {},
+        name: '',
+        icon_name: '',
+        description:''
+
 
       }
     },
     created() {
       Vue.axios.get('https://elm.cangdu.org/shopping/restaurant/' + this.$store.state.shopId + '').then((res) => {
-        this.objpro = res.data
+        this.objpro2 = res.data
+        this.objpro = res.data.activities;
+        if(res.data.activities.length===0){
+          this.name = ''
+          this.icon_name = ''
+          this.description='暂无活动'
+        }else{
+          this.name = res.data.activities[0].name
+          this.icon_name = res.data.activities[0].icon_name
+          this.description=res.data.activities[0].description
+        }
+
+
+        // this.count = res.data.activities.length;
+        console.log(this.objpro)
       });
       // console.log(this.$store.state.shopId)
     },
@@ -77,42 +98,42 @@
         this.TborderBottom = '';
         this.Tcolor = '';
       },
-      huodong(i){
+      huodong(i) {
         // if(i.activities.length===0){
         //   return ''
         // }else {
         //   return i.activities[0].icon_name
         // }
       },
-      huodongjian(i){
+      huodongjian(i) {
         // if(i.length===0){
         //   return ''
         // }else {
         //   return i[0].description
         // }
       },
-      toshopdetail(){
-        this.$router.push({path:'toshopdetail'})
+      toshopdetail() {
+        this.$router.push({path: 'toshopdetail'})
       },
-      shuliang(i){
+      shuliang(i) {
         // console.log(i)
-       // return i.activities.length
-       //  if(i.activities[0]===null){
-       //    console.log(i.activities)
-       //  }else {
-       //    // return i.activities.length
-       //  }
-       //  if(i.activities===[]){
-       //    let a =0
-       //    console.log(i.activities)
-       //    return a
-       //  }else {
-       //    return i.activities.length
-       //  }
+        // return i.activities.length
+        //  if(i.activities[0]===null){
+        //    console.log(i.activities)
+        //  }else {
+        //    // return i.activities.length
+        //  }
+        //  if(i.activities===[]){
+        //    let a =0
+        //    console.log(i.activities)
+        //    return a
+        //  }else {
+        //    return i.activities.length
+        //  }
       },
       //点击跳转活动信息页面
-      ActivityInformation(){
-        this.$router.push({path:'blankscreen'});
+      ActivityInformation() {
+        this.$router.push({path: 'blankscreen'});
       }
     }
   }
@@ -128,7 +149,8 @@
     color: #fff;
     background-color: rgb(240, 115, 115);
   }
-  .shade{
+
+  .shade {
     width: 100%;
     height: 5rem;
     background-color: red;
@@ -136,9 +158,10 @@
     top: 0;
     left: 0;
     /*设置div模糊*/
-    filter:blur(.5rem);
+    filter: blur(.5rem);
   }
-  .shade>img{
+
+  .shade > img {
     width: 100%;
     height: 100%;
   }
@@ -157,8 +180,8 @@
     z-index: 300;
 
   }
-  .bottomroute{
-    padding-top: 7.5rem;
+  .bottomroute {
+    padding-top: 7rem;
     height: 100%;
   }
 
@@ -236,7 +259,10 @@
     left: 0rem;
     top: .2rem;
   }
-  .ShopHost_header{}
+
+  .ShopHost_header {
+  }
+
   /*商家分栏*/
   .ShopSubfield {
     width: 100%;
