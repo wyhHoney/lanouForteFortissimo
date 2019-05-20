@@ -82,17 +82,17 @@
         </div>
       </div>
       <section class="pay_way">
-        <router-link :to="{path:'/special'}">
+        <router-link :to="{path:'/special'}" style="text-decoration: none">
           <span>订单备注</span>
           <div class="more_type" @click="special">
-            <span class="kouwei"> 口味、偏好等</span>
+            <span class="kouwei">{{ifshowspecial()}}</span>
             <img src="../../assets/右箭头.png" alt="">
           </div>
-        </router-link>>
-        <a href="">
+        </router-link>
+        <a href="###" style="text-decoration: none">
           <span>发票抬头</span>
           <div class="more_type">
-            <router-link :to="{path:'/toinvoice'}">
+            <router-link :to="{path:'/toinvoice'}" style="text-decoration: none">
               <span class="kouwei"> 不需要开发票</span>
               <img src="../../assets/右箭头.png" alt="" class="fapiao">
             </router-link>
@@ -146,7 +146,15 @@
         promptContent: '',//提示框内容
       }
     }, methods: {
+      ifshowspecial(){
+        if(this.$store.state.LmLeaveMsg===''){
+          return '口味偏好等'
+        }else{
+          return this.$store.state.LmLeaveMsg
+        }
+      },
       special(){
+        this.$store.state.LmLeaveMsg=''
         this.$router.push({path:'/special'})
       },
       getMsg(data) {
@@ -302,6 +310,7 @@
   }
 
   .kouwei {
+    overflow: hidden;
     font-size: .6rem;
     color: #aaa;
     width: 8rem;
