@@ -6,7 +6,7 @@
     </div>
     <div class="zg_text">
       <!--登录输入框的帐号-->
-      <span >成功兑换后将关联到当前帐号:{{}}</span>
+      <span >成功兑换后将关联到当前帐号:{{$store.state.zg_name}}</span>
     </div>
     <div style="position: absolute;top: 4rem;">
       <input type="text"placeholder="请输入10位卡号"style="width: 100%;height: 2rem;border-top:grey;outline:none;padding: 0 .7rem;font-size: .62rem">

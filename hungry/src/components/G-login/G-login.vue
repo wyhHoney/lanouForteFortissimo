@@ -38,6 +38,10 @@
 
   export default {
     name: "G-login",
+    mounted(){
+      Vue.Axios.get('https://elm.cangdu.org/v2/login?username='+this.A&'password='+this.B&'captcha_code ='+this.C).then(res=>{
+      })
+    },
     data() {
       return {
         A: '',
@@ -49,9 +53,9 @@
     },
     computed: {
       A_1: function () {
-        return this.$store.state.A_1
+          return this.$store.state.A_1
 
-      }
+      },
     },
     mounted() {
       draw(this.show_num);
@@ -74,12 +78,15 @@
           alert("你是个傻逼?啥都不输入还登?")
         }
         if (this.A !== '' && this.B !== '' && this.C !== '') {
-//按钮登录,下边是个路由,登录成功的路由
+          //按钮登录,下边是个路由,登录成功的路由
           this.$router.push({path: 'myhomepage'})
         }
         this.Aarr.push(this.A)
+        //登录过的帐号都存到一个数组里
         this.$store.state.nameArrAdjustIn=this.Aarr;
-        console.log(this.$store.state.nameArrAdjustIn,1111)
+        // console.log(this.$store.state.nameArrAdjustIn,1111)
+        this.$store.state.zg_name=this.A;
+        console.log(this.$store.state.zg_name);
       }
     }
   }

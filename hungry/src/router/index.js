@@ -28,7 +28,12 @@ import exchangeMembers from '../components/zg_AccountInformation/ExchangeMembers
 import PurchaseHistory from '../components/zg_AccountInformation/PurchaseHistory'
 import seek from '../components/Zg_seek/Zg_seek'//收索页面
 import TheMoneyThat from '../components/zg_AccountInformation/TheMoneyThat'//红包说明
-
+import IDiscount from '../components/zg_AccountInformation/Idiscount'//领取红包
+import EnvelopeHistory from '../components/zg_AccountInformation/EnvelopeHstory'//红包历史记录
+import MerchantVoucher from '../components/zg_AccountInformation/MerchantVoucher'//商家代金卷
+import ForARedEnvelope from '../components/zg_AccountInformation/ForARedEnvelope'//兑换红包
+import ReferralBonuses from '../components/zg_AccountInformation/ReferralBonuses'//推荐有奖
+import IntearalStore from '../components/zg_AccountInformation/IntegralStore'//积分商城
 //王义豪配置的路由
 import Balance from '../components/MyPage/SubPage/wyh_Balance'
 import Discount from '../components/MyPage/SubPage/wyh_Discount'
@@ -137,7 +142,12 @@ export default new Router({
     {path: '/exchangeMembers', component: exchangeMembers},//帐号注册
     {path: '/PurchaseHistory', component: PurchaseHistory},//购买记录
     {path: '/seek', component: seek},//搜索食物页面
-    {path:'/TheMoneyThat',component:TheMoneyThat}
-
+    {path:'/TheMoneyThat',component:TheMoneyThat},
+    {path:'/IDiscount',component:IDiscount},//可用红包记录
+    {path:'/EnvelopeHistory',component:EnvelopeHistory},//历史红包
+    {path:'/MerchantVoucher',component:MerchantVoucher},//商家代金卷
+    {path:'/ForARedEnvelope',component:ForARedEnvelope},//兑换红包
+    {path:'/ReferralBonuses',component:ReferralBonuses},//推荐有奖
+    {path:'/IntearalStore',component:IntearalStore},//积分商城
   ]
 })

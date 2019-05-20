@@ -43,8 +43,8 @@
         name: "Payment",
       data(){
         return{
-          zg_second:60,
-          MinuteHand:14,
+          zg_second:59,
+          MinuteHand:29,
           receiver:0,
           weixin:true,
           weixin_1:false,
@@ -60,12 +60,16 @@
       methods:{
           gettime(){
         let  clock = setInterval( ()=>  {
-              this.zg_second --
-              if(this.zg_second==0){
-                this.zg_second=60;
+              this.zg_second -=1
+              if(this.zg_second<0){
+                this.zg_second=59;
                 this.MinuteHand --
-                if(this.MinuteHand==0&&this.zg_second==0){
-                  alert('请求超时')
+                if(this.MinuteHand==0){
+                  this.zg_second=0
+                  clearInterval(clock)
+                }
+                if(this.MinuteHand===0&&this.zg_second===0){
+                  alert('你没给钱小伙子!')
                 }
               }
             },1000)
@@ -91,7 +95,7 @@
         },
         zg_disappeared__logon(){
             //跳转到订单页面
-            this.$router.push({})
+            this.$router.push({path:'theorderoage'})
           this.disappeared_logon=false
         }
       },

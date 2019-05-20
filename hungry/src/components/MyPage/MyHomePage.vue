@@ -15,7 +15,7 @@
           <div class="HeadPortrait"><img :src="HeadPortrait" alt=""></div>
 
           <div class="HeadPortrait_right">
-            <h3 class="UserName">{{UserName}}</h3>
+            <h3 class="UserName">{{$store.state.zg_name}}</h3>
             <p class="CellPhoneNumber"><span class="CellPhoneNumber_shouji"></span>{{Phone}}</p>
           </div>
         </div>
@@ -39,15 +39,19 @@
           <div class="ThreeLists_nr_right">></div>
           <div class="empty"></div>
         </div>
-        <div class="ThreeLists_nr1" @click="IntegralMall">
+        <div class="ThreeLists_nr1"  @click="jifenshangcheng">
           <span class="ThreeLists_logo ThreeLists_Discount"></span>
-          <div class="ThreeLists_nr_left"><p>积分商场</p></div>
+          <div class="ThreeLists_nr_left"><p >积分商场</p></div>
           <div class="ThreeLists_nr_right">></div>
           <div class="empty"></div>
         </div>
+
         <div class="ThreeLists_nr1" @click="MembershipCard">
+
+        <div class="ThreeLists_nr1" @click="member">
+
           <span class="ThreeLists_logo ThreeLists_integral"></span>
-          <div class="ThreeLists_nr_left"><p>饿了么会员卡</p></div>
+          <div class="ThreeLists_nr_left" ><p>饿了么会员卡</p></div>
           <div class="ThreeLists_nr_right">></div>
           <div class="empty"></div>
         </div>
@@ -68,7 +72,7 @@
           <div class="empty"></div>
         </div>
       </div>
-
+      </div>
     </div>
 
 
@@ -149,8 +153,12 @@
       },
       //我的优惠点击事件
       Discount(){
+
         this.$router.push({path:'discount'});//王义豪写的空白页面
 
+
+        // this.$router.push({path:'discount'});//王义豪写的空白页面
+        this.$router.push({path:'IDiscount'});
       },
       //我的积分点击事件
       integral(){
@@ -197,7 +205,15 @@
       MyInformation(){
         this.$router.push({path:'myhomepage'})
       },
-
+      //积分商城按钮点击事件
+      jifenshangcheng(){
+        this.$router.push({path:'IntearalStore'})
+        console.log(666)
+      },
+      //会员卡跳转
+      member(){
+        this.$router.push({path:'basice'})
+      }
     },
     components:{
 

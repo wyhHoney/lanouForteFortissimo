@@ -7,7 +7,7 @@
         </div>
       </div>
       <div class="zg_text">
-        <p >为账户{{$store.state.zg_bianliang}}购买会员</p>
+        <p >为账户 <span style="color: green;font-size: .8rem">{{$store.state.zg_name}}</span> 购买会员</p>
       </div>
       <div  class="zg_span_father">
         <router-link :to="{path:'/membershipprivileges'}">
