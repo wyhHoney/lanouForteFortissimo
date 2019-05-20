@@ -2,6 +2,8 @@
   <!--店铺信息-->
   <div class="ShopHost">
     <div class="ShopHost_header clearfix">
+      <!--设置头部背景图模糊-->
+      <div class="shade"><img :src="'//elm.cangdu.org/img/'+$store.state.shoppro1.image_path" alt=""></div>
       <img :src="'//elm.cangdu.org/img/'+$store.state.shoppro1.image_path" alt="">
       <div @click="toshopdetail">
         <h4>{{objpro2.name}}</h4>
@@ -20,8 +22,7 @@
       </p>
       <span @click="GetBack"></span>
     </div>
-    <!--设置头部背景图模糊-->
-    <div class="shade"><img :src="'//elm.cangdu.org/img/'+$store.state.shoppro1.image_path" alt=""></div>
+
 
     <div class="ShopSubfield">
       <div>
@@ -156,6 +157,7 @@
     position: absolute;
     top: 0;
     left: 0;
+    z-index: -1;
     /*设置div模糊*/
     filter: blur(.5rem);
   }
@@ -176,7 +178,7 @@
     background: initial;
     padding: .4rem;
     position: absolute;
-    z-index: 10;
+    z-index: 0;
 
   }
   .bottomroute {
@@ -271,7 +273,7 @@
     font-size: 0;
     position: absolute;
     margin-top: 5.5rem;
-    z-index:10;
+    z-index:0;
   }
 
   .ShopSubfield > div {

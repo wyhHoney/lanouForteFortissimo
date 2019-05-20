@@ -119,8 +119,7 @@
             </ul>
           </section>
         </section>
-        <div class="screen_cover" v-if="if_show_cart_list" @click="if_hidden_list">
-
+        <div class="screen_cover" v-if="if_show_cart_list" @click="if_hidden_list">111
         </div>
       </section>
     </section>
@@ -643,7 +642,7 @@
     left: 0;
     right: 0;
     background-color: rgba(0, 0, 0, .3);
-    z-index: 11;
+    z-index: 10;
   }
 
   .cart_food_list {

@@ -797,7 +797,7 @@
     background-color: #3d3d3f;
     bottom: 0;
     left: 0;
-    z-index: 13;
+    z-index: !important;
     display: flex;
     width: 100%;
     height: 2rem;
