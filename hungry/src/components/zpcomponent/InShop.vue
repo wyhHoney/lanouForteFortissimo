@@ -689,8 +689,8 @@
     /*position: absolute;*/
     /*right: -2rem;*/
     /*top: -50rem;*/
-    margin-left: 5.2rem;
-    margin-top: 2.2rem;
+    margin-left: 5.4rem;
+    margin-top: 2.3rem;
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
