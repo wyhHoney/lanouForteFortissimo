@@ -17,6 +17,7 @@ import FoodClass from '../components/zpcomponent/FoodClass'
 import  ShopDetail from  '../components/zpcomponent/ShopDetail'
 import video from '../components/zpcomponent/video1'
 import  jiandu from  '../components/zpcomponent/shipin'
+import  special from '../components/zpcomponent/speciallike'
 
 //曾光配置的路由
 import register from '../components/G-login/zg_register'//重置密码页面的路由
@@ -131,6 +132,7 @@ export default new Router({
         {path: '/evaluate',component:Evaluate},//评价信息
       ]},//店铺信息页
     {path:'/jiandu',component:jiandu},
+    {path:'/special',component:special},
 
 
     //曾光配置的路由

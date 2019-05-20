@@ -82,13 +82,13 @@
         </div>
       </div>
       <section class="pay_way">
-        <a href="">
+        <router-link :to="{path:'/special'}">
           <span>订单备注</span>
-          <div class="more_type">
+          <div class="more_type" @click="special">
             <span class="kouwei"> 口味、偏好等</span>
             <img src="../../assets/右箭头.png" alt="">
           </div>
-        </a>
+        </router-link>>
         <a href="">
           <span>发票抬头</span>
           <div class="more_type">
@@ -146,6 +146,9 @@
         promptContent: '',//提示框内容
       }
     }, methods: {
+      special(){
+        this.$router.push({path:'/special'})
+      },
       getMsg(data) {
         this.showcom = data;
       },
