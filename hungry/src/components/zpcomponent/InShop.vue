@@ -292,7 +292,7 @@
       //定义函数判断有无东西来显示购物车的css样式
       shopcartcss() {
         if (this.buy_specs_arr.length === 0) {
-          this.$refs.allprice.innerHTML = '$0.00';
+          this.$refs.allprice.innerHTML = '￥0.00';
           this.$refs.gotopay.style.backgroundColor = '#535356';
           this.$refs.gotopay_btn.innerHTML = '还差￥20起送';
           this.$refs.gotopay_btn.style.fontSize = '.7rem';
@@ -502,9 +502,8 @@
 
     created() {
       Vue.axios.get('https://elm.cangdu.org/shopping/getcategory/' + this.$store.state.shopId + '').then((res) => {
+        this.loadload = false;
         this.foodPro = res.data.category_list;
-        this.loadload = false
-        console.log(res.data, 111)
       });
       this.buy_specs_arr = this.$store.state.buy_specs_arr;
 

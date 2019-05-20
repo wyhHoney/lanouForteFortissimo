@@ -187,13 +187,14 @@
     created() {
       this.headname = sessionStorage.getItem('afterSearchName');
       Vue.axios.get('https://elm.cangdu.org/shopping/restaurants?latitude=' + sessionStorage.getItem('latitude') + '&longitude=' + sessionStorage.getItem('longitude') + '').then((res) => {
+        this.ifShowLoading = false;
         this.shopPro = res.data;
       });
       Vue.axios.get('https://elm.cangdu.org/v2/index_entry').then((res) => {
         this.goodsCategory = res.data
         this.halfGoodsCateory1 = this.goodsCategory.slice(0, this.goodsCategory.length / 2);
         this.halfGoodsCateory2 = this.goodsCategory.slice(this.goodsCategory.length / 2, this.goodsCategory.length)
-        this.ifShowLoading = false;
+
 
       })
       Vue.axios.get('https://elm.cangdu.org/v1/user').then((res) => {

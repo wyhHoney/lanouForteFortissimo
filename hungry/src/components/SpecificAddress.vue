@@ -21,7 +21,7 @@
         <ul>
           <li v-for="item in zp_afterDelete">
             <a href="###" @click="zp_inNextPage(item)" style="text-decoration: none">
-              <h4 class="zp_searchProId">{{item.name}}pppppppp</h4>
+              <h4 class="zp_searchProId">{{item.name}}</h4>
               <p class="zp_searchProAddress">{{item.address}}</p>
             </a>
           </li>

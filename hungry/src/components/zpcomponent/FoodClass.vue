@@ -123,34 +123,34 @@
               <img src="../../assets/选择勾号1.png" alt="" v-if="ifshowshuxing1">
               <span class="filter_icon"
                     style="color: rgb(63, 189, 230); border-color: rgb(63, 189, 230);"
-                    v-if="ifshowshuxing11">品</span><span>8品牌商家</span>
+                    v-if="ifshowshuxing11">品</span><span>品牌商家</span>
             </li>
             <li class="filter_li" @click="ifshuxing2">
               <img src="../../assets/选择勾号1.png" alt="" v-if="ifshowshuxing2">
               <span class="filter_icon"
-                    style="color: rgb(153, 153, 153); border-color: rgb(153, 153, 153);" v-if="ifshowshuxing22">品</span><span>7外卖保</span>
+                    style="color: rgb(153, 153, 153); border-color: rgb(153, 153, 153);" v-if="ifshowshuxing22">品</span><span>外卖保</span>
             </li>
             <li class="filter_li" @click="ifshuxing3">
               <img src="../../assets/选择勾号1.png" alt="" v-if="ifshowshuxing3">
               <span class="filter_icon"
                     style="color: rgb(63, 189, 230); border-color: rgb(63, 189, 230);"
-                    v-if="ifshowshuxing33">准</span><span>9准时达</span>
+                    v-if="ifshowshuxing33">准</span><span>准时达</span>
             </li>
             <li class="filter_li" @click="ifshuxing4">
               <img src="../../assets/选择勾号1.png" alt="" v-if="ifshowshuxing4">
               <span class="filter_icon"
                     style="color: rgb(232, 132, 45); border-color: rgb(232, 132, 45);"
-                    v-if="ifshowshuxing44">新</span><span>5新店</span>
+                    v-if="ifshowshuxing44">新</span><span>新店</span>
             </li>
             <li class="filter_li" @click="ifshuxing5">
               <img src="../../assets/选择勾号1.png" alt="" v-if="ifshowshuxing5">
               <span class="filter_icon" style="color: rgb(255, 78, 0); border-color: rgb(255, 78, 0);"
-                    v-if="ifshowshuxing55">付</span><span>3在线支付</span>
+                    v-if="ifshowshuxing55">付</span><span>在线支付</span>
             </li>
             <li class="filter_li" @click="ifshuxing6">
               <img src="../../assets/选择勾号1.png" alt="" v-if="ifshowshuxing6">
               <span class="filter_icon"
-                    style="color: rgb(153, 153, 153); border-color: rgb(153, 153, 153);" v-if="ifshowshuxing66">票</span><span>4开发票</span>
+                    style="color: rgb(153, 153, 153); border-color: rgb(153, 153, 153);" v-if="ifshowshuxing66">票</span><span>开发票</span>
             </li>
             <!--<li class="filter_li" @click="choosewitch(i)" v-for="(item ,i) in arr10" >-->
             <!--<img src="../../assets/选择勾号1.png" alt="" v-if="showimg">-->
@@ -285,9 +285,6 @@
       }
     },
     methods: {
-      qingqiu() {
-
-      },
       inshophost() {
         this.$router.push({path: '/shophost'})
       },
@@ -367,7 +364,6 @@
         Vue.axios.get('https://elm.cangdu.org/shopping/restaurants?latitude=' + sessionStorage.getItem('latitude') + '&longitude=' + sessionStorage.getItem('longitude') + '&order_by=1').then((res) => {
           this.doneArr = res.data
           this.ifshowload1 = false;
-          // console.log(res.data, 1)
         });
         this.load1()
         this.showsortup = true
@@ -447,6 +443,7 @@
       //进入各个具体的商铺分类
       selfkind(i) {
         this.selfKindArr = i;
+        console.log(111)
         // console.log(i)
       },
       //  点击下拉商铺分类
@@ -509,7 +506,9 @@
     },
     mounted() {
       Vue.axios.get('https://elm.cangdu.org/shopping/v1/restaurants/activity_attributes').then((res) => {
+
         this.arr10 = res.data
+        console.log(this.arr10, 123)
       })
       Vue.axios.get('https://elm.cangdu.org/shopping/v2/restaurant/category').then((res) => {
         // console.log(res.data)
