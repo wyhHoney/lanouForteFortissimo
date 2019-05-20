@@ -84,7 +84,7 @@ export default new Router({
     {path: '/downloadapp', component: DownloadAPP},//下载饿了么
     {path: '/publicprompt', component: PublicPrompt},//提示框路由
     {path: '/theorderoage', component: TheOrderPage},//订单页面
-    {path: '/publicheader', component: PublicHeader},//登陆页面
+    {path: '/publicheader', component: PublicHeader},//登陆页面驼峰
     {path: '/accountinformation', component: AccountInformation},//账户信息页面
     {path: '/amendusername', component: AmendUserName},//修改用户名页面
     {path: '/takesite', component: TakeSite},//编辑地址页面

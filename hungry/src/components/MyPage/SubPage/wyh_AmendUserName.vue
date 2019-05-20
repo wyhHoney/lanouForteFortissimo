@@ -6,7 +6,7 @@
       <div class="AmendUserName_nr">
         <input type="text" name="username" placeholder="输入用户名" v-model="UserName" :style="{border:InputOutline}">
         <p :style="{color:PTextColor,fontSize:PFontSize}">{{PText}}</p>
-        <div :style="{color: ButtonColor}" @click="SureToModify($event)">确定修改</div>
+        <div :style="{color: ButtonColor}" @click="SureToModify()">确定修改</div>
       </div>
     </div>
 </template>
@@ -35,7 +35,7 @@
       watch:{
         UserName:function (oldV) {
           this.UserName=oldV;
-          if(this.UserName.length<=5){
+          if(this.UserName.length<5){
             this.PText='用户名长度在5-24位之间';
             this.PTextColor='red';
             this.PFontSize='0.58rem';
@@ -56,14 +56,14 @@
         }
       },
       methods:{
-        SureToModify(event){
-          if (this.UserName.length<=5){
+        SureToModify(){
+          if (this.UserName.length<5){
 
           }else if(this.UserName.length>=24){
 
           }else {
             this.$store.state.UserName11=this.UserName;
-              console.log(this.$store.state.UserName11);
+              // console.log(this.$store.state.UserName11);
           }
           this.$router.push({path:'accountinformation'})
         }

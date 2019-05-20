@@ -16,8 +16,8 @@
     <div class="Seek_history" v-if="Show_history">
       <p class="history_p">搜索历史</p>
       <ul class="history_ul" >
-        <li class="clearfix" v-for="(pie,index) in SearchRecord" @click="ClickHistorySeek(pie)">
-          <p>{{pie}}</p>
+        <li class="clearfix" v-for="(pie,index) in SearchRecord" >
+          <p @click="ClickHistorySeek(pie)">{{pie}}</p>
           <span class="Wrong1" @click="ClickDelete(index)"></span>
         </li>
         <div class="Empty_History" @click="ClickEmpty">清空搜索历史</div>
@@ -97,6 +97,7 @@
             if (olbV.length>=1){
               this.Show_wrong=true
             }else if(olbV.length===0){
+              this.Show_wrong=false;
               this.Show_Regret=false;
               this.Show_merchant=false;
               this.Show_history=true;

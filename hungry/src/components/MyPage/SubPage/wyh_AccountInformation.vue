@@ -133,6 +133,7 @@
           },
           //退出登陆
           QuitLogIn(){
+            this.$store.state.UserName11='';//设置退出后修改的用户名为空
             this.ShowLog=true;
           }
         }

@@ -15,7 +15,7 @@
           <div class="HeadPortrait"><img :src="HeadPortrait" alt=""></div>
 
           <div class="HeadPortrait_right">
-            <h3 class="UserName">{{$store.state.zg_name}}</h3>
+            <h3 class="UserName">{{UserName}}</h3>
             <p class="CellPhoneNumber"><span class="CellPhoneNumber_shouji"></span>{{Phone}}</p>
           </div>
         </div>
@@ -119,9 +119,15 @@
         this.NoLogiIn=res.data.message;//判断是否登陆
         //此时用户没有登陆不进行任何操作
         if(res.data.message==='通过session获取用户信息失败'){
-          this.HeadPortrait=require('../../assets/yonghu.jpg')
+          this.HeadPortrait=require('../../assets/yonghu.jpg');
         }else { //已经登陆
-          this.UserName=res.data.username;//修改用户名
+            if(this.$store.state.UserName11==''){
+              // console.log("123456");
+              this.UserName=res.data.username;//修改用户名
+            }else {
+              this.UserName=this.$store.state.UserName11;
+            }
+
           //判断是手机号是否存在
           if (res.data.point===0){
 
@@ -132,7 +138,6 @@
           this.MyBalance=res.data.balance.toFixed(2);//显示余额
           this.GiftAmount=res.data.gift_amount;//我的优惠
           this.IsActive=res.data.is_active;//我的积分
-
         }
       })
     },
@@ -156,9 +161,7 @@
 
         this.$router.push({path:'discount'});//王义豪写的空白页面
 
-
-        // this.$router.push({path:'discount'});//王义豪写的空白页面
-        this.$router.push({path:'IDiscount'});
+        // this.$router.push({path:'IDiscount'});//曾光写的优惠页面
       },
       //我的积分点击事件
       integral(){
