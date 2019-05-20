@@ -1,12 +1,10 @@
 <template>
   <div id="app">
     <div id="xixi">
-      <!--<loading v-if="ifshowload"></loading>-->
     </div>
     <transition name="cmp" mode="out-in" >
       <router-view></router-view>
     </transition>
-    <!--<loading></loading>-->
   </div>
 </template>
 
@@ -35,28 +33,6 @@
   import Idiscount from "./components/zg_AccountInformation/IDiscount";
   export default {
     name: 'App',
-    components: {
-      Invoice,
-      Loading,
-      Idiscount,
-      MyHomePage,
-
-      //张鹏引入的组件
-      SpecificAddress,
-      Zp_position,
-      ZpTakeOut,
-      Shop,
-
-      //曾光引入的组件
-      Payment,
-      Explain,
-      Zg_basic,
-      Zg_register,
-      Zg_seek,
-      ResetPasswords,
-      GLogin,
-
-    },
     data(){
       return{
         ifshowload:true,

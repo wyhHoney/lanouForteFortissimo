@@ -227,16 +227,16 @@
       this.shopcartcss();
     },
     methods: {
-      popp(i){
+      popp(i) {
 
-        let a=[]
-        for(let q in i.specfoods){
+        let a = []
+        for (let q in i.specfoods) {
           a.push(i.specfoods[q].price)
         }
         a.sort();
-        if(a[0]===null){
+        if (a[0] === null) {
           return 0
-        }else{
+        } else {
           return a[0]
         }
       },
@@ -497,7 +497,8 @@
     created() {
       Vue.axios.get('https://elm.cangdu.org/shopping/getcategory/' + this.$store.state.shopId + '').then((res) => {
         this.foodPro = res.data.category_list;
-        this.loadload=false
+        this.loadload = false
+        console.log(res.data, 111)
       });
       this.buy_specs_arr = this.$store.state.buy_specs_arr;
 

@@ -147,14 +147,15 @@
         }).then((res) => {
           console.log(res.data)
           this.statusID=res.data.status
+          if (this.statusID===0) {
+            //弹出提示框
+            this.promptContent = '用户名id错误';
+            this.showcom = true;
+          }else if(this.statusID===1){
+            this.$router.push({path:'tochooseaddress'});
+          }
         })
-        if (this.statusID===0) {
-          //弹出提示框
-          this.promptContent = '用户名id错误';
-          this.showcom = true;
-        }else if(this.statusID===1){
-          this.$router.push({path:'tochooseaddress'});
-        }
+
       }
     }
   }

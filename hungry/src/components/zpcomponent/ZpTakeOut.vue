@@ -4,7 +4,7 @@
       <router-link :to="{path:'/seek'}" style="text-decoration: none">
         <a href="###" style="text-decoration: none"><img src="../../assets/fangdajing.png" alt=""></a>
       </router-link>
-      <router-link :to="{path:'/glogin'}" v-if=" ifshowdenglu">
+      <router-link :to="{path:'publicheader'}" v-if=" ifshowdenglu">
         <a href="###" class="zp_head_top_right" style="text-decoration: none">
           <span>登陆|注册</span>
         </a>
