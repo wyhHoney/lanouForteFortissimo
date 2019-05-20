@@ -77,7 +77,7 @@
       //   Vue.axios.get("https://elm.cangdu.org/bos/v2/users/" + res.data.id + "/orders?limit=1&offset=0").then((res) => {
       //     console.log(res.data);
       //     this.TheOrderList = res.data;
-      //     this.load=false
+          this.load=false
       //   });
       // });
 
