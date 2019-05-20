@@ -1,7 +1,6 @@
 <template>
   <div id="app">
     <div id="xixi">
-      <!--<loading v-if="ifshowload"></loading>-->
     </div>
     <transition name="cmp" mode="out-in" >
 
@@ -18,6 +17,7 @@
     <!--<MyHomePage></MyHomePage>-->
     <!--<wyh_-balance></wyh_-balance>-->
     <!--<Idiscount></Idiscount>-->
+
 
   </div>
 </template>

@@ -10,7 +10,7 @@
           <div class="TheOrderPage_nr_li_div">
             <h4>{{pie.pro1.name}} <img src="../../../assets/jiantou.png" alt=""><span>等待支付</span></h4>
             <!--<p class="shijian">{{pie.formatted_created_at}}</p>-->
-            <p class="jiage">{{pie.pro.name}}-{{pie.count}}<span>￥{{17328+$store.state.allPrice}}.00</span></p>
+            <p class="jiage">{{pie.pro.name}}-{{pie.count}}<span>￥{{$store.state.allPrice}}.00</span></p>
             <span class="zhifu">去支付(还剩{{Minute}}分{{Second}}秒)</span>
           </div>
         </li>
@@ -70,47 +70,35 @@
       PublicPrompt
     },
     created() {
-      this.dataArr = this.$store.state.buy_specs_arr
-      console.log(this.dataArr)
-      Vue.axios.get("https://elm.cangdu.org/v1/user").then((res) => {
-        Vue.axios.get("https://elm.cangdu.org/bos/v2/users/" + res.data.id + "/orders?limit=10&offset=0").then((res) => {
-          this.TheOrderList = res.data;
+      this.dataArr = this.$store.state.buy_specs_arr;
+      // console.log(this.dataArr)
+      //发起请求从后台提取订单数据
+      // Vue.axios.get("https://elm.cangdu.org/v1/user").then((res) => {
+      //   Vue.axios.get("https://elm.cangdu.org/bos/v2/users/" + res.data.id + "/orders?limit=1&offset=0").then((res) => {
+      //     console.log(res.data);
+      //     this.TheOrderList = res.data;
           this.load=false
-        });
-      });
-    },
-    mounted() {
-    },
-    watch: {
-      Second: function (oldV) {
-        this.Second = oldV;
-      },
-      Minute: function (oldV) {
-        if (oldV === 0 && this.Second === 0) {
-          clearInterval(countdown);
-        }
-      }
-    },
-    methods: {
-      CountDown() {
-        let countdown = setInterval(() => {
+      //   });
+      // });
+
+      //开启计时器
+      let countdown = setInterval(() => {
+        if (this.Second !== 0) {
           this.Second--;
-          if (this.Second === 0) {
+          if(this.Second===0&&this.Minute!==0){
             this.Second = 60;
             this.Minute--;
           }
-          if (this.Minute === 0 && this.Second === 0) {
-            clearInterval(countdown);
-            //弹出提示框
-            this.promptContent = '支付超时';
-            this.showcom = true;
-          }
-        }, 1)
-
-
-      },
-
-
+        }
+        if (this.Minute <= 0&&this.Second===0) {
+          clearInterval(countdown);
+          //弹出提示框
+          this.promptContent = '支付超时';
+          this.showcom = true;
+        }
+      }, 1000)
+    },
+    methods: {
       //底部按钮按钮的点击事件
       TakeOutFood() {
         this.$router.push({path: 'zp_toMyHome'});
@@ -135,25 +123,6 @@
       //点击跳转再来一单页面
       AnotherList(data) {
         this.$router.push({path: 'anotherlist', query: {GetDate: data}})
-      },
-      CountDown() {
-        let countdown = setInterval(() => {
-          this.Second--;
-          if (this.Second === 0) {
-            if (this.Minute !== 0) {
-              this.Minute--;
-              this.Second = 60;
-            }
-            if (this.Minute === 0 && this.Second === 0) {
-              clearInterval(countdown);
-              //弹出提示框
-              this.promptContent = '支付超时';
-              this.showcom = true;
-            }
-          }
-
-        }, 1000)
-
       },
     }
   }

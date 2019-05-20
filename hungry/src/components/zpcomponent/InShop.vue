@@ -52,7 +52,7 @@
                   </div>
                   <footer class="menu_detail_footer">
                     <section class="food_price">
-                      <span class="food_price1">$</span>
+                      <span class="food_price1">￥</span>
                       <span class="food_price2">{{popp(pro)}}</span>
                       <span class="food_price3">起</span>
                       <div class="shuliang">
@@ -108,7 +108,7 @@
                   <p class="art_list_num2">{{item.pro.specs_name}}</p>
                 </div>
                 <div class="cart_list_price">
-                  <span>$</span><span>{{item.pro.price}}</span>
+                  <span>￥</span><span>{{item.pro.price}}</span>
                 </div>
                 <section class="cart_list_control">
                   <img src="../../assets/减小.png" alt="" class="jianxiao" @click="jianshao1(item)">
@@ -227,16 +227,16 @@
       this.shopcartcss();
     },
     methods: {
-      popp(i){
+      popp(i) {
 
-        let a=[]
-        for(let q in i.specfoods){
+        let a = []
+        for (let q in i.specfoods) {
           a.push(i.specfoods[q].price)
         }
         a.sort();
-        if(a[0]===null){
+        if (a[0] === null) {
           return 0
-        }else{
+        } else {
           return a[0]
         }
       },
@@ -279,10 +279,11 @@
       },
       //分栏的购买数量
       hot_kind(m) {
+        // console.log(m)
         let sum = null;
         for (let i in m) {
           for (let j in this.buy_specs_arr) {
-            if (m[i].name === this.buy_specs_arr[j].pro.name) {
+            if (m[i].item_id === this.buy_specs_arr[j].pro.item_id) {
               sum += this.buy_specs_arr[j].count;
             }
           }
@@ -328,8 +329,9 @@
       },
       //点击减少
       jianshao1(p) {
+        // console.log(p )
         for (let i in this.buy_specs_arr) {
-          if (this.buy_specs_arr[i].pro.specs_name === p.pro.specs_name) {
+          if (this.buy_specs_arr[i].pro._id=== p.pro._id) {
             if (this.buy_specs_arr[i].count > 1) {
               this.buy_specs_arr[i].count--;
             } else {
@@ -362,10 +364,15 @@
       jianxiao(m) {
         // console.log(m)
         if (m.specfoods.length !== 1) {
-          alert('只能减少当个商品')
+          //弹出提示框
+          this.showcom = true;
+          //提示内容
+          let money = 20 - this.$store.state.allPrice
+
+          this.promptContent = '只能减少当个商品！'
         } else {
           for (let i in this.buy_specs_arr) {
-            if (this.buy_specs_arr[i].pro.name === this.buy_specs_kind) {
+            if (this.buy_specs_arr[i].pro.item_id ===m.item_id) {
               if (this.buy_specs_arr[i].count > 1) {
                 this.buy_specs_arr[i].count--;
               } else {
@@ -497,7 +504,8 @@
     created() {
       Vue.axios.get('https://elm.cangdu.org/shopping/getcategory/' + this.$store.state.shopId + '').then((res) => {
         this.foodPro = res.data.category_list;
-        this.loadload=false
+        this.loadload = false
+        console.log(res.data, 111)
       });
       this.buy_specs_arr = this.$store.state.buy_specs_arr;
 
@@ -681,8 +689,8 @@
     /*position: absolute;*/
     /*right: -2rem;*/
     /*top: -50rem;*/
-    margin-left: 5.2rem;
-    margin-top: 2.2rem;
+    margin-left: 5.4rem;
+    margin-top: 2.3rem;
     position: absolute;
     top: 50%;
     transform: translateY(-50%);

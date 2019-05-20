@@ -34,7 +34,7 @@
             <ul>
               <li  v-for="p in item" id="zp_all-city-city">
                 <!--<a href="###"> {{p.name}}</a>-->
-                <router-link class="zp_guess-city" :to="{path: '/city'}" style="text-decoration: none"><div @click="zp_getAddress(p.id,p.name)" class="zp_hot-citys_p"><div>{{p.name}}</div></div></router-link>
+                <router-link class="zp_guess-city" :to="{path: '/city'}" style="text-decoration: none"><div @click="zp_getAddress(p.id,p.name)" class="zp_hot-citys_p" style="margin: auto">{{p.name}}</div></router-link>
               </li>
             </ul>
 
@@ -113,7 +113,8 @@ margin-left: 0.6rem;
     text-overflow: ellipsis;
   }
   zp_hot-citys_p{
-
+    display: inline-block;
+    text-overflow: ellipsis;
   }
   .zp_hot-citys_pp{
     width: 25%;

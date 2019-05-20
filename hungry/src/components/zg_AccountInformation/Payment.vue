@@ -1,7 +1,7 @@
 <template>
   <div>
   <div class="Zg_head">
-    <router-link :to="{path:'./basice'}"> <img src="../../assets/fanhui.png" height="200" width="200" class="zg_fanhui4"/></router-link>
+    <router-link :to="{path:'./basice'}"> <img  src="../../assets/fanhui.png" height="200" width="200" class="zg_fanhui4"/></router-link>
     <div class="search">
       <span>在线付款</span>
     </div>
