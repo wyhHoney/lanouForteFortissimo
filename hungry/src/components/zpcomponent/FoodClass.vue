@@ -179,7 +179,7 @@
       <div class="zp_shopListContainer">
         <ul>
           <router-link :to="{path:'/shophost'}">
-            <li class="zp_shop_li" v-for="item in doneArr" @click="inshophost">
+            <li class="zp_shop_li" v-for="item in doneArr" @click="inshophost(item)">
               <section>
                 <img :src="'//elm.cangdu.org/img/'+item.image_path" alt="" class="zp_shop_img">
               </section>
@@ -285,7 +285,9 @@
       }
     },
     methods: {
-      inshophost() {
+      inshophost(i) {
+        console.log(i,1111111)
+        this.$store.state.shoppro1.image_path=i.image_path
         this.$router.push({path: '/shophost'})
       },
       ifshuxing1() {

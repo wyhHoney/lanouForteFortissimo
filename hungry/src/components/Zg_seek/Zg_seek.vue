@@ -179,8 +179,8 @@
 
           //跳转到商家
           JumpMerchant(data){
-            console.log(data);
-            this.$store.state.shopId=data.id;
+            console.log(data.id);
+            this.$store.state.shopId1=data.id;
             // console.log(this.$store.state.shopId)
           },
 

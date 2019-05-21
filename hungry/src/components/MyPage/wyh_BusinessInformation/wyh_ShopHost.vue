@@ -55,13 +55,14 @@
         objpro2: {},
         name: '',
         icon_name: '',
-        description:''
-
+        description:'',
+        path:''
 
       }
     },
     created() {
       Vue.axios.get('https://elm.cangdu.org/shopping/restaurant/' + this.$store.state.shopId + '').then((res) => {
+        this.path=res.data.image_path
         this.objpro2 = res.data
         this.objpro = res.data.activities;
         if(res.data.activities.length===0){

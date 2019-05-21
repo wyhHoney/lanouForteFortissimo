@@ -1,7 +1,9 @@
 <template>
     <div>
       <div class="L_head">
-        <span class="glyphicon glyphicon-menu-left pull-left" style="color: white;" @click="$router.go(-1)"></span>
+       <router-link :to="{path:'/tosureorder'}">
+         <span class="glyphicon glyphicon-menu-left pull-left" style="color: white;"></span>
+       </router-link>
         <span class="L_headDiv">订单备注</span>
       </div>
       <!--快速备注-->
