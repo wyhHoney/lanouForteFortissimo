@@ -13,7 +13,7 @@
           <div class="empty"></div>
        </div>
        <div class="CurrentBalance_header_balance"><p><span>0.00</span>元</p></div>
-       <button class="CurrentBalance_header_button">提现</button>
+       <div class="CurrentBalance_header_button" @click="WithdrawDeposit">提现</div>
       </div>
     </div>
 
@@ -28,11 +28,14 @@
       <p>暂无明细记录</p>
     </div>
 
+    <PublicPrompt v-if="showcom" :showcom="showcom" @update="getMsg($event)" :prompt="promptContent"></PublicPrompt>
+
   </div>
 </template>
 
 <script>
   import PublicHeader from '../CommonComponents/wyh_header'
+  import PublicPrompt from '../CommonComponents/wyh_PublicPrompt'//引入提示框组件
   import Vue from 'vue'
     export default {
         name: "wyh_Balance",
@@ -42,7 +45,9 @@
             routejump:'myhomepage',
             Balance:'balance',//在里面点击需要返回的页面
             DescriptionTitle:'',//积分说明标题
-            IntegralDescription:''//积分说明信息
+            IntegralDescription:'',//积分说明信息
+            showcom:'',
+            promptContent:'',//提示框内容
           }
         },
         methods:{
@@ -56,10 +61,20 @@
               //通过点击事件完成路由跳转
               this.$router.push({path:'integraldescription'});
             });
+          },
+          //点击提现按钮
+          WithdrawDeposit(){
+            //弹出提示框
+            this.showcom=true;
+            this.promptContent='余额为0,请先充值!'
+          },
+          getMsg(data){
+            this.showcom=data;
           }
         },
       components:{
-        PublicHeader
+        PublicHeader,
+        PublicPrompt,
       }
     }
 </script>

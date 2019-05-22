@@ -1,7 +1,10 @@
 <template>
   <div>
   <div class="Zg_head">
-    <router-link :to="{path:'./basice'}"> <img  src="../../assets/fanhui.png" height="200" width="200" class="zg_fanhui4"/></router-link>
+    <a href="###" @click="$router.back(-1)">
+      <img  src="../../assets/fanhui.png" height="200" width="200" class="zg_fanhui4"/>
+    </a>
+    <!--<router-link :to="{path:'./basice'}"></router-link>-->
     <div class="search">
       <span>在线付款</span>
     </div>
@@ -69,7 +72,7 @@
                   clearInterval(clock)
                 }
                 if(this.MinuteHand===0&&this.zg_second===0){
-                  alert('你没给钱小伙子!')
+                  // alert('你没给钱小伙子!')
                 }
               }
             },1000)

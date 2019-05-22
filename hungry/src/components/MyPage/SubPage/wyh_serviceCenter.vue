@@ -45,11 +45,15 @@
         methods:{
           //左边在线客服点击事件
           Service_lift(){
-              console.log('点击了左边的在线客服');
+              this.showcom=true;
+              this.promptContent='亲需要您的投资请客服噢!';
+              // console.log('点击了左边的在线客服');
           },
           //右边在线客服点击事件
           Service_right(){
-            console.log('点击了右边的在线客服');
+            this.showcom=true;
+            this.promptContent='亲需要您的投资请客服噢!';
+            // console.log('点击了右边的在线客服');
           },
           InDetail(data){
             //通过点击事件完成路由跳转

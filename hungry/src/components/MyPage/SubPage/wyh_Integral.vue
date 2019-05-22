@@ -12,7 +12,7 @@
           <p class="CurrentBalance_header_right" @click="balanceProblem"><img src="../../../assets/wenhao.png" alt="">积分说明</p>
           <div class="empty"></div>
         </div>
-        <div class="CurrentBalance_header_balance"><p><span>0</span>分</p></div>
+        <div class="CurrentBalance_header_balance"><p><span>{{IsActive}}</span>分</p></div>
         <div class="CurrentBalance_header_button" @click="Conversion">积分兑换商品</div>
       </div>
     </div>
@@ -50,10 +50,21 @@
             IntegralDescription:'',//积分说明信息
             showcom:'',
             promptContent:'快去下单赚取大量积分吧',//提示框内容
+            IsActive:'0'
           }
         },
         mounted(){
           totalVue.$emit("MonitorHeaders",this.PageTitle);
+        },
+        created(){
+          Vue.axios.get('https://elm.cangdu.org/v1/user').then((res)=>{
+            if(res.data.message==='通过session获取用户信息失败'){
+              this.IsActive='0';
+            }else {
+              this.IsActive=res.data.is_active;//我的积分
+            }
+
+          })
         },
         methods:{
           balanceProblem(){
@@ -61,7 +72,6 @@
             Vue.axios.get('https://elm.cangdu.org/v3/profile/explain').then((res)=>{
               this.DescriptionTitle=res.data.pointtextCaption;
               this.IntegralDescription=res.data.pointtextContent;
-              // console.log(res.data);
 
               //通过点击事件完成路由跳转
               this.$router.push({path:'integralproblems'});

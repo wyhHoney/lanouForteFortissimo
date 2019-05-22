@@ -1,6 +1,6 @@
 <template>
     <!--推出登陆页面-->
-    <div class="QuitLogIn" v-if="Show_Quit">
+    <div class="QuitLogIn bounceIn" v-if="Show_Quit">
       <img src="../../../assets/jinggao.png" alt="" class="PublicPrompt_img">
       <h2>是否退出登陆</h2>
       <div class="Button_er">

@@ -5,7 +5,7 @@
       <!--头部-->
       <PublicHeader :pagetitle="PageTitle" :hops="routejump"></PublicHeader>
       <div class="AccountInformation_nr">
-        <form  v-show="false" enctype="multipart/form-data" method="post"><input type="file" id="file" name="type"></form>
+        <form  v-show="false" enctype="multipart/form-data" method="post"><input type="file" id="file" name="type" @click="ClickD($event)"></form>
         <div class="message">
             <label for="file" >
               <div class="message_list">
@@ -107,6 +107,12 @@
 
         },
         methods:{
+          ClickD(e){
+            //阻止file的默认事件
+            e.preventDefault();
+            this.promptContent='暂不支持此功能';
+            this.showcom=true;
+          },
           getMsg(data){
             this.showcom=data;
           },
