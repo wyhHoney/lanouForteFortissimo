@@ -107,6 +107,7 @@ export default new Router({
     {path: '/voucherdescription',component:VoucherDescription},//代金券说明页面
     {path: '/conversionred',component:ConversionRed},//兑换红包
     {path: '/recommend',component:Recommend},//推荐有奖页面
+    //模拟带码提交
 
 
 
